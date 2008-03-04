@@ -2,7 +2,7 @@ class ScansController < ApplicationController
   # GET /scans
   # GET /scans.xml
   def index
-    @scans = Scan.find(:all)
+    @scans = Scan.find(:all, :include => :location)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class ScansController < ApplicationController
   # GET /scans/1
   # GET /scans/1.xml
   def show
-    @scan = Scan.find(params[:id])
+    @scan = Scan.find(params[:id], :include => :location)
 
     respond_to do |format|
       format.html # show.html.erb

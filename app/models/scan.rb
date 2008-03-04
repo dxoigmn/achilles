@@ -15,4 +15,8 @@ class Scan < ActiveRecord::Base
   event :stop do
     transitions :to => :finished, :from => :running
   end
+  
+  def state
+    read_attribute(:state).capitalize
+  end
 end
