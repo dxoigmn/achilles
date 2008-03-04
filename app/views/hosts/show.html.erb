@@ -1,3 +1,5 @@
+<h1>Host</h1>
+
 <p>
   <b>Name:</b>
   <%=h @host.name %>
@@ -17,6 +19,10 @@
   <b>Scan End:</b>
   <%=h @host.scan_end %>
 </p>
+
+<h2>Vulnerabilities</h2>
+
+<%= render :partial => 'vulnerabilities/list', :locals => { :vulnerabilities => @host.vulnerabilities } %>
 
 
 <%= link_to 'Edit', edit_host_path(@host) %> |

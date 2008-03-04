@@ -1,3 +1,4 @@
+<h1>Vulnerability</h1>
 <p>
   <b>Protocol:</b>
   <%=h @vulnerability.protocol %>
@@ -25,7 +26,7 @@
 
 <p>
   <b>Plugin:</b>
-  <%=h @vulnerability.plugin_id %>
+  <%= link_to @vulnerability.plugin_id, plugin_path(@vulnerability.plugin) %>
 </p>
 
 <p>

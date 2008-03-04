@@ -1,15 +1,3 @@
 <h1>Listing scans</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-  </tr>
-
-<% for scan in @scans %>
-  <tr>
-    <td><%=h scan.name %></td>
-    <td><%= link_to 'Show', scan %></td>
-    <td><%= link_to 'Edit', edit_scan_path(scan) %></td>
-  </tr>
-<% end %>
-</table>
+<%= render :partial => 'scans/list', :locals => { :scans => @scans } %>

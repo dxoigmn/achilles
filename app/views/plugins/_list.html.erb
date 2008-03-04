@@ -1,0 +1,27 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Version</th>
+    <th>Family</th>
+    <th>Cve</th>
+    <th>Bugtraq</th>
+    <th>Category</th>
+    <th>Risk</th>
+    <th>Summary</th>
+  </tr>
+
+<% for plugin in plugins %>
+  <tr>
+    <td><%=h plugin.name %></td>
+    <td><%=h plugin.version %></td>
+    <td><%=h plugin.family %></td>
+    <td><%=h plugin.cve %></td>
+    <td><%=h plugin.bugtraq %></td>
+    <td><%=h plugin.category %></td>
+    <td><%=h plugin.risk %></td>
+    <td><%=h plugin.summary %></td>
+    <td><%= link_to 'Show', plugin %></td>
+    <td><%= link_to 'Edit', edit_plugin_path(plugin) %></td>
+  </tr>
+<% end %>
+</table>
