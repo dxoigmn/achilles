@@ -9,4 +9,12 @@ class Host < ActiveRecord::Base
   def ip=(value)
     write_attribute(:ip, NetAddr.ip_to_i(value))
   end
+  
+  def os_detection
+    vulnerabilities.find_by_plugin_id(11936).data rescue nil
+  end
+  
+  def traceroute
+    vulnerabilities.find_by_plugin_id(10287).data rescue nil
+  end
 end

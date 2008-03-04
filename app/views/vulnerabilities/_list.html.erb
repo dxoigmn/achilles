@@ -2,6 +2,7 @@
   <caption>Vulnerabilities (<%= vulnerabilities.size %>)</caption>
   <thead>
     <tr>
+      <th>Name</th>
       <th>Summary</th>
       <th>Service</th>
     </tr>
@@ -10,6 +11,7 @@
   <tbody>
 <% for vulnerability in vulnerabilities %>
     <tr>
+      <td><%=h vulnerability.name %></td>
       <td><%=h vulnerability.summary %></td>
       <td><%=h vulnerability.service %></td>
       <td><%= link_to 'Show', vulnerability %></td>

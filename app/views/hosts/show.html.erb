@@ -6,6 +6,12 @@
 
   <dt>Scanned</dt>
   <dd><%=h @host.scan_start %> - <%=h @host.scan_end %></dd>
+
+  <dt>OS Detection</dt>
+  <dd><pre><%= @host.os_detection %></pre></dd>
+  
+  <dt>Traceroute</dt>
+  <dd><pre><%= @host.traceroute %></pre></dd>
 </dl>
 
 <%= link_to 'Back', hosts_path %>
