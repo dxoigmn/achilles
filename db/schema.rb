@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(:version => 4) do
     t.string   "protocol"
     t.integer  "port"
     t.string   "service"
-    t.string   "severity"
     t.text     "data"
     t.integer  "plugin_id"
     t.integer  "host_id"
