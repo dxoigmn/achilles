@@ -22,7 +22,7 @@ class Scan < ActiveRecord::Base
     save!
   end
   
-  def self.process
+  def self.run!
     scan = Scan.find_in_state(:first, :waiting, :order => 'starts_at')
     
     return unless scan && Time.now >= scan.starts_at
