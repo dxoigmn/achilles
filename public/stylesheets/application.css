@@ -57,14 +57,15 @@ div#content dl dt {
   font-weight: bold;
   font-size: small;
   float: left;
-  width: 10em;
-  padding: 0.25em;
+  padding: 1em;
 }
 
 div#content dl dd {
   margin-left: 10em;
   margin-bottom: 1em;
   background-color: #f0f0f0;
+  padding: 1em;
+  font-size: small;
 }
 
 div#content dl dd pre {

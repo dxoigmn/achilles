@@ -1,4 +1,4 @@
-<h2><%=h @vulnerability.name %></h2>
+<h2><%= link_to @vulnerability.host.name, @vulnerability.host %> :: <%=h @vulnerability.name %></h2>
 
 <dl>
   <dt>Summary</dt>
@@ -12,9 +12,6 @@
 
   <dt>Service</dt>
   <dd><%=h @vulnerability.service %></dd>
-
-  <dt>Host</dt>
-  <dd><%= link_to 'Host', @vulnerability.host %></dd>
 
   <dt>Plugin</dt>
   <dd><%= link_to 'Plugin', plugin_path(@vulnerability.plugin) %></dd>
