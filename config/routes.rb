@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :scans
+
   map.resources :vulnerabilities
 
   map.resources :hosts

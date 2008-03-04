@@ -4,16 +4,16 @@
   <tr>
     <th>Name</th>
     <th>Ip</th>
-    <th>Start</th>
-    <th>End</th>
+    <th>Scan Start</th>
+    <th>Scan End</th>
   </tr>
 
 <% for host in @hosts %>
   <tr>
     <td><%=h host.name %></td>
     <td><%=h host.ip %></td>
-    <td><%=h host.start %></td>
-    <td><%=h host.end %></td>
+    <td><%=h host.scan_start %></td>
+    <td><%=h host.scan_end %></td>
     <td><%= link_to 'Show', host %></td>
     <td><%= link_to 'Edit', edit_host_path(host) %></td>
     <td><%= link_to 'Destroy', host, :confirm => 'Are you sure?', :method => :delete %></td>

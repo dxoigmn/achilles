@@ -9,15 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 3) do
+ActiveRecord::Schema.define(:version => 4) do
 
   create_table "hosts", :force => true do |t|
     t.string   "name"
     t.integer  "ip"
-    t.date     "start"
-    t.date     "end"
+    t.datetime "scan_start"
+    t.datetime "scan_end"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "scan_id"
   end
 
   create_table "plugins", :force => true do |t|
@@ -29,6 +30,12 @@ ActiveRecord::Schema.define(:version => 3) do
     t.string   "category"
     t.string   "risk"
     t.string   "summary"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "scans", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

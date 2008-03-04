@@ -106,10 +106,10 @@ module Nessus
       
       # Host attributes
       when 'start'
-        @host.start = @text if @host
+        @host.scan_start = @text if @host
         
       when 'end'
-        @host.end = @text if @host
+        @host.scan_end = @text if @host
       
       when 'result'
         if @host
@@ -151,7 +151,7 @@ module Nessus
   end
   
   class Host
-    attr_accessor :name, :ip, :start, :end, :vulnerabilities
+    attr_accessor :name, :ip, :scan_start, :scan_end, :vulnerabilities
   end
 
   class Vulnerability
@@ -168,7 +168,7 @@ end
 if ARGV.size < 2
   puts "Usage: ./import [scan name] [file/dir 1] [file/dir 2] ... [file/dir n]"
 else
-  name = ARGV.shift
+  scan = Scan.find_or_create_by_name(ARGV.shift)
   
   files = []
   
@@ -183,11 +183,12 @@ else
     report = Nessus.parse(file)
     
     report.hosts.each do |nessus_host|
-      host        = Host.new
-      host.name   = nessus_host.name
-      host.ip     = NetAddr.ip_to_i(Resolv.getaddress(nessus_host.ip))
-      host.start  = nessus_host.start
-      host.end    = nessus_host.end
+      host            = Host.new
+      host.name       = nessus_host.name
+      host.ip         = NetAddr.ip_to_i(Resolv.getaddress(nessus_host.ip))
+      host.scan_start = nessus_host.scan_start
+      host.scan_end   = nessus_host.scan_end
+      host.scan_id    = scan.id
       host.save!
 
       nessus_host.vulnerabilities.each do |nessus_vulnerability|

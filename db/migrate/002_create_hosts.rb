@@ -3,8 +3,8 @@ class CreateHosts < ActiveRecord::Migration
     create_table :hosts do |t|
       t.string :name
       t.integer :ip
-      t.date :start
-      t.date :end
+      t.datetime :scan_start
+      t.datetime :scan_end
 
       t.timestamps
     end
