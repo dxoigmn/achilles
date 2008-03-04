@@ -21,37 +21,9 @@ class HostsController < ApplicationController
     end
   end
 
-  # GET /hosts/new
-  # GET /hosts/new.xml
-  def new
-    @host = Host.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @host }
-    end
-  end
-
   # GET /hosts/1/edit
   def edit
     @host = Host.find(params[:id])
-  end
-
-  # POST /hosts
-  # POST /hosts.xml
-  def create
-    @host = Host.new(params[:host])
-
-    respond_to do |format|
-      if @host.save
-        flash[:notice] = 'Host was successfully created.'
-        format.html { redirect_to(@host) }
-        format.xml  { render :xml => @host, :status => :created, :location => @host }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @host.errors, :status => :unprocessable_entity }
-      end
-    end
   end
 
   # PUT /hosts/1
@@ -68,18 +40,6 @@ class HostsController < ApplicationController
         format.html { render :action => "edit" }
         format.xml  { render :xml => @host.errors, :status => :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /hosts/1
-  # DELETE /hosts/1.xml
-  def destroy
-    @host = Host.find(params[:id])
-    @host.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(hosts_url) }
-      format.xml  { head :ok }
     end
   end
 end

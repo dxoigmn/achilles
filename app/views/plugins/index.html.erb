@@ -24,11 +24,6 @@
     <td><%=h plugin.summary %></td>
     <td><%= link_to 'Show', plugin %></td>
     <td><%= link_to 'Edit', edit_plugin_path(plugin) %></td>
-    <td><%= link_to 'Destroy', plugin, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New plugin', new_plugin_path %>
