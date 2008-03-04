@@ -197,7 +197,7 @@ else
         vulnerability.service   = nessus_vulnerability.service
         vulnerability.severity  = nessus_vulnerability.severity
         vulnerability.plugin_id = nessus_vulnerability.plugin_id
-        vulnerability.data      = nessus_vulnerability.data
+        vulnerability.data      = nessus_vulnerability.data.strip.split(/\n/).map { |line| line.strip }.join("\n")
         vulnerability.host_id   = host.id
         vulnerability.save!
 

@@ -1,45 +1,21 @@
 <h1>Plugin</h1>
 
-<p>
-  <b>Name:</b>
-  <%=h @plugin.name %>
-</p>
+<dl>
+  <dt>Name</dt>
+  <dd><%=h @plugin.name %></dd>
 
-<p>
-  <b>Version:</b>
-  <%=h @plugin.version %>
-</p>
+  <dt>Summary</dt>
+  <dd><%=h @plugin.summary %></dd>
 
-<p>
-  <b>Family:</b>
-  <%=h @plugin.family %>
-</p>
+  <dt>Family</dt>
+  <dd><%=h @plugin.family %></dd>
 
-<p>
-  <b>Cve:</b>
-  <%=h @plugin.cve %>
-</p>
+  <dt>Risk</dt>
+  <dd><%=h @plugin.risk %></dd>
+</dl>
 
-<p>
-  <b>Bugtraq:</b>
-  <%=h @plugin.bugtraq %>
-</p>
-
-<p>
-  <b>Category:</b>
-  <%=h @plugin.category %>
-</p>
-
-<p>
-  <b>Risk:</b>
-  <%=h @plugin.risk %>
-</p>
-
-<p>
-  <b>Summary:</b>
-  <%=h @plugin.summary %>
-</p>
-
-
-<%= link_to 'Edit', edit_plugin_path(@plugin) %> |
 <%= link_to 'Back', plugins_path %>
+
+<h2>Hosts</h2>
+
+<%= render :partial => 'hosts/list', :locals => { :hosts => @plugin.hosts } %>

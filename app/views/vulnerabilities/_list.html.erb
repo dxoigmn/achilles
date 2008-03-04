@@ -1,17 +1,21 @@
 <table>
-  <tr>
-    <th>Summary</th>
-    <th>Service</th>
-    <th>Severity</th>
-  </tr>
-
+  <caption>Vulnerabilities (<%= vulnerabilities.size %>)</caption>
+  <thead>
+    <tr>
+      <th>Summary</th>
+      <th>Service</th>
+      <th>Severity</th>
+    </tr>
+  </thead>
+  
+  <tbody>
 <% for vulnerability in vulnerabilities %>
-  <tr>
-    <td><%=h vulnerability.summary %></td>
-    <td><%=h vulnerability.service %></td>
-    <td><%=h vulnerability.severity %></td>
-    <td><%= link_to 'Show', vulnerability %></td>
-    <td><%= link_to 'Edit', edit_vulnerability_path(vulnerability) %></td>
-  </tr>
+    <tr>
+      <td><%=h vulnerability.summary %></td>
+      <td><%=h vulnerability.service %></td>
+      <td><%=h vulnerability.severity %></td>
+      <td><%= link_to 'Show', vulnerability %></td>
+    </tr>
 <% end %>
+  </tbody>
 </table>

@@ -1,29 +1,14 @@
 <h1>Host</h1>
 
-<p>
-  <b>Name:</b>
-  <%=h @host.name %>
-</p>
+<dl>
+  <dt>Name</dt>
+  <dd><%=h @host.name %> (<%=h @host.ip %>)</dd>
 
-<p>
-  <b>Ip:</b>
-  <%=h @host.ip %>
-</p>
+  <dt>Scanned</dt>
+  <dd><%=h @host.scan_start %> - <%=h @host.scan_end %></dd>
+</dl>
 
-<p>
-  <b>Scan Start:</b>
-  <%=h @host.scan_start %>
-</p>
-
-<p>
-  <b>Scan End:</b>
-  <%=h @host.scan_end %>
-</p>
+<%= link_to 'Back', hosts_path %>
 
 <h2>Vulnerabilities</h2>
-
 <%= render :partial => 'vulnerabilities/list', :locals => { :vulnerabilities => @host.vulnerabilities } %>
-
-
-<%= link_to 'Edit', edit_host_path(@host) %> |
-<%= link_to 'Back', hosts_path %>

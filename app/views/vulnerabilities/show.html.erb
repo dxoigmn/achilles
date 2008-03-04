@@ -1,39 +1,28 @@
 <h1>Vulnerability</h1>
-<p>
-  <b>Protocol:</b>
-  <%=h @vulnerability.protocol %>
-</p>
+<dl>
+  <dt>Name</dt>
+  <dd><%=h @vulnerability.name %></dd>
 
-<p>
-  <b>Port:</b>
-  <%=h @vulnerability.port %>
-</p>
+  <dt>Summary</dt>
+  <dd><%=h @vulnerability.summary %></dd>
 
-<p>
-  <b>Service:</b>
-  <%=h @vulnerability.service %>
-</p>
+  <dt>Family</dt>
+  <dd><%=h @vulnerability.family %></dd>
 
-<p>
-  <b>Severity:</b>
-  <%=h @vulnerability.severity %>
-</p>
+  <dt>Risk</dt>
+  <dd><%=h @vulnerability.risk %></dd>
 
-<p>
-  <b>Data:</b>
-  <%=h @vulnerability.data %>
-</p>
+  <dt>Service</dt>
+  <dd><%=h @vulnerability.service %></dd>
 
-<p>
-  <b>Plugin:</b>
-  <%= link_to @vulnerability.plugin_id, plugin_path(@vulnerability.plugin) %>
-</p>
+  <dt>Host</dt>
+  <dd><%= link_to 'Host', @vulnerability.host %></dd>
 
-<p>
-  <b>Host:</b>
-  <%=h @vulnerability.host_id %>
-</p>
+  <dt>Plugin</dt>
+  <dd><%= link_to 'Plugin', plugin_path(@vulnerability.plugin) %></dd>
 
+  <dt>Data</dt>
+  <dd><pre><%=h @vulnerability.data %></pre></dd>
+</dl>
 
-<%= link_to 'Edit', edit_vulnerability_path(@vulnerability) %> |
 <%= link_to 'Back', vulnerabilities_path %>

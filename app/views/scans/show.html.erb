@@ -4,9 +4,7 @@
   <%=h @scan.name %>
 </p>
 
+<%= link_to 'Back', scans_path %>
+
 <h2>Listing Hosts</h2>
 <%= render :partial => 'hosts/list', :locals => { :hosts => @scan.hosts } %>
-
-
-<%= link_to 'Edit', edit_scan_path(@scan) %> |
-<%= link_to 'Back', scans_path %>
