@@ -1,23 +1,15 @@
 <table>
   <tr>
-    <th>Protocol</th>
-    <th>Port</th>
+    <th>Summary</th>
     <th>Service</th>
     <th>Severity</th>
-    <th>Data</th>
-    <th>Plugin</th>
-    <th>Host</th>
   </tr>
 
 <% for vulnerability in vulnerabilities %>
   <tr>
-    <td><%=h vulnerability.protocol %></td>
-    <td><%=h vulnerability.port %></td>
+    <td><%=h vulnerability.summary %></td>
     <td><%=h vulnerability.service %></td>
     <td><%=h vulnerability.severity %></td>
-    <td><%=h vulnerability.data %></td>
-    <td><%=h vulnerability.plugin_id %></td>
-    <td><%=h vulnerability.host_id %></td>
     <td><%= link_to 'Show', vulnerability %></td>
     <td><%= link_to 'Edit', edit_vulnerability_path(vulnerability) %></td>
   </tr>
