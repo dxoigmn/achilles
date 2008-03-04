@@ -1,4 +1,3 @@
-require 'yaml'
 require 'resolv'
 require 'netaddr'
 require 'rexml/document'
@@ -25,7 +24,7 @@ module Nessus
         
       when 'plugin'
         if @report.plugins
-          @plugin     = Nessus::Plugin.new
+          @plugin     = NessusPlugin.new
           @plugin.id  = attrs['id'].to_i
         end
       
@@ -33,7 +32,7 @@ module Nessus
         @report.hosts = []
       
       when 'result'
-        @host = Nessus::Host.new if @report.hosts
+        @host = NessusHost.new if @report.hosts
 
       when 'host'
         if @host
@@ -52,7 +51,7 @@ module Nessus
         @last_service   = attrs['name']
       
       when 'information'
-        @vulnerability = Nessus::Vulnerability.new
+        @vulnerability = NessusVulnerability.new
         @vulnerability.protocol = @last_protocol
         @vulnerability.port     = @last_port
         @vulnerability.service  = @last_service
@@ -138,25 +137,82 @@ module Nessus
     end
   end
   
-  class Report
+  class NessusReport
     attr_accessor :plugins, :hosts
   end
 
-  class Plugin
+  class NessusPlugin
     attr_accessor :id, :name, :version, :family, :cve, :bugtraq, :category, :risk, :summary, :copyright
   end
   
-  class Host
+  class NessusHost
     attr_accessor :name, :ip, :scan_start, :scan_end, :vulnerabilities
   end
 
-  class Vulnerability
+  class NessusVulnerability
     attr_accessor :protocol, :port, :service, :severity, :plugin_id, :data
   end
 
-  def self.parse(xml)
-    report = Nessus::Report.new
-    REXML::Document.parse_stream(File.new(xml), XMLListener.new(report))
-    report
+  def self.process(scan, file)
+    scan.output!("Parsing #{file}...")
+
+    report = NessusReport.new
+    REXML::Document.parse_stream(File.new(file), XMLListener.new(report))
+
+    scan.output!("Importing #{file}...")
+
+    report.hosts.each do |nessus_host|
+      host            = scan.hosts.new
+      host.name       = nessus_host.name
+      host.ip         = Resolv.getaddress(nessus_host.ip)
+      host.scan_start = DateTime.parse(nessus_host.scan_start)
+      host.scan_end   = DateTime.parse(nessus_host.scan_end)
+      host.save!
+
+      nessus_host.vulnerabilities.each do |nessus_vulnerability|
+        vulnerability           = host.vulnerabilities.new
+        vulnerability.protocol  = nessus_vulnerability.protocol
+        vulnerability.port      = nessus_vulnerability.port
+        vulnerability.service   = nessus_vulnerability.service
+        vulnerability.plugin_id = nessus_vulnerability.plugin_id
+        vulnerability.data      = nessus_vulnerability.data.strip.split(/\n/).map { |line| line.strip }.join("\n")
+        vulnerability.host_id   = host.id
+        vulnerability.save!
+
+        nessus_plugin = report.plugins.find { |plugin| plugin.id == nessus_vulnerability.plugin_id }
+        plugin        = Plugin.find(vulnerability.plugin_id) rescue nil
+
+        if plugin && nessus_plugin
+          mismatched = []
+          mismatched << "name"      if plugin.name      != nessus_plugin.name
+          mismatched << "version"   if plugin.version   != nessus_plugin.version
+          mismatched << "family"    if plugin.family    != nessus_plugin.family
+          mismatched << "cve"       if plugin.cve       != nessus_plugin.cve
+          mismatched << "bugtraq"   if plugin.bugtraq   != nessus_plugin.bugtraq
+          mismatched << "category"  if plugin.category  != nessus_plugin.category
+          mismatched << "risk"      if plugin.risk      != nessus_plugin.risk
+          mismatched << "summary"   if plugin.summary   != nessus_plugin.summary
+
+          # TODO: This should probably prompt the user asking for which version they would like to keep.
+
+          scan.output!("Plugin #{plugin.id} fields are mismatched: #{mismatched.join(', ')}") if mismatched.length > 0
+        elsif nessus_plugin
+          plugin                        = Plugin.new
+          plugin.id                     = nessus_plugin.id
+          plugin.name                   = nessus_plugin.name
+          plugin.version                = nessus_plugin.version
+          plugin.family                 = nessus_plugin.family
+          plugin.cve                    = nessus_plugin.cve
+          plugin.bugtraq                = nessus_plugin.bugtraq
+          plugin.category               = nessus_plugin.category
+          plugin.risk                   = nessus_plugin.risk
+          plugin.summary                = nessus_plugin.summary
+          plugin.vulnerabilities_count  = 1
+          plugin.save!
+        else
+          scan.output!("Please import data for plugin #{nessus_vulnerability.plugin_id}") unless plugin
+        end
+      end
+    end
   end
 end
