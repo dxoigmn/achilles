@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Summary</th>
+      <th>Vulnerabilities</th>
     </tr>
   </thead>
 
@@ -13,6 +14,7 @@
     <tr>
       <td><%=h plugin.name %></td>
       <td><%=h plugin.summary %></td>
+      <td><%=h plugin.vulnerabilities_count %></td>
       <td><%= link_to 'Show', plugin %></td>
     </tr>
 <% end %>

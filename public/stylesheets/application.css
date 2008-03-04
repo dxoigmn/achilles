@@ -41,6 +41,14 @@ div#content table {
   width: 100%;
 }
 
+div#content table th:first-child, div#content table td:first-child {
+  text-align: left;
+}
+
+div#content table th, div#content table td {
+  text-align: center;
+}
+
 div#content dl dt {
   font-weight: bold;
   font-size: small;

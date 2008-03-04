@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Hosts</th>
     </tr>
   </thead>
   
@@ -11,6 +12,7 @@
 <% for scan in scans %>
     <tr>
       <td><%=h scan.name %></td>
+      <td><%=h scan.hosts_count %></td>
       <td><%= link_to 'Show', scan %></td>
     </tr>
 <% end %>
