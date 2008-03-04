@@ -1,9 +1,9 @@
-<h2>Host</h2>
+<h2><%=h @host.name %></h2>
 
 <dl>
-  <dt>Name</dt>
-  <dd><%=h @host.name %> (<%=h @host.ip %>)</dd>
-
+  <dt>Ip Address</dt>
+  <dd><%=h @host.ip %></dd>
+  
   <dt>Scanned</dt>
   <dd><%=h @host.scan_start %> - <%=h @host.scan_end %></dd>
 

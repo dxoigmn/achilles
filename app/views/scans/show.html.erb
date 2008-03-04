@@ -1,8 +1,4 @@
-<h2>Scan</h2>
-<dl>
-  <dt>Name</dt>
-  <dd><%=h @scan.name %></dd>
-</dl>
+<h2><%=h @scan.name %></h2>
 
 <h3>Hosts</h3>
 <%= render :partial => 'hosts/list', :locals => { :hosts => @scan.hosts } %>
