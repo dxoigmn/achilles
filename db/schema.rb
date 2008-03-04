@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 4) do
+ActiveRecord::Schema.define(:version => 6) do
 
   create_table "hosts", :force => true do |t|
     t.string   "name"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(:version => 4) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "scan_id"
+    t.integer  "location_id",           :default => 0
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "plugins", :force => true do |t|
@@ -39,6 +46,15 @@ ActiveRecord::Schema.define(:version => 4) do
   create_table "scans", :force => true do |t|
     t.string   "name"
     t.integer  "hosts_count", :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subnets", :force => true do |t|
+    t.string   "name"
+    t.integer  "lowest_ip_address"
+    t.integer  "highest_ip_address"
+    t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

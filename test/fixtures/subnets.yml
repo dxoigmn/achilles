@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  lowest_ip_address: 1
+  highest_ip_address: 1
+  location_id: 1
+
+two:
+  name: MyString
+  lowest_ip_address: 1
+  highest_ip_address: 1
+  location_id: 1
