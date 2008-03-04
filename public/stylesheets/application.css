@@ -41,6 +41,10 @@ div#content table {
   width: 100%;
 }
 
+div#content table caption {
+  display: none;
+}
+
 div#content table th:first-child, div#content table td:first-child {
   text-align: left;
 }
