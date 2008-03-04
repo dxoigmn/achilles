@@ -1,0 +1,38 @@
+<p>
+  <b>Protocol:</b>
+  <%=h @vulnerability.protocol %>
+</p>
+
+<p>
+  <b>Port:</b>
+  <%=h @vulnerability.port %>
+</p>
+
+<p>
+  <b>Service:</b>
+  <%=h @vulnerability.service %>
+</p>
+
+<p>
+  <b>Severity:</b>
+  <%=h @vulnerability.severity %>
+</p>
+
+<p>
+  <b>Data:</b>
+  <%=h @vulnerability.data %>
+</p>
+
+<p>
+  <b>Plugin:</b>
+  <%=h @vulnerability.plugin_id %>
+</p>
+
+<p>
+  <b>Host:</b>
+  <%=h @vulnerability.host_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_vulnerability_path(@vulnerability) %> |
+<%= link_to 'Back', vulnerabilities_path %>

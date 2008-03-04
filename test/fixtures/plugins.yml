@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  version: MyString
+  family: MyString
+  cve: MyString
+  bugtraq: MyString
+  category: MyString
+  risk: MyString
+  summary: MyString
+
+two:
+  name: MyString
+  version: MyString
+  family: MyString
+  cve: MyString
+  bugtraq: MyString
+  category: MyString
+  risk: MyString
+  summary: MyString

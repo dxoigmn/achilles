@@ -1,0 +1,43 @@
+<p>
+  <b>Name:</b>
+  <%=h @plugin.name %>
+</p>
+
+<p>
+  <b>Version:</b>
+  <%=h @plugin.version %>
+</p>
+
+<p>
+  <b>Family:</b>
+  <%=h @plugin.family %>
+</p>
+
+<p>
+  <b>Cve:</b>
+  <%=h @plugin.cve %>
+</p>
+
+<p>
+  <b>Bugtraq:</b>
+  <%=h @plugin.bugtraq %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%=h @plugin.category %>
+</p>
+
+<p>
+  <b>Risk:</b>
+  <%=h @plugin.risk %>
+</p>
+
+<p>
+  <b>Summary:</b>
+  <%=h @plugin.summary %>
+</p>
+
+
+<%= link_to 'Edit', edit_plugin_path(@plugin) %> |
+<%= link_to 'Back', plugins_path %>

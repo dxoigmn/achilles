@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  protocol: MyString
+  port: 1
+  service: MyString
+  severity: MyString
+  data: MyText
+  plugin_id: 1
+  host_id: 1
+
+two:
+  protocol: MyString
+  port: 1
+  service: MyString
+  severity: MyString
+  data: MyText
+  plugin_id: 1
+  host_id: 1

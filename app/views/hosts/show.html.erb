@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @host.name %>
+</p>
+
+<p>
+  <b>Ip:</b>
+  <%=h @host.ip %>
+</p>
+
+<p>
+  <b>Start:</b>
+  <%=h @host.start %>
+</p>
+
+<p>
+  <b>End:</b>
+  <%=h @host.end %>
+</p>
+
+
+<%= link_to 'Edit', edit_host_path(@host) %> |
+<%= link_to 'Back', hosts_path %>

@@ -1,0 +1,51 @@
+<h1>New plugin</h1>
+
+<%= error_messages_for :plugin %>
+
+<% form_for(@plugin) do |f| %>
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <b>Version</b><br />
+    <%= f.text_field :version %>
+  </p>
+
+  <p>
+    <b>Family</b><br />
+    <%= f.text_field :family %>
+  </p>
+
+  <p>
+    <b>Cve</b><br />
+    <%= f.text_field :cve %>
+  </p>
+
+  <p>
+    <b>Bugtraq</b><br />
+    <%= f.text_field :bugtraq %>
+  </p>
+
+  <p>
+    <b>Category</b><br />
+    <%= f.text_field :category %>
+  </p>
+
+  <p>
+    <b>Risk</b><br />
+    <%= f.text_field :risk %>
+  </p>
+
+  <p>
+    <b>Summary</b><br />
+    <%= f.text_field :summary %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', plugins_path %>
