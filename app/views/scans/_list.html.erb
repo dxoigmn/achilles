@@ -1,12 +1,18 @@
 <table>
-  <tr>
-    <th>Name</th>
-  </tr>
-
+  <caption>Scans (<%=h scans.size %>)</caption>
+    
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  
+  <tbody>
 <% for scan in scans %>
-  <tr>
-    <td><%=h scan.name %></td>
-    <td><%= link_to 'Show', scan %></td>
-  </tr>
+    <tr>
+      <td><%=h scan.name %></td>
+      <td><%= link_to 'Show', scan %></td>
+    </tr>
 <% end %>
+  </tbody>
 </table>

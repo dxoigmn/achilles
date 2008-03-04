@@ -1,4 +1,4 @@
-<h1>Host</h1>
+<h2>Host</h2>
 
 <dl>
   <dt>Name</dt>
@@ -14,7 +14,6 @@
   <dd><pre><%= @host.traceroute %></pre></dd>
 </dl>
 
-<%= link_to 'Back', hosts_path %>
+<h3>Vulnerabilities</h3>
 
-<h2>Vulnerabilities</h2>
 <%= render :partial => 'vulnerabilities/list', :locals => { :vulnerabilities => @host.vulnerabilities } %>

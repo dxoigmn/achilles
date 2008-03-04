@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+                      "DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Achilles</title>
+</head>
+<body>
+  <div id="header">
+    <h1>Achilles</h1>
+    
+    <ul>
+      <li><%= link_to 'Scans', scans_path %></li>
+      <li><%= link_to 'Hosts', hosts_path %></li>
+      <li><%= link_to 'Vulnerabilities', vulnerabilities_path %></li>
+      <li><%= link_to 'Plugins', plugins_path %></li>
+    </ul>
+  </div>
+
+  <div id="content">
+    <%= yield  %>
+  </div>
+
+  <div id="footer">
+    
+  </div>
+</body>
+</html>

@@ -1,10 +1,8 @@
-<h1>Scan</h1>
-<p>
-  <b>Name:</b>
-  <%=h @scan.name %>
-</p>
+<h2>Scan</h2>
+<dl>
+  <dt>Name</dt>
+  <dd><%=h @scan.name %></dd>
+</dl>
 
-<%= link_to 'Back', scans_path %>
-
-<h2>Listing Hosts</h2>
+<h3>Hosts</h3>
 <%= render :partial => 'hosts/list', :locals => { :hosts => @scan.hosts } %>

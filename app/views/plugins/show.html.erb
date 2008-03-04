@@ -1,4 +1,4 @@
-<h1>Plugin</h1>
+<h2>Plugin</h2>
 
 <dl>
   <dt>Name</dt>
@@ -14,8 +14,6 @@
   <dd><%=h @plugin.risk %></dd>
 </dl>
 
-<%= link_to 'Back', plugins_path %>
-
-<h2>Hosts</h2>
+<h3>Hosts</h3>
 
 <%= render :partial => 'hosts/list', :locals => { :hosts => @plugin.hosts } %>

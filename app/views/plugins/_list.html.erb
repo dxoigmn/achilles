@@ -1,14 +1,20 @@
 <table>
-  <tr>
-    <th>Name</th>
-    <th>Summary</th>
-  </tr>
+  <caption>Plugins (<%=h plugins.size %>)</caption>
+  
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Summary</th>
+    </tr>
+  </thead>
 
+  <tbody>
 <% for plugin in plugins %>
-  <tr>
-    <td><%=h plugin.name %></td>
-    <td><%=h plugin.summary %></td>
-    <td><%= link_to 'Show', plugin %></td>
-  </tr>
+    <tr>
+      <td><%=h plugin.name %></td>
+      <td><%=h plugin.summary %></td>
+      <td><%= link_to 'Show', plugin %></td>
+    </tr>
 <% end %>
+  </tbody>
 </table>
