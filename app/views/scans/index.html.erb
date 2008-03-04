@@ -1,3 +1,5 @@
 <h2>Scans</h2>
 
 <%= render :partial => 'scans/list', :locals => { :scans => @scans } %>
+
+<%= link_to 'Add Scan', new_scan_path %>

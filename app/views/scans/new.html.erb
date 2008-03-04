@@ -1,0 +1,22 @@
+<h2>Add Scan</h2>
+
+<% form_for(@scan) do |f| %>
+  <p>
+    <b>Name</b><br />
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <b>Start</b><br />
+    <%= f.datetime_select :start %>
+  </p>
+
+  <p>
+    <b>Location</b><br />
+    <%= f.select :location_id, Location.find(:all).map { |location| [location.name, location.id]} %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>

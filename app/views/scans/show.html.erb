@@ -1,4 +1,18 @@
 <h2><%=h @scan.name %></h2>
 
+<dl>
+  <dt>Start Time</dt>
+  <dd><%=h @scan.start %></dd>
+  
+  <dt>State</dt>
+  <dd><%=h @scan.state %></dd>
+  
+  <dt>Location</dt>
+  <dd><%=h @scan.location %></dd>
+
+  <dt>Output</dt>
+  <dd><pre><%=h @scan.output %></pre></dd>
+</dl>
+
 <h3>Hosts</h3>
 <%= render :partial => 'hosts/list', :locals => { :hosts => @scan.hosts } %>
