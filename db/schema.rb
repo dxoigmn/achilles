@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(:version => 6) do
 
   create_table "scans", :force => true do |t|
     t.string   "name"
-    t.datetime "start"
-    t.text     "output"
+    t.datetime "starts_at"
+    t.text     "output",      :default => ""
     t.string   "state"
     t.integer  "hosts_count", :default => 0
     t.integer  "location_id"

@@ -2,7 +2,7 @@
 
 <dl>
   <dt>Starts At</dt>
-  <dd><%=h @scan.start %></dd>
+  <dd><%=h @scan.starts_at %></dd>
   
   <dt>State</dt>
   <dd><%=h @scan.state %></dd>
@@ -10,7 +10,7 @@
   <dt>Location</dt>
   <dd><%=h @scan.location %></dd>
 
-<% if @scan.finished? %>
+<% if @scan.running? || @scan.finished? %>
   <dt>Output</dt>
   <dd><pre><%=h @scan.output %></pre></dd>
 <% end %>
