@@ -9,7 +9,7 @@ class CreatePlugins < ActiveRecord::Migration
       t.string :category
       t.string :risk
       t.string :summary
-
+      t.integer :vulnerabilities_count, :default => 0
       t.timestamps
     end
   end

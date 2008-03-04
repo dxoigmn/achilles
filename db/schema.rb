@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 4) do
     t.integer  "ip"
     t.datetime "scan_start"
     t.datetime "scan_end"
+    t.integer  "vulnerabilities_count", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "scan_id"
@@ -30,12 +31,14 @@ ActiveRecord::Schema.define(:version => 4) do
     t.string   "category"
     t.string   "risk"
     t.string   "summary"
+    t.integer  "vulnerabilities_count", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "scans", :force => true do |t|
     t.string   "name"
+    t.integer  "hosts_count", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -183,16 +183,15 @@ else
     report = Nessus.parse(file)
     
     report.hosts.each do |nessus_host|
-      host            = Host.new
+      host            = scan.hosts.new
       host.name       = nessus_host.name
-      host.ip         = NetAddr.ip_to_i(Resolv.getaddress(nessus_host.ip))
-      host.scan_start = nessus_host.scan_start
-      host.scan_end   = nessus_host.scan_end
-      host.scan_id    = scan.id
+      host.ip         = Resolv.getaddress(nessus_host.ip)
+      host.scan_start = DateTime.parse(nessus_host.scan_start)
+      host.scan_end   = DateTime.parse(nessus_host.scan_end)
       host.save!
 
       nessus_host.vulnerabilities.each do |nessus_vulnerability|
-        vulnerability           = Vulnerability.new
+        vulnerability           = host.vulnerabilities.new
         vulnerability.protocol  = nessus_vulnerability.protocol
         vulnerability.port      = nessus_vulnerability.port
         vulnerability.service   = nessus_vulnerability.service
@@ -220,16 +219,17 @@ else
 
           warn "Plugin #{plugin.id} fields are mismatched: #{mismatched.join(', ')}" if mismatched.length > 0
         elsif nessus_plugin
-          plugin          = Plugin.new
-          plugin.id       = nessus_plugin.id
-          plugin.name     = nessus_plugin.name
-          plugin.version  = nessus_plugin.version
-          plugin.family   = nessus_plugin.family
-          plugin.cve      = nessus_plugin.cve
-          plugin.bugtraq  = nessus_plugin.bugtraq
-          plugin.category = nessus_plugin.category
-          plugin.risk     = nessus_plugin.risk
-          plugin.summary  = nessus_plugin.summary
+          plugin                        = Plugin.new
+          plugin.id                     = nessus_plugin.id
+          plugin.name                   = nessus_plugin.name
+          plugin.version                = nessus_plugin.version
+          plugin.family                 = nessus_plugin.family
+          plugin.cve                    = nessus_plugin.cve
+          plugin.bugtraq                = nessus_plugin.bugtraq
+          plugin.category               = nessus_plugin.category
+          plugin.risk                   = nessus_plugin.risk
+          plugin.summary                = nessus_plugin.summary
+          plugin.vulnerabilities_count  = 1
           plugin.save!
         else
           warn "Please import data for plugin #{nessus_vulnerability.plugin_id}" unless plugin

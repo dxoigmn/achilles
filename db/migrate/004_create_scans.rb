@@ -2,7 +2,7 @@ class CreateScans < ActiveRecord::Migration
   def self.up
     create_table :scans do |t|
       t.string :name
-
+      t.integer :hosts_count, :default => 0
       t.timestamps
     end
     
