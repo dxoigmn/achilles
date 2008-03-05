@@ -9,23 +9,23 @@
   <%= javascripts %>
 </head>
 <body>
+<div id="body">
   <div id="header">
     <h1>Achilles</h1>
     
     <ul>
-      <li><%= link_to 'Scans', scans_path %></li>
-      <li><%= link_to 'Hosts', hosts_path %></li>
-      <li><%= link_to 'Vulnerabilities', vulnerabilities_path %></li>
-      <li><%= link_to 'Plugins', plugins_path %></li>
+      <li<%= ' class="active"' if controller.kind_of?(ScansController) %>><%= link_to 'Scans', scans_path %></li>
+      <li<%= ' class="active"' if controller.kind_of?(HostsController) %>><%= link_to 'Hosts', hosts_path %></li>
+      <li<%= ' class="active"' if controller.kind_of?(VulnerabilitiesController) %>><%= link_to 'Vulnerabilities', vulnerabilities_path %></li>
+      <li<%= ' class="active"' if controller.kind_of?(PluginsController) %>><%= link_to 'Plugins', plugins_path %></li>
     </ul>
   </div>
 
-  <div id="content">
-    <%= yield  %>
-  </div>
+  <%= yield  %>
 
   <div id="footer">
     
   </div>
+</div>
 </body>
 </html>

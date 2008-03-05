@@ -1,5 +1,8 @@
+<div id="subheader">
 <h2><%=h @plugin.name %></h2>
+</div>
 
+<div id="content">
 <dl>
   <dt>Summary</dt>
   <dd><%=h @plugin.summary %></dd>
@@ -14,3 +17,4 @@
 <h3>Hosts</h3>
 
 <%= render :partial => 'hosts/list', :locals => { :hosts => @plugin.hosts } %>
+</div>

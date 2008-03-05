@@ -1,44 +1,94 @@
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: verdana, sans-serif;
-  background-color: #ffffff;
+  background-color: #F0F0F0;
+  height: 100%;
+}
+
+div#body {
+  height: 100%;
 }
 
 div#header {
-  height: 2em;
-  padding: 0.5em 1em 1em 1em;
+  padding: 0.5em 0.5em 0 1em;
   margin: 0;
-  background-color: #5c0009;
+  background-color: #8A0917;
 }
 
 div#header h1 {
   float: left;
   margin: 0;
   padding: 0;
-  color: #ffffff;
+  color: #F0F0F0;
   font-weight: normal;
 }
 
 div#header ul {
-  float: right;
+  text-align: right;
+  margin: 1.5em 0 0 0;
+  padding-bottom: 0.25em;
 }
 
 div#header ul li {
   display: inline;
-  padding-right: 1em;
+  padding: 0.5em 1em 0.25em 1em;
+}
+
+div#header ul li.active {
+  background-color: #B8AE9C;
+  border: 1px solid #5F0917;
+  border-bottom: 1px solid #B8AE9C;
+}
+
+div#header ul li.active a {
+  color: #000000;
+  font-weight: bold;
 }
 
 div#header ul li a {
-  color: #ffffff;
+  color: #F0F0F0;
+  text-decoration: none;
+}
+
+
+div#subheader {
+  background-color: #B8AE9C;
+  width: auto;
+  margin: 0;
+  padding: 0.5em 1em 0.5em 1em;
+  border-top: 1px solid #5F0917;
+  border-bottom: 1px solid #595241;
+}
+
+div#subheader h2 {
+  margin: 0;
+  padding: 0;
+  font-size: medium;
+}
+
+div#subheader h2 a {
+  color: #333333;
+  text-decoration: none;
 }
 
 div#content {
-  padding: 0 1em 0 1em;
+  margin: 0;
+  padding: 1em;
+  width: auto;
+}
+
+div#content dl {
+  margin: 0;
 }
 
 div#content table {
   width: 100%;
+  padding: 0;
 }
 
 div#content table caption {
