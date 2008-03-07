@@ -1,8 +1,5 @@
-<div id="subheader">
 <h2><%=h @scan.name %></h2>
-</div>
 
-<div id="content">
 <dl>
   <dt>Starts At</dt>
   <dd><%=h @scan.starts_at %></dd>
@@ -23,4 +20,3 @@
 <h3>Hosts</h3>
 <%= render :partial => 'hosts/list', :locals => { :hosts => @scan.hosts } %>
 <% end %>
-</div>

@@ -1,9 +1,5 @@
-<div id="subheader">
 <h2>Listing</h2>
-</div>
 
-<div id="content">
 <%= render :partial => 'scans/list', :locals => { :scans => @scans } %>
 
 <%= link_to 'Add Scan', new_scan_path %>
-</div>

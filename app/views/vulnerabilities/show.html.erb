@@ -1,8 +1,5 @@
-<div id="subheader">
 <h2><%= link_to @vulnerability.host.name, @vulnerability.host %> :: <%=h @vulnerability.name %></h2>
-</div>
 
-<div id="content">
 <dl>
   <dt>Summary</dt>
   <dd><%=h @vulnerability.summary %></dd>
@@ -22,4 +19,3 @@
   <dt>Data</dt>
   <dd><pre><%=h @vulnerability.data %></pre></dd>
 </dl>
-</div>

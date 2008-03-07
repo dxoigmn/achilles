@@ -1,8 +1,5 @@
-<div id="subheader">
 <h2><%=h @host.name %></h2>
-</div>
 
-<div id="content">
 <dl>
   <dt>Ip Address</dt>
   <dd><%=h @host.ip %></dd>
@@ -20,4 +17,3 @@
 <h3>Vulnerabilities</h3>
 
 <%= render :partial => 'vulnerabilities/list', :locals => { :vulnerabilities => @host.vulnerabilities } %>
-</div>

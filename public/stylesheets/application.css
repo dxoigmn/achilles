@@ -5,8 +5,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: verdana, sans-serif;
-  background-color: #F0F0F0;
+  font-family: 'lucida grande', arial, sans-serif;
+  background-color: #e0e0e0;
   height: 100%;
 }
 
@@ -24,83 +24,86 @@ div#header h1 {
   float: left;
   margin: 0;
   padding: 0;
-  color: #F0F0F0;
+  color: #ffffff;
   font-weight: normal;
+  font-size: x-large;
 }
 
 div#header ul {
-  text-align: right;
-  margin: 1.5em 0 0 0;
-  padding-bottom: 0.25em;
+  margin: 0.25em 0 0 5em;
+  padding-bottom: 0.5em;
 }
 
 div#header ul li {
   display: inline;
-  padding: 0.5em 1em 0.25em 1em;
+  padding: 0.5em 1em 1em 1em;
+  font-family: arial;
+  font-size: small;
+  letter-spacing: 0.1em;
 }
 
 div#header ul li.active {
-  background-color: #B8AE9C;
-  border: 1px solid #5F0917;
-  border-bottom: 1px solid #B8AE9C;
+  background-color: #e0e0e0;
+  font-weight: bold;
 }
 
 div#header ul li.active a {
   color: #000000;
-  font-weight: bold;
+  text-decoration: none;
 }
 
 div#header ul li a {
-  color: #F0F0F0;
-  text-decoration: none;
-}
-
-
-div#subheader {
-  background-color: #B8AE9C;
-  width: auto;
-  margin: 0;
-  padding: 0.5em 1em 0.5em 1em;
-  border-top: 1px solid #5F0917;
-  border-bottom: 1px solid #595241;
-}
-
-div#subheader h2 {
-  margin: 0;
-  padding: 0;
-  font-size: medium;
-}
-
-div#subheader h2 a {
-  color: #333333;
-  text-decoration: none;
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 div#content {
-  margin: 0;
+  background-color: #ffffff;
+  margin: 1em;
   padding: 1em;
   width: auto;
+  border-right: 2px solid #aaaaaa;
+  border-bottom: 2px solid #aaaaaa;
 }
 
-div#content dl {
-  margin: 0;
+div#content h2 {
+  margin: 0 0 1em 0;
+  font-size: large;
+}
+
+div#content h3 {
+  margin: 2em 0 1em 0;
+  font-size: medium;
+}
+
+div#content pre {
+  font-family: 'lucida console', 'andale mono', monospace;
+  font-size: x-small;
 }
 
 div#content table {
   width: 100%;
-  padding: 0;
+  border-collapse: collapse;
+  margin: 1em 0 1em 0;
+  font-size: small;
 }
 
-div#content table caption {
-  display: none;
+div#content table thead th {
+  background-color: #d0d0d0;
+  padding: 0.25em;
 }
 
-div#content table th:first-child, div#content table td:first-child {
-  text-align: left;
+div#content table td {
+  padding: 0.5em;
 }
 
-div#content table th, div#content table td {
+div#content table thead th, 
+div#content table tbody td {
   text-align: center;
+}
+
+div#content dl {
+  margin: 0;
 }
 
 div#content dl dt {
@@ -113,7 +116,7 @@ div#content dl dt {
 div#content dl dd {
   margin-left: 10em;
   margin-bottom: 1em;
-  background-color: #f0f0f0;
+  background-color: #E6E6E6;
   padding: 1em;
   font-size: small;
 }
