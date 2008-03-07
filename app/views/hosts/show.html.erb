@@ -16,6 +16,18 @@
   <dt>Traceroute</dt>
   <dd><pre><%= traceroute %></pre></dd>
 <% end %>
+
+<% if (services = @host.services) %>
+  <dt>Services</dt>
+  <dd>
+    <dl>
+      <% services.each do |service| %>
+      <dt><%= service.service %></dt>
+      <dd><pre><%= service.data %></pre></dd>
+      <% end %>
+    </dl>
+  </dd>
+<% end %>
 </dl>
 
 <h3>Vulnerabilities</h3>

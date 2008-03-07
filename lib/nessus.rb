@@ -143,6 +143,15 @@ module Nessus
 
   class NessusPlugin
     attr_accessor :id, :name, :version, :family, :cve, :bugtraq, :category, :risk, :summary, :copyright
+
+    def risk
+      case @risk
+      when /^critical/i;  'Critical'
+      when /^high/i;      'High'
+      when /^medium/i;    'Medium'
+      else;               'Low'
+      end
+    end
   end
   
   class NessusHost
@@ -180,32 +189,32 @@ module Nessus
         vulnerability.save!
 
         nessus_plugin = report.plugins.find { |plugin| plugin.id == nessus_vulnerability.plugin_id }
-        plugin        = Plugin.find(vulnerability.plugin_id) rescue nil
+        plugin        = Plugin.find(vulnerability.plugin_id, :include => [:family, :risk]) rescue nil
 
         if plugin && nessus_plugin
           mismatched = []
-          mismatched << "name"      if plugin.name      != nessus_plugin.name
-          mismatched << "version"   if plugin.version   != nessus_plugin.version
-          mismatched << "family"    if plugin.family    != nessus_plugin.family
-          mismatched << "cve"       if plugin.cve       != nessus_plugin.cve
-          mismatched << "bugtraq"   if plugin.bugtraq   != nessus_plugin.bugtraq
-          mismatched << "category"  if plugin.category  != nessus_plugin.category
-          mismatched << "risk"      if plugin.risk      != nessus_plugin.risk
-          mismatched << "summary"   if plugin.summary   != nessus_plugin.summary
+          mismatched << "name"      if plugin.name        != nessus_plugin.name
+          mismatched << "version"   if plugin.version     != nessus_plugin.version
+          mismatched << "family"    if plugin.family.to_s != nessus_plugin.family
+          mismatched << "cve"       if plugin.cve         != nessus_plugin.cve
+          mismatched << "bugtraq"   if plugin.bugtraq     != nessus_plugin.bugtraq
+          mismatched << "category"  if plugin.category    != nessus_plugin.category
+          mismatched << "risk"      if plugin.risk.to_s   != nessus_plugin.risk
+          mismatched << "summary"   if plugin.summary     != nessus_plugin.summary
 
           # TODO: This should probably prompt the user asking for which version they would like to keep.
 
-          scan.output!("Plugin #{plugin.id} fields are mismatched: #{mismatched.join(', ')}") if mismatched.length > 0
+          scan.output!("The following fields for plugin #{plugin.id} are mismatched: #{mismatched.join(', ')}") if mismatched.length > 0
         elsif nessus_plugin
           plugin                        = Plugin.new
           plugin.id                     = nessus_plugin.id
           plugin.name                   = nessus_plugin.name
           plugin.version                = nessus_plugin.version
-          plugin.family                 = nessus_plugin.family
+          plugin.family                 = Family.find_or_create_by_name(nessus_plugin.family)
           plugin.cve                    = nessus_plugin.cve
           plugin.bugtraq                = nessus_plugin.bugtraq
           plugin.category               = nessus_plugin.category
-          plugin.risk                   = nessus_plugin.risk
+          plugin.risk                   = Risk.find_or_create_by_name(nessus_plugin.risk)
           plugin.summary                = nessus_plugin.summary
           plugin.vulnerabilities_count  = 1
           plugin.save!

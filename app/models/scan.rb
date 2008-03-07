@@ -23,7 +23,11 @@ class Scan < ActiveRecord::Base
   end
   
   def location_names
-    locations.join(", ")
+    if locations.empty?
+      "Unknown" 
+    else
+      locations.join(", ")
+    end
   end
   
   def self.run!

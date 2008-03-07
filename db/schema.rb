@@ -11,6 +11,10 @@
 
 ActiveRecord::Schema.define(:version => 6) do
 
+  create_table "families", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "hosts", :force => true do |t|
     t.string   "name"
     t.integer  "ip"
@@ -37,15 +41,19 @@ ActiveRecord::Schema.define(:version => 6) do
   create_table "plugins", :force => true do |t|
     t.string   "name"
     t.string   "version"
-    t.string   "family"
     t.string   "cve"
     t.string   "bugtraq"
     t.string   "category"
-    t.string   "risk"
     t.string   "summary"
+    t.integer  "family_id"
+    t.integer  "risk_id"
     t.integer  "vulnerabilities_count", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "risks", :force => true do |t|
+    t.string "name"
   end
 
   create_table "scans", :force => true do |t|

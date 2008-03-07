@@ -8,7 +8,6 @@ else
   scan = Scan.find_or_create_by_name(ARGV.shift)
   
   scan.starts_at  = Time.now
-  scan.location   = 0
   scan.save!
 
   scan.start!

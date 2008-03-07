@@ -17,4 +17,8 @@ class Host < ActiveRecord::Base
   def traceroute
     vulnerabilities.find_by_plugin_id(Plugin::TRACEROUTE) || nil
   end
+  
+  def services
+    vulnerabilities.find(:all, :conditions => { :plugin_id => Plugin::SERVICE })
+  end
 end
