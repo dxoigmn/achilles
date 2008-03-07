@@ -19,6 +19,6 @@ class Host < ActiveRecord::Base
   end
   
   def services
-    vulnerabilities.find(:all, :conditions => { :plugin_id => Plugin::SERVICE })
+    vulnerabilities.find(:all).group_by(&:service)
   end
 end

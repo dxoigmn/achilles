@@ -156,6 +156,9 @@ module Nessus
   
   class NessusHost
     attr_accessor :name, :ip, :scan_start, :scan_end, :vulnerabilities
+    
+    # TODO: Should use Plugin::HOST_FQDN to determine FQDN, example:
+    # 129.170.213.82 resolves as metrosense-dev.cs.dartmouth.edu.
   end
 
   class NessusVulnerability
