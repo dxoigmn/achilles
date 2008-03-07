@@ -62,8 +62,8 @@ div#content {
   margin: 1em;
   padding: 1em;
   width: auto;
-  border-right: 2px solid #aaaaaa;
-  border-bottom: 2px solid #aaaaaa;
+  border-right: 2px solid #999999;
+  border-bottom: 2px solid #999999;
 }
 
 div#content h2 {
@@ -89,7 +89,7 @@ div#content table {
 }
 
 div#content table thead th {
-  background-color: #d0d0d0;
+  background-color: #e6e6e6;
   padding: 0.25em;
 }
 
@@ -116,7 +116,7 @@ div#content dl dt {
 div#content dl dd {
   margin-left: 10em;
   margin-bottom: 1em;
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
   padding: 1em;
   font-size: small;
 }
