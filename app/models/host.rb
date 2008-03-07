@@ -11,10 +11,10 @@ class Host < ActiveRecord::Base
   end
   
   def os_detection
-    vulnerabilities.find_by_plugin_id(11936).data rescue nil
+    vulnerabilities.find_by_plugin_id(Plugin::OS_DETECTION) || nil
   end
   
   def traceroute
-    vulnerabilities.find_by_plugin_id(10287).data rescue nil
+    vulnerabilities.find_by_plugin_id(Plugin::TRACEROUTE) || nil
   end
 end

@@ -7,11 +7,15 @@
   <dt>Scanned</dt>
   <dd><%=h @host.scan_start %> - <%=h @host.scan_end %></dd>
 
+<% if (os_detection = @host.os_detection) %>
   <dt>OS Detection</dt>
-  <dd><pre><%= @host.os_detection %></pre></dd>
-  
+  <dd><pre><%= os_detection %></pre></dd>
+<% end %>
+
+<% if (traceroute = @host.traceroute) %>
   <dt>Traceroute</dt>
-  <dd><pre><%= @host.traceroute %></pre></dd>
+  <dd><pre><%= traceroute %></pre></dd>
+<% end %>
 </dl>
 
 <h3>Vulnerabilities</h3>
