@@ -1,6 +1,6 @@
 class Scan < ActiveRecord::Base
   has_many :hosts
-  belongs_to :location
+  has_and_belongs_to_many :locations
   
   acts_as_state_machine :initial => :waiting
 
@@ -20,6 +20,10 @@ class Scan < ActiveRecord::Base
     puts str
     output << str + "\n"
     save!
+  end
+  
+  def location_names
+    locations.join(", ")
   end
   
   def self.run!

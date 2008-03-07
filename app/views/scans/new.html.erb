@@ -13,7 +13,12 @@
 
   <p>
     <b>Location</b><br />
-    <%= f.select :location_id, Location.find(:all).map { |location| [location.name, location.id]} %>
+    
+    <ul>
+      <% Location.find(:all).each do |location| %>
+      <li><%= check_box_tag 'scan[location_ids][]', location.id %> <%= location %></li>
+      <% end %>
+    </ul>
   </p>
 
   <p>

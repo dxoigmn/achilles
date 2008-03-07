@@ -1,5 +1,5 @@
 class Location < ActiveRecord::Base
-  has_many :scans
+  has_and_belongs_to_many :scans
   
   def to_s
     read_attribute(:name)

@@ -19,14 +19,19 @@ ActiveRecord::Schema.define(:version => 6) do
     t.integer  "vulnerabilities_count", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "scan_id"
     t.integer  "location_id",           :default => 0
+    t.integer  "scan_id"
   end
 
   create_table "locations", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "locations_scans", :id => false, :force => true do |t|
+    t.integer "location_id"
+    t.integer "scan_id"
   end
 
   create_table "plugins", :force => true do |t|

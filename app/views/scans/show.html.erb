@@ -7,8 +7,8 @@
   <dt>State</dt>
   <dd><%=h @scan.state %></dd>
   
-  <dt>Location</dt>
-  <dd><%=h @scan.location || "Unknown" %></dd>
+  <dt>Locations</dt>
+  <dd><%=h @scan.location_names %></dd>
 
 <% if @scan.running? || @scan.finished? %>
   <dt>Output</dt>
