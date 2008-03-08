@@ -168,12 +168,12 @@ module Nessus
   def self.process(scan, file)
     scan.output!("Parsing #{file}...")
 
-    report = NessusReport.new
-    REXML::Document.parse_stream(File.new(file), XMLListener.new(report))
+    nessus_report = NessusReport.new
+    REXML::Document.parse_stream(File.new(file), XMLListener.new(nessus_report))
 
     scan.output!("Importing #{file}...")
 
-    report.hosts.each do |nessus_host|
+    nessus_report.hosts.each do |nessus_host|
       host            = scan.hosts.new
       host.name       = nessus_host.name
       host.ip         = Resolv.getaddress(nessus_host.ip)
@@ -182,17 +182,8 @@ module Nessus
       host.save!
 
       nessus_host.vulnerabilities.each do |nessus_vulnerability|
-        vulnerability           = host.vulnerabilities.new
-        vulnerability.protocol  = nessus_vulnerability.protocol
-        vulnerability.port      = nessus_vulnerability.port
-        vulnerability.service   = nessus_vulnerability.service
-        vulnerability.plugin_id = nessus_vulnerability.plugin_id
-        vulnerability.data      = nessus_vulnerability.data.strip.split(/\n/).map { |line| line.strip }.join("\n")
-        vulnerability.host_id   = host.id
-        vulnerability.save!
-
-        nessus_plugin = report.plugins.find { |plugin| plugin.id == nessus_vulnerability.plugin_id }
-        plugin        = Plugin.find(vulnerability.plugin_id, :include => [:family, :risk]) rescue nil
+        nessus_plugin = nessus_report.plugins.find { |plugin| plugin.id == nessus_vulnerability.plugin_id }
+        plugin        = Plugin.find(nessus_vulnerability.plugin_id, :include => [:family, :risk]) rescue nil
 
         if plugin && nessus_plugin
           mismatched = []
@@ -205,7 +196,8 @@ module Nessus
           mismatched << "risk"      if plugin.risk.to_s   != nessus_plugin.risk
           mismatched << "summary"   if plugin.summary     != nessus_plugin.summary
 
-          # TODO: This should probably prompt the user asking for which version they would like to keep.
+          # TODO: This should probably prompt the user asking for which version they
+          #       would like to keep if running interactively
 
           scan.output!("The following fields for plugin #{plugin.id} are mismatched: #{mismatched.join(', ')}") if mismatched.length > 0
         elsif nessus_plugin
@@ -225,6 +217,16 @@ module Nessus
         else
           scan.output!("Please import data for plugin #{nessus_vulnerability.plugin_id}") unless plugin
         end
+        
+        vulnerability           = host.vulnerabilities.new
+        vulnerability.protocol  = nessus_vulnerability.protocol
+        vulnerability.port      = nessus_vulnerability.port
+        vulnerability.service   = nessus_vulnerability.service
+        vulnerability.plugin    = plugin
+        vulnerability.data      = nessus_vulnerability.data.strip.split(/\n/).map { |line| line.strip }.join("\n")
+        vulnerability.host_id   = host.id
+        vulnerability.severity  = VulnerabilitySeverity.severify(plugin.classification, host.location)
+        vulnerability.save!
       end
     end
   end

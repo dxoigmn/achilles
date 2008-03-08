@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  plugin_id: 1
+  location_id: 1
+  severity_id: 1
+
+two:
+  plugin_id: 1
+  location_id: 1
+  severity_id: 1

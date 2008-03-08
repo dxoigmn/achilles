@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 6) do
+ActiveRecord::Schema.define(:version => 7) do
 
   create_table "classifications", :force => true do |t|
     t.string "name"
@@ -49,6 +49,14 @@ ActiveRecord::Schema.define(:version => 6) do
     t.integer "classification_id"
   end
 
+  create_table "plugin_severities", :force => true do |t|
+    t.integer  "plugin_id"
+    t.integer  "location_id"
+    t.integer  "severity_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "plugins", :force => true do |t|
     t.string   "name"
     t.string   "version"
@@ -79,6 +87,10 @@ ActiveRecord::Schema.define(:version => 6) do
     t.datetime "updated_at"
   end
 
+  create_table "severities", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "subnets", :force => true do |t|
     t.string   "name"
     t.integer  "lowest_ip_address"
@@ -95,6 +107,15 @@ ActiveRecord::Schema.define(:version => 6) do
     t.text     "data"
     t.integer  "plugin_id"
     t.integer  "host_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "severity_id"
+  end
+
+  create_table "vulnerability_severities", :force => true do |t|
+    t.integer  "location_id"
+    t.integer  "classification_id"
+    t.integer  "severity_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

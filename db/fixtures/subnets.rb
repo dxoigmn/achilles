@@ -9,11 +9,12 @@ def subnet(options)
     options[:highest_ip_address]  = NetAddr.ip_to_i(cidr.last)
   end
 
-  if options[:location]
-    location = Location.find_or_create_by_name(options.delete(:location))
-
-    options[:location_id] = location.id
-  end
+  options[:location_id] = Location.find_or_create_by_name(options.delete(:location)) if options[:location]
+  
+  fail unless options[:name] &&
+              options[:lowest_ip_address] &&
+              options[:highest_ip_address] &&
+              options[:location_id]
 
   subnet                    = Subnet.find_or_create_by_name(options[:name])
   subnet.lowest_ip_address  = options[:lowest_ip_address]

@@ -3,9 +3,9 @@ def classify(options)
   options[:family_id]         = Family.find_or_create_by_name(options.delete(:family)).id     if options[:family]
   options[:classification_id] = Classification.find_or_create_by_name(options.delete(:as)).id if options[:as]
   
-  fail unless options[:family_id]
-  fail unless options[:risk_id]
-  fail unless options[:classification_id]
+  fail unless options[:family_id] &&
+              options[:risk_id] &&
+              options[:classification_id]
   
   plugin_classification = PluginClassification.find(:first, 
                                                     :conditions => { :family_id  => options[:family_id], 
