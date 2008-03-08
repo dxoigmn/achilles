@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 5) do
 
   create_table "locations", :force => true do |t|
     t.string   "name"
+    t.integer  "hosts_count", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

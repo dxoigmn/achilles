@@ -2,7 +2,7 @@ class CreateLocations < ActiveRecord::Migration
   def self.up
     create_table :locations do |t|
       t.string :name
-
+      t.integer :hosts_count, :default => 0
       t.timestamps
     end
     

@@ -1,5 +1,6 @@
 class Host < ActiveRecord::Base
   has_many :vulnerabilities
+  belongs_to :location, :counter_cache => true
   belongs_to :scan, :counter_cache => true
   
   def ip
