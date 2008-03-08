@@ -10,6 +10,7 @@ RAILS_GEM_VERSION = '2.0.2' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+require 'plugins/app_config/lib/configuration'
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -55,5 +56,8 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector
 
   # Make Active Record use UTC-base instead of local time
-  # config.active_record.default_timezone = :utc
+  config.active_record.default_timezone = :utc
+  
+  config.app_config.nessus_path         = '/opt/local/bin/nessus'
+  config.app_config.nessus_results_path = '/store/monthlyscans/results/nessus/%Y-%m-%d-results.xml'
 end
