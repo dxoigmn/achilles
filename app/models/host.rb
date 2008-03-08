@@ -14,8 +14,16 @@ class Host < ActiveRecord::Base
     self.location = Location.locate(value)
   end
   
+  def os_detected?
+    !os_detection.nil?
+  end
+  
   def os_detection
     vulnerabilities.find_by_plugin_id(Plugin::OS_DETECTION) || nil
+  end
+  
+  def tracerouted?
+    !traceroute.nil?
   end
   
   def traceroute

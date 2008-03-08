@@ -2,7 +2,7 @@ class PluginsController < ApplicationController
   # GET /plugins
   # GET /plugins.xml
   def index
-    @plugins = Plugin.find(:all)
+    @plugins = Plugin.find(:all, :include => :classification)
 
     respond_to do |format|
       format.html # index.html.erb

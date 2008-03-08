@@ -7,14 +7,14 @@
   <dt>Scanned</dt>
   <dd><%=h @host.scan_start %> - <%=h @host.scan_end %></dd>
 
-<% if (os_detection = @host.os_detection) %>
+<% if @host.os_detected? %>
   <dt>OS Detection</dt>
-  <dd><pre><%= os_detection %></pre></dd>
+  <dd><pre><%= @host.os_detection %></pre></dd>
 <% end %>
 
-<% if (traceroute = @host.traceroute) %>
+<% if @host.tracerouted? %>
   <dt>Traceroute</dt>
-  <dd><pre><%= traceroute %></pre></dd>
+  <dd><pre><%= @host.traceroute %></pre></dd>
 <% end %>
 </dl>
 

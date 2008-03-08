@@ -9,7 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 5) do
+ActiveRecord::Schema.define(:version => 6) do
+
+  create_table "classifications", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "families", :force => true do |t|
     t.string "name"
@@ -39,6 +43,12 @@ ActiveRecord::Schema.define(:version => 5) do
     t.integer "scan_id"
   end
 
+  create_table "plugin_classifications", :id => false, :force => true do |t|
+    t.integer "risk_id"
+    t.integer "family_id"
+    t.integer "classification_id"
+  end
+
   create_table "plugins", :force => true do |t|
     t.string   "name"
     t.string   "version"
@@ -51,6 +61,7 @@ ActiveRecord::Schema.define(:version => 5) do
     t.integer  "vulnerabilities_count", :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "classification_id"
   end
 
   create_table "risks", :force => true do |t|

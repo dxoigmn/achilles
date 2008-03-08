@@ -219,6 +219,7 @@ module Nessus
           plugin.category               = nessus_plugin.category
           plugin.risk                   = Risk.find_or_create_by_name(nessus_plugin.risk)
           plugin.summary                = nessus_plugin.summary
+          plugin.classification         = PluginClassification.classify(plugin.risk, plugin.family)
           plugin.vulnerabilities_count  = 1
           plugin.save!
         else

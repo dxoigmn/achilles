@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  risk_id: 1
+  family_id: 1
+  classification_id: 1
+
+two:
+  risk_id: 1
+  family_id: 1
+  classification_id: 1
