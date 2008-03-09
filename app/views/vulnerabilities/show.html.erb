@@ -4,22 +4,28 @@
   </div>
   
   <dl>
-    <dt>Summary</dt>
+    <dt><div>Summary</div></dt>
     <dd><%=h @vulnerability.summary %></dd>
 
-    <dt>Family</dt>
+    <dt><div>Severity</div></dt>
+    <dd><%=h @vulnerability.severity %></dd>
+
+    <dt><div>Family</div></dt>
     <dd><%=h @vulnerability.family %></dd>
 
-    <dt>Risk</dt>
+    <dt><div>Risk</div></dt>
     <dd><%=h @vulnerability.risk %></dd>
 
-    <dt>Service</dt>
+    <dt><div>Classification</div></dt>
+    <dd><%=h @vulnerability.classification %></dd>
+
+    <dt><div>Service</div></dt>
     <dd><%=h @vulnerability.service %></dd>
 
-    <dt>Plugin</dt>
+    <dt><div>Plugin</div></dt>
     <dd><%= link_to 'Plugin', plugin_path(@vulnerability.plugin) %></dd>
 
-    <dt>Data</dt>
+    <dt><div>Data</div></dt>
     <dd><pre><%=h @vulnerability.data %></pre></dd>
   </dl>
 </div>

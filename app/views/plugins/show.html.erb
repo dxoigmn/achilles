@@ -4,14 +4,30 @@
   </div>
     
   <dl>
-    <dt>Summary</dt>
+    <dt><div>Summary</div></dt>
     <dd><%=h @plugin.summary %></dd>
 
-    <dt>Family</dt>
+    <dt><div>Family</div></dt>
     <dd><%=h @plugin.family %></dd>
 
-    <dt>Risk</dt>
+    <dt><div>Risk</div></dt>
     <dd><%=h @plugin.risk %></dd>
+    
+    <dt><div>Classification</div></dt>
+    <dd><%=h @plugin.classification %></dd>
+  </dl>
+</div>
+
+<div class="section">
+  <div class="header">
+    <h1>Severities</h1>
+  </div>
+  
+  <dl>
+    <% Location.find(:all).each do |location| %>
+    <dt><div><%=h location %></div></dt>
+    <dd><%=h @plugin.severity(location) %></dd>
+    <% end %>
   </dl>
 </div>
 

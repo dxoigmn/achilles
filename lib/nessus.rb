@@ -224,7 +224,7 @@ module Nessus
         vulnerability.plugin    = plugin
         vulnerability.data      = nessus_vulnerability.data.strip.split(/\n/).map { |line| line.strip }.join("\n")
         vulnerability.host_id   = host.id
-        vulnerability.severity  = VulnerabilitySeverity.severify(plugin.classification, host.location)
+        vulnerability.severity  = plugin.severity(host.location)
         vulnerability.save!
       end
     end

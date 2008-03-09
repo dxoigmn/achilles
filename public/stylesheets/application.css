@@ -56,90 +56,86 @@ div#nav ul li a {
   text-decoration: underline;
 }
 
-div#article {
-  background-color: #ffffff;
+div.section {
+  background-color: #f9f9f9;
   margin: 1em;
   padding: 1em;
   width: auto;
   border-right: 2px solid #999999;
   border-bottom: 2px solid #999999;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
 }
 
-div#article h1 {
-  margin: 0 0 1em 0;
+div.section div.header h1 {
   font-size: large;
+  margin-top: 0;
 }
 
-div#article pre {
+div.section:first-child div.header h1 {
+  font-size: x-large;
+}
+
+div.section pre {
   font-family: 'lucida console', 'andale mono', monospace;
   font-size: x-small;
 }
 
-div#article table {
+div.section table {
   width: 100%;
   border-collapse: collapse;
   margin: 1em 0 1em 0;
   font-size: small;
 }
 
-div#article table thead th {
+div.section table thead th {
   background-color: #e6e6e6;
   padding: 0.25em;
 }
 
-div#article table td {
+div.section table td {
   padding: 0.5em;
 }
 
-div#article table thead th, 
-div#article table tbody td {
+div.section table thead th, 
+div.section table tbody td {
   text-align: center;
 }
 
-div#article dl {
+div.section dl {
   margin: 0;
 }
 
-div#article dl.list dt {
-  float: none;
-  border-bottom: 1px solid #aaaaaa;
-  padding-bottom: 0.5em;
-}
-
-div#article dl.list dd {
-  margin-left: 0;
-}
-
-div#article dl dt {
+div.section dl dt {
   font-weight: bold;
   font-size: small;
   float: left;
-  padding: 1em;
+  width: 9em;
+  text-align: right;
+  height: 3em;
+  display: table;
 }
 
-div#article dl dd {
-  margin-left: 15em;
-  margin-bottom: 1em;
+div.section dl dt div {
+	vertical-align: middle;
+  display: table-cell;
+  align: right;
+}
+
+div.section dl dd {
+  margin: 0 0 0.5em 10em;
   background-color: #e6e6e6;
   padding: 1em;
   font-size: small;
 }
 
-div#article dl dd pre {
+div.section dl dd pre {
   padding: 0;
   margin: 0;
 }
 
-div#article ul.vulnerabilities {
+div.section ul.vulnerabilities {
   margin: 0;
   padding: 0;
   list-style-position: inside;
-}
-
-div#article div.section {
-  margin-top: 2em;
-}
-
-div#article div.section:first-child {
-  margin-top: 0;
 }

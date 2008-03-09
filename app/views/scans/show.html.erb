@@ -4,17 +4,17 @@
   </div>
 
   <dl>
-    <dt>Starts At</dt>
+    <dt><div>Starts At</div></dt>
     <dd><%=h @scan.starts_at %></dd>
   
-    <dt>State</dt>
+    <dt><div>State</div></dt>
     <dd><%=h @scan.state.capitalize %></dd>
   
-    <dt>Locations</dt>
+    <dt><div>Locations</div></dt>
     <dd><%=h @scan.location_names %></dd>
 
   <% if @scan.running? || @scan.finished? %>
-    <dt>Output</dt>
+    <dt><div>Output</div></dt>
     <dd><pre><%=h @scan.output %></pre></dd>
   <% end %>
   </dl>

@@ -4,19 +4,22 @@
   </div>
 
   <dl>
-    <dt>Ip Address</dt>
+    <dt><div>Ip Address</div></dt>
     <dd><%=h @host.ip %></dd>
   
-    <dt>Scanned</dt>
+    <dt><div>Last Scanned</div></dt>
     <dd><%=h @host.scan_start %> - <%=h @host.scan_end %></dd>
 
+    <dt><div>Severity</div></dt>
+    <dd><%=h @host.severity %></dd>
+
   <% if @host.os_detected? %>
-    <dt>OS Detection</dt>
+    <dt><div>OS Detection</div></dt>
     <dd><pre><%= @host.os_detection %></pre></dd>
   <% end %>
 
   <% if @host.tracerouted? %>
-    <dt>Traceroute</dt>
+    <dt><div>Traceroute</div></dt>
     <dd><pre><%= @host.traceroute %></pre></dd>
   <% end %>
   </dl>
@@ -27,16 +30,5 @@
     <h1>Vulnerabilities</h1>
   </div>
   
-  <dl>
-  <% @host.services.each do |service, vulnerabilities| %>
-    <dt><%= service %></dt>
-    <dd>
-      <ul class="vulnerabilities">
-        <% vulnerabilities.each do |vulnerability| %>
-        <li><%= link_to vulnerability.name, vulnerability %></li>
-        <% end %>
-      </ul>
-    </dd>
-  <% end %>
-  </dl>
+  <%= render :partial => 'vulnerabilities/list', :locals => { :vulnerabilities => @host.vulnerabilities } %>
 </div>
