@@ -9,18 +9,19 @@
   <%= javascripts %>
 </head>
 <body>
-<div id="body">
   <div id="header">
     <h1>Achilles</h1>
-    
+  </div>
+
+  <div id="nav">
     <ul>
       <li<%= ' class="active"' if controller.kind_of?(ScansController) %>><%= link_to 'Scans', scans_path %></li>
       <li<%= ' class="active"' if controller.kind_of?(HostsController) %>><%= link_to 'Hosts', hosts_path %></li>
       <li<%= ' class="active"' if controller.kind_of?(PluginsController) %>><%= link_to 'Plugins', plugins_path %></li>
-    </ul>
+    </ul>    
   </div>
 
-  <div id="content">
+  <div id="article">
 <%= yield  %>
   </div>
 

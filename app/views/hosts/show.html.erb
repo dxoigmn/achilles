@@ -1,33 +1,42 @@
-<h2><%=h @host.name %></h2>
+<div class="section">
+  <div class="header">
+    <h1><%=h @host.name %></h1>
+  </div>
 
-<dl>
-  <dt>Ip Address</dt>
-  <dd><%=h @host.ip %></dd>
+  <dl>
+    <dt>Ip Address</dt>
+    <dd><%=h @host.ip %></dd>
   
-  <dt>Scanned</dt>
-  <dd><%=h @host.scan_start %> - <%=h @host.scan_end %></dd>
+    <dt>Scanned</dt>
+    <dd><%=h @host.scan_start %> - <%=h @host.scan_end %></dd>
 
-<% if @host.os_detected? %>
-  <dt>OS Detection</dt>
-  <dd><pre><%= @host.os_detection %></pre></dd>
-<% end %>
+  <% if @host.os_detected? %>
+    <dt>OS Detection</dt>
+    <dd><pre><%= @host.os_detection %></pre></dd>
+  <% end %>
 
-<% if @host.tracerouted? %>
-  <dt>Traceroute</dt>
-  <dd><pre><%= @host.traceroute %></pre></dd>
-<% end %>
-</dl>
+  <% if @host.tracerouted? %>
+    <dt>Traceroute</dt>
+    <dd><pre><%= @host.traceroute %></pre></dd>
+  <% end %>
+  </dl>
+</div>
 
-<h3>Vulnerabilities</h3>
-<dl>
-<% @host.services.each do |service, vulnerabilities| %>
-  <dt><%= service %></dt>
-  <dd>
-    <ul class="vulnerabilities">
-      <% vulnerabilities.each do |vulnerability| %>
-      <li><%= link_to vulnerability.name, vulnerability %></li>
-      <% end %>
-    </ul>
-  </dd>
-<% end %>
-</dl>
+<div class="section">
+  <div class="header">
+    <h1>Vulnerabilities</h1>
+  </div>
+  
+  <dl>
+  <% @host.services.each do |service, vulnerabilities| %>
+    <dt><%= service %></dt>
+    <dd>
+      <ul class="vulnerabilities">
+        <% vulnerabilities.each do |vulnerability| %>
+        <li><%= link_to vulnerability.name, vulnerability %></li>
+        <% end %>
+      </ul>
+    </dd>
+  <% end %>
+  </dl>
+</div>

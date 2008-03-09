@@ -1,5 +1,9 @@
-<h2>Listing</h2>
+<div class="section">
+  <div class="header">
+    <h1>Listing</h1>
+  </div>
 
-<%= render :partial => 'scans/list', :locals => { :scans => @scans } %>
+  <%= render :partial => 'scans/list', :locals => { :scans => @scans } %>
 
-<%= link_to 'Add Scan', new_scan_path %>
+  <%= link_to 'Add Scan', new_scan_path %>
+</div>

@@ -1,16 +1,24 @@
-<h2><%=h @plugin.name %></h2>
+<div class="section">
+  <div class="header">
+    <h1><%=h @plugin.name %></h1>
+  </div>
+    
+  <dl>
+    <dt>Summary</dt>
+    <dd><%=h @plugin.summary %></dd>
 
-<dl>
-  <dt>Summary</dt>
-  <dd><%=h @plugin.summary %></dd>
+    <dt>Family</dt>
+    <dd><%=h @plugin.family %></dd>
 
-  <dt>Family</dt>
-  <dd><%=h @plugin.family %></dd>
+    <dt>Risk</dt>
+    <dd><%=h @plugin.risk %></dd>
+  </dl>
+</div>
 
-  <dt>Risk</dt>
-  <dd><%=h @plugin.risk %></dd>
-</dl>
-
-<h3>Hosts</h3>
-
-<%= render :partial => 'hosts/list', :locals => { :hosts => @plugin.hosts } %>
+<div class="section">
+  <div class="header">
+    <h1>Hosts</h1>
+  </div>
+    
+  <%= render :partial => 'hosts/list', :locals => { :hosts => @plugin.hosts } %>
+</div>

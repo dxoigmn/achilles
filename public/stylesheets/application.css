@@ -14,27 +14,26 @@ div#body {
   height: 100%;
 }
 
-div#header {
-  padding: 0.5em 0.5em 0 1em;
-  margin: 0;
-  background-color: #8A0917;
-}
-
 div#header h1 {
   float: left;
-  margin: 0;
+  margin: 0.25em 0 0 0.5em;
   padding: 0;
   color: #ffffff;
   font-weight: normal;
   font-size: x-large;
 }
 
-div#header ul {
-  margin: 0.25em 0 0 5em;
+div#nav {
+  background-color: #8A0917;
+  padding: 0.25em 0 0 0;
+}
+
+div#nav ul {
+  margin: 0.5em 0 0 5em;
   padding-bottom: 0.5em;
 }
 
-div#header ul li {
+div#nav ul li {
   display: inline;
   padding: 0.5em 1em 1em 1em;
   font-family: arial;
@@ -42,22 +41,22 @@ div#header ul li {
   letter-spacing: 0.1em;
 }
 
-div#header ul li.active {
+div#nav ul li.active {
   background-color: #e0e0e0;
   font-weight: bold;
 }
 
-div#header ul li.active a {
+div#nav ul li.active a {
   color: #000000;
   text-decoration: none;
 }
 
-div#header ul li a {
+div#nav ul li a {
   color: #ffffff;
   text-decoration: underline;
 }
 
-div#content {
+div#article {
   background-color: #ffffff;
   margin: 1em;
   padding: 1em;
@@ -66,64 +65,59 @@ div#content {
   border-bottom: 2px solid #999999;
 }
 
-div#content h2 {
+div#article h1 {
   margin: 0 0 1em 0;
   font-size: large;
 }
 
-div#content h3 {
-  margin: 2em 0 1em 0;
-  font-size: medium;
-}
-
-div#content pre {
+div#article pre {
   font-family: 'lucida console', 'andale mono', monospace;
   font-size: x-small;
 }
 
-div#content table {
+div#article table {
   width: 100%;
   border-collapse: collapse;
   margin: 1em 0 1em 0;
   font-size: small;
 }
 
-div#content table thead th {
+div#article table thead th {
   background-color: #e6e6e6;
   padding: 0.25em;
 }
 
-div#content table td {
+div#article table td {
   padding: 0.5em;
 }
 
-div#content table thead th, 
-div#content table tbody td {
+div#article table thead th, 
+div#article table tbody td {
   text-align: center;
 }
 
-div#content dl {
+div#article dl {
   margin: 0;
 }
 
-div#content dl.list dt {
+div#article dl.list dt {
   float: none;
   border-bottom: 1px solid #aaaaaa;
   padding-bottom: 0.5em;
 }
 
-div#content dl.list dd {
+div#article dl.list dd {
   margin-left: 0;
 }
 
-div#content dl dt {
+div#article dl dt {
   font-weight: bold;
   font-size: small;
   float: left;
   padding: 1em;
 }
 
-div#content dl dd {
+div#article dl dd {
   margin-left: 15em;
   margin-bottom: 1em;
   background-color: #e6e6e6;
@@ -131,12 +125,12 @@ div#content dl dd {
   font-size: small;
 }
 
-div#content dl dd pre {
+div#article dl dd pre {
   padding: 0;
   margin: 0;
 }
 
-div#content ul.vulnerabilities {
+div#article ul.vulnerabilities {
   margin: 0;
   padding: 0;
   list-style-position: inside;

@@ -1,6 +1,9 @@
-<h2>Add Scan</h2>
-
-<% form_for(@scan) do |f| %>
+<div class="section">
+  <div class="header">
+    <h1>Add Scan</h1>
+  </div>
+  
+  <% form_for(@scan) do |f| %>
   <p>
     <b>Name</b><br />
     <%= f.text_field :name %>
@@ -13,7 +16,7 @@
 
   <p>
     <b>Location</b><br />
-    
+  
     <ul>
       <% Location.find(:all).each do |location| %>
       <li><%= check_box_tag 'scan[location_ids][]', location.id %> <%= location %></li>
@@ -24,4 +27,5 @@
   <p>
     <%= f.submit "Create" %>
   </p>
-<% end %>
+  <% end %>
+</div>

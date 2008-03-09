@@ -1,22 +1,31 @@
-<h2><%=h @scan.name %></h2>
+<div class="section">
+  <div class="header">
+    <h1><%=h @scan.name %></h1>
+  </div>
 
-<dl>
-  <dt>Starts At</dt>
-  <dd><%=h @scan.starts_at %></dd>
+  <dl>
+    <dt>Starts At</dt>
+    <dd><%=h @scan.starts_at %></dd>
   
-  <dt>State</dt>
-  <dd><%=h @scan.state.capitalize %></dd>
+    <dt>State</dt>
+    <dd><%=h @scan.state.capitalize %></dd>
   
-  <dt>Locations</dt>
-  <dd><%=h @scan.location_names %></dd>
+    <dt>Locations</dt>
+    <dd><%=h @scan.location_names %></dd>
 
-<% if @scan.running? || @scan.finished? %>
-  <dt>Output</dt>
-  <dd><pre><%=h @scan.output %></pre></dd>
-<% end %>
-</dl>
+  <% if @scan.running? || @scan.finished? %>
+    <dt>Output</dt>
+    <dd><pre><%=h @scan.output %></pre></dd>
+  <% end %>
+  </dl>
+</div>
 
 <% if @scan.finished? %>
-<h3>Hosts</h3>
-<%= render :partial => 'hosts/list', :locals => { :hosts => @scan.hosts } %>
+<div class="section">
+  <div class="header">
+    <h1>Hosts</h1>
+  </div>
+
+  <%= render :partial => 'hosts/list', :locals => { :hosts => @scan.hosts } %>
+</div>
 <% end %>
