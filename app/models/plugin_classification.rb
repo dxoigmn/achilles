@@ -1,5 +1,7 @@
 class PluginClassification < ActiveRecord::Base
   belongs_to :classification
+  belongs_to :risk
+  belongs_to :family
   has_many :plugins, :finder_sql => 'SELECT plugins.* FROM plugins ' +
                                     'WHERE plugins.family_id = #{family_id} AND ' +
                                     '      plugins.risk_id = #{risk_id}'

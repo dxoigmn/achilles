@@ -6,7 +6,6 @@ class PluginsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @plugins }
     end
   end
 
@@ -17,7 +16,6 @@ class PluginsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @plugin }
     end
   end
 end

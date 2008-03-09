@@ -6,7 +6,6 @@ class HostsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @hosts }
     end
   end
 
@@ -17,7 +16,6 @@ class HostsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @host }
     end
   end
 end

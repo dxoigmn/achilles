@@ -6,7 +6,6 @@ class ScansController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @scans }
     end
   end
 
@@ -17,7 +16,6 @@ class ScansController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @scan }
     end
   end
   
@@ -28,7 +26,6 @@ class ScansController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @scan }
     end
   end
   
@@ -41,10 +38,8 @@ class ScansController < ApplicationController
       if @scan.save
         flash[:notice] = 'Scan was successfully created.'
         format.html { redirect_to(@scan) }
-        format.xml  { render :xml => @scan, :status => :created, :location => @scan }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @scan.errors, :status => :unprocessable_entity }
       end
     end
   end
