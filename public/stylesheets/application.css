@@ -135,3 +135,11 @@ div#article ul.vulnerabilities {
   padding: 0;
   list-style-position: inside;
 }
+
+div#article div.section {
+  margin-top: 2em;
+}
+
+div#article div.section:first-child {
+  margin-top: 0;
+}
