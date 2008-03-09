@@ -23,6 +23,12 @@
     </ul>    
   </div>
 
+<% flash.each do |key,value| -%>
+  <div class="flash" id="<%=h key %>">
+    <%=h value %>
+  </div>
+<% end %>
+
   <div id="article">
 <%= yield  %>
   </div>

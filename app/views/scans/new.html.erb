@@ -4,28 +4,23 @@
   </div>
   
   <% form_for(@scan) do |f| %>
-  <p>
-    <b>Name</b><br />
-    <%= f.text_field :name %>
-  </p>
+  <dl>
+    <dt><div>Name</div></dt>
+    <dd><%= f.text_field :name %></dd>
 
-  <p>
-    <b>Starts At</b><br />
-    <%= f.datetime_select :starts_at %>
-  </p>
+    <dt><div>Start At</div></dt>
+    <dd><%= f.datetime_select :starts_at %></dd>
 
-  <p>
-    <b>Location</b><br />
+    <dt><div>Location</div></dt>
+    <dd>
+      <ul>
+        <% Location.find(:all).each do |location| %>
+        <li><%= check_box_tag 'scan[location_ids][]', location.id %> <%= location %></li>
+        <% end %>
+      </ul>
+    </dd>
+  </dl>
   
-    <ul>
-      <% Location.find(:all).each do |location| %>
-      <li><%= check_box_tag 'scan[location_ids][]', location.id %> <%= location %></li>
-      <% end %>
-    </ul>
-  </p>
-
-  <p>
-    <%= f.submit "Create" %>
-  </p>
+  <%= f.submit "Create" %>
   <% end %>
 </div>

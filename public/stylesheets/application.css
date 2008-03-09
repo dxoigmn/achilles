@@ -56,6 +56,24 @@ div#nav ul li a {
   text-decoration: underline;
 }
 
+div.flash {
+  margin: 1em;
+  padding: 0.5em;
+  color: #333333;
+  font-size: small;
+  font-weight: bold;
+}
+
+div.flash#notice {
+  background-color: #FEFDE6;
+  border: 1px solid #FDF350;
+}
+
+div.flash#error {
+  background-color: #F7D9D9;
+  border: 1px solid #EA8F8F;
+}
+
 div.section {
   background-color: #f9f9f9;
   margin: 1em;
@@ -84,7 +102,6 @@ div.section pre {
 div.section table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1em 0 1em 0;
   font-size: small;
 }
 
@@ -134,8 +151,8 @@ div.section dl dd pre {
   margin: 0;
 }
 
-div.section ul.vulnerabilities {
+div.section dl dd ul {
+  list-style-type: none;
   margin: 0;
   padding: 0;
-  list-style-position: inside;
 }
