@@ -88,7 +88,8 @@ ActiveRecord::Schema.define(:version => 7) do
   end
 
   create_table "severities", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "value"
   end
 
   create_table "subnets", :force => true do |t|

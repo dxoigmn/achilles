@@ -2,6 +2,7 @@ class CreateSeverities < ActiveRecord::Migration
   def self.up
     create_table :severities do |t|
       t.string :name
+      t.integer :value
     end
 
     create_table :plugin_severities do |t|

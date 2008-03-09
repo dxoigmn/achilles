@@ -1,24 +1,10 @@
-def severify(options)
-  options[:location_id]       = Location.find_or_create_by_name(options.delete(:location)).id             if options[:location]
-  options[:classification_id] = Classification.find_or_create_by_name(options.delete(:classification)).id if options[:classification]
-  options[:severity_id]       = Severity.find_or_create_by_name(options.delete(:as)).id                   if options[:as]
-  
-  fail unless options[:location_id] &&
-              options[:classification_id] &&
-              options[:severity_id]
-  
-  vulnerability_severity = VulnerabilitySeverity.find(:first, :conditions => { :location_id => options[:location_id], 
-                                                                               :classification_id => options[:classification_id] })
+include FixtureHelpers
 
-  unless vulnerability_severity
-    vulnerability_severity                    = VulnerabilitySeverity.new
-    vulnerability_severity.location_id        = options[:location_id]
-    vulnerability_severity.classification_id  = options[:classification_id]
-  end
-  
-  vulnerability_severity.severity_id = options[:severity_id]  
-  vulnerability_severity.save!
-end
+severity :value => 5, :name => 'Critical'
+severity :value => 4, :name => 'High'
+severity :value => 3, :name => 'Medium'
+severity :value => 2, :name => 'Low'
+severity :value => 1, :name => 'None'
 
 severify :location => 'Academic - Dynamic',       :classification => 'Compromised',               :as => 'Critical'
 severify :location => 'Academic - Dynamic',       :classification => 'Data Corruption',           :as => 'Low'

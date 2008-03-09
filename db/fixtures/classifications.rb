@@ -1,24 +1,4 @@
-def classify(options)
-  options[:risk_id]           = Risk.find_or_create_by_name(options.delete(:risk)).id         if options[:risk]
-  options[:family_id]         = Family.find_or_create_by_name(options.delete(:family)).id     if options[:family]
-  options[:classification_id] = Classification.find_or_create_by_name(options.delete(:as)).id if options[:as]
-  
-  fail unless options[:family_id] &&
-              options[:risk_id] &&
-              options[:classification_id]
-  
-  plugin_classification = PluginClassification.find(:first, :conditions => { :family_id  => options[:family_id], 
-                                                                             :risk_id    => options[:risk_id] })
-  
-  unless plugin_classification
-    plugin_classification           = PluginClassification.new
-    plugin_classification.family_id = options[:family_id]
-    plugin_classification.risk_id   = options[:risk_id]
-  end
-  
-  plugin_classification.classification_id = options[:classification_id]
-  plugin_classification.save!
-end
+include FixtureHelpers
 
 classify :family => 'Backdoors',                     :risk => 'Critical', :as => 'Compromised'
 classify :family => 'Backdoors',                     :risk => 'High',     :as => 'Compromised'
