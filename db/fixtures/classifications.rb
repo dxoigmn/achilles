@@ -7,15 +7,17 @@ def classify(options)
               options[:risk_id] &&
               options[:classification_id]
   
-  plugin_classification = PluginClassification.find(:first, 
-                                                    :conditions => { :family_id  => options[:family_id], 
-                                                                     :risk_id    => options[:risk_id] })
+  plugin_classification = PluginClassification.find(:first, :conditions => { :family_id  => options[:family_id], 
+                                                                             :risk_id    => options[:risk_id] })
   
-  if plugin_classification
-    ActiveRecord::Base.connection.execute "UPDATE plugin_classifications SET classification_id = #{options[:classification_id]} WHERE family_id = #{options[:family_id]} AND risk_id = #{options[:risk_id]}"
-  else
-    ActiveRecord::Base.connection.execute "INSERT INTO plugin_classifications (classification_id, family_id, risk_id) VALUES (#{options[:classification_id]}, #{options[:family_id]}, #{options[:risk_id]})"
+  unless plugin_classification
+    plugin_classification           = PluginClassification.new
+    plugin_classification.family_id = options[:family_id]
+    plugin_classification.risk_id   = options[:risk_id]
   end
+  
+  plugin_classification.classification_id = options[:classification_id]
+  plugin_classification.save!
 end
 
 classify :family => 'Backdoors',                     :risk => 'Critical', :as => 'Compromised'

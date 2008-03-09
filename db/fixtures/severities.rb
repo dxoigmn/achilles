@@ -10,11 +10,14 @@ def severify(options)
   vulnerability_severity = VulnerabilitySeverity.find(:first, :conditions => { :location_id => options[:location_id], 
                                                                                :classification_id => options[:classification_id] })
 
-  if vulnerability_severity
-    ActiveRecord::Base.connection.execute "UPDATE vulnerability_severities SET severity_id = #{options[:severity_id]} WHERE location_id = #{options[:location_id]} AND classification_id = #{options[:classification_id]}"
-  else
-    ActiveRecord::Base.connection.execute "INSERT INTO vulnerability_severities (severity_id, location_id, classification_id) VALUES (#{options[:severity_id]}, #{options[:location_id]}, #{options[:classification_id]})"
+  unless vulnerability_severity
+    vulnerability_severity                    = VulnerabilitySeverity.new
+    vulnerability_severity.location_id        = options[:location_id]
+    vulnerability_severity.classification_id  = options[:classification_id]
   end
+  
+  vulnerability_severity.severity_id = options[:severity_id]  
+  vulnerability_severity.save!
 end
 
 severify :location => 'Academic - Dynamic',       :classification => 'Compromised',               :as => 'Critical'
