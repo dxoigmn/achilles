@@ -25,15 +25,15 @@
 
     %dt
       %div='Description'
-    %dd=@plugin.description.gsub("\n", "<br/>")
+    %dd=find_and_preserve("<pre>#{@plugin.description}</pre>")
     
     %dt
       %div='Evaluation'
-    %dd=@plugin.evaluation.gsub("\n", "<br/>")
+    %dd=find_and_preserve("<pre>#{@plugin.evaluation}</pre>")
   
     %dt
       %div='Remediation'
-    %dd=@plugin.remediation.gsub("\n", "<br/>")
+    %dd=find_and_preserve("<pre>#{@plugin.remediation}</pre>")
 
 .section
   .header

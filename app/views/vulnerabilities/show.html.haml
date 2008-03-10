@@ -41,17 +41,17 @@
 
     %dt
       %div='Data'
-    %dd=@vulnerability.data.gsub("\n", "<br/>")
+    %dd=find_and_preserve("<pre>#{@vulnerability.data}</pre>")
   
     %dt
       %div='Description'
-    %dd=@vulnerability.description.gsub("\n", "<br/>")
+    %dd=find_and_preserve("<pre>#{@vulnerability.description}</pre>")
       
     %dt
       %div='Evaluation'
-    %dd=@vulnerability.evaluation.gsub("\n", "<br/>")
+    %dd=find_and_preserve("<pre>#{@vulnerability.evaluation}</pre>")
     
     %dt
       %div='Remediation'
-    %dd=@vulnerability.remediation.gsub("\n", "<br/>")
+    %dd=find_and_preserve("<pre>#{@vulnerability.remediation}</pre>")
       

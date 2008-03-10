@@ -18,7 +18,7 @@
     - if @scan.running? || @scan.finished?
       %dt
         %div='Output'
-      %dd=@scan.output.gsub("\n", "<br/>")
+      %dd=find_and_preserve("<pre>#{@scan.output}</pre>")
 
 -if @scan.finished?
   .section
