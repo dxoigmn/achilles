@@ -218,15 +218,13 @@ module Nessus
           scan.output!("Please import data for plugin #{nessus_vulnerability.plugin_id}") unless plugin
         end
         
-        vulnerability           = host.vulnerabilities.new
-        vulnerability.protocol  = nessus_vulnerability.protocol
-        vulnerability.port      = nessus_vulnerability.port
-        vulnerability.service   = nessus_vulnerability.service
-        vulnerability.plugin    = plugin
-        vulnerability.data      = nessus_vulnerability.data.strip.split(/\n/).map { |line| line.strip }.join("\n")
-        vulnerability.host_id   = host.id
-        vulnerability.severity  = plugin.severity(host.location)
-        vulnerability.status    = plugin.status
+        vulnerability             = host.vulnerabilities.new
+        vulnerability.protocol    = nessus_vulnerability.protocol
+        vulnerability.port        = nessus_vulnerability.port
+        vulnerability.service     = nessus_vulnerability.service
+        vulnerability.data        = nessus_vulnerability.data.strip.split(/\n/).map { |line| line.strip }.join("\n")
+        vulnerability.plugin      = plugin
+        vulnerability.severity    = plugin.severity(host.location)
         vulnerability.save!
       end
     end

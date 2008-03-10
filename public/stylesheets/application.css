@@ -144,6 +144,7 @@ div.section dl dd {
   background-color: #e6e6e6;
   padding: 1em;
   font-size: small;
+  min-height: 1em;
 }
 
 div.section dl dd pre {

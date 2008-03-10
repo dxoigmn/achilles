@@ -1,11 +1,11 @@
 class CreateScans < ActiveRecord::Migration
   def self.up
     create_table :scans do |t|
-      t.string :name
-      t.datetime :starts_at
-      t.text :output, :default => ''
-      t.string :state
-      t.integer :hosts_count, :default => 0
+      t.string :name, :null => false, :default => ''
+      t.datetime :starts_at, :null => false, :default => ''
+      t.text :output, :null => false, :default => ''
+      t.string :state, :null => false, :default => ''
+      t.integer :hosts_count, :null => false, :default => 0
       t.integer :location_id
       t.timestamps
     end

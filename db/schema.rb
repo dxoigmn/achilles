@@ -9,31 +9,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 8) do
+ActiveRecord::Schema.define(:version => 9) do
 
   create_table "classifications", :force => true do |t|
-    t.string "name"
+    t.string "name", :default => "", :null => false
   end
 
   create_table "families", :force => true do |t|
-    t.string "name"
+    t.string "name", :default => "", :null => false
   end
 
   create_table "hosts", :force => true do |t|
-    t.string   "name"
-    t.integer  "ip"
-    t.datetime "scan_start"
-    t.datetime "scan_end"
-    t.integer  "vulnerabilities_count", :default => 0
+    t.string   "name",                  :default => "", :null => false
+    t.integer  "ip",                    :default => 0,  :null => false
+    t.datetime "scan_start",                            :null => false
+    t.datetime "scan_end",                              :null => false
+    t.integer  "vulnerabilities_count", :default => 0,  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "location_id",           :default => 0
+    t.integer  "location_id"
     t.integer  "scan_id"
+    t.text     "description",           :default => "", :null => false
+    t.text     "evaluation",            :default => "", :null => false
+    t.text     "remediation",           :default => "", :null => false
   end
 
   create_table "locations", :force => true do |t|
-    t.string   "name"
-    t.integer  "hosts_count", :default => 0
+    t.string   "name",        :default => "", :null => false
+    t.integer  "hosts_count", :default => 0,  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -58,66 +61,69 @@ ActiveRecord::Schema.define(:version => 8) do
   end
 
   create_table "plugins", :force => true do |t|
-    t.string   "name"
-    t.string   "version"
-    t.string   "cve"
-    t.string   "bugtraq"
-    t.string   "category"
-    t.string   "summary"
+    t.string   "name",                  :default => "",   :null => false
+    t.string   "version",               :default => "",   :null => false
+    t.string   "cve",                   :default => "",   :null => false
+    t.string   "bugtraq",               :default => "",   :null => false
+    t.string   "category",              :default => "",   :null => false
+    t.string   "summary",               :default => "",   :null => false
     t.integer  "family_id"
     t.integer  "risk_id"
-    t.integer  "vulnerabilities_count", :default => 0
+    t.integer  "vulnerabilities_count", :default => 0,    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "classification_id"
     t.integer  "status_id"
+    t.text     "description",           :default => "",   :null => false
+    t.text     "evaluation",            :default => "",   :null => false
+    t.text     "remediation",           :default => "",   :null => false
+    t.boolean  "visible",               :default => true, :null => false
   end
 
   create_table "risks", :force => true do |t|
-    t.string "name"
+    t.string "name", :default => "", :null => false
   end
 
   create_table "scans", :force => true do |t|
-    t.string   "name"
-    t.datetime "starts_at"
-    t.text     "output",      :default => ""
-    t.string   "state"
-    t.integer  "hosts_count", :default => 0
+    t.string   "name",        :default => "", :null => false
+    t.datetime "starts_at",                   :null => false
+    t.text     "output",      :default => "", :null => false
+    t.string   "state",       :default => "", :null => false
+    t.integer  "hosts_count", :default => 0,  :null => false
     t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "severities", :force => true do |t|
-    t.string  "name"
-    t.integer "value"
+    t.string  "name",  :default => "", :null => false
+    t.integer "value", :default => 0,  :null => false
   end
 
   create_table "statuses", :force => true do |t|
-    t.string  "name"
-    t.boolean "default", :default => false
+    t.string  "name",    :default => "",    :null => false
+    t.boolean "default", :default => false, :null => false
   end
 
   create_table "subnets", :force => true do |t|
-    t.string   "name"
-    t.integer  "lowest_ip_address"
-    t.integer  "highest_ip_address"
+    t.string   "name",               :default => "", :null => false
+    t.integer  "lowest_ip_address",  :default => 0,  :null => false
+    t.integer  "highest_ip_address", :default => 0,  :null => false
     t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "vulnerabilities", :force => true do |t|
-    t.string   "protocol"
-    t.integer  "port"
-    t.string   "service"
-    t.text     "data"
+    t.string   "protocol",    :default => "", :null => false
+    t.integer  "port",        :default => 0,  :null => false
+    t.string   "service",     :default => "", :null => false
+    t.text     "data",        :default => "", :null => false
     t.integer  "plugin_id"
     t.integer  "host_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "severity_id"
-    t.integer  "status_id"
   end
 
   create_table "vulnerability_severities", :force => true do |t|

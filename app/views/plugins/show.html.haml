@@ -23,6 +23,18 @@
       %div='Classification'
     %dd=@plugin.classification
 
+    %dt
+      %div='Description'
+    %dd=@plugin.description.gsub("\n", "<br/>")
+    
+    %dt
+      %div='Evaluation'
+    %dd=@plugin.evaluation.gsub("\n", "<br/>")
+  
+    %dt
+      %div='Remediation'
+    %dd=@plugin.remediation.gsub("\n", "<br/>")
+
 .section
   .header
     %h1='Severities'

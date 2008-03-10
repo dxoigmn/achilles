@@ -12,6 +12,10 @@
     %dd=@vulnerability.severity
 
     %dt
+      %div='Status'
+    %dd=@vulnerability.status
+
+    %dt
       %div='Family'
     %dd=@vulnerability.family
 
@@ -39,3 +43,15 @@
       %div='Data'
     %dd=@vulnerability.data.gsub("\n", "<br/>")
   
+    %dt
+      %div='Description'
+    %dd=@vulnerability.description.gsub("\n", "<br/>")
+      
+    %dt
+      %div='Evaluation'
+    %dd=@vulnerability.evaluation.gsub("\n", "<br/>")
+    
+    %dt
+      %div='Remediation'
+    %dd=@vulnerability.remediation.gsub("\n", "<br/>")
+      
