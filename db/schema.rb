@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 7) do
+ActiveRecord::Schema.define(:version => 8) do
 
   create_table "classifications", :force => true do |t|
     t.string "name"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 7) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "classification_id"
+    t.integer  "status_id"
   end
 
   create_table "risks", :force => true do |t|
@@ -92,6 +93,11 @@ ActiveRecord::Schema.define(:version => 7) do
     t.integer "value"
   end
 
+  create_table "statuses", :force => true do |t|
+    t.string  "name"
+    t.boolean "default", :default => false
+  end
+
   create_table "subnets", :force => true do |t|
     t.string   "name"
     t.integer  "lowest_ip_address"
@@ -111,6 +117,7 @@ ActiveRecord::Schema.define(:version => 7) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "severity_id"
+    t.integer  "status_id"
   end
 
   create_table "vulnerability_severities", :force => true do |t|

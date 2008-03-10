@@ -10,6 +10,7 @@ class Plugin < ActiveRecord::Base
   belongs_to :family
   belongs_to :risk
   belongs_to :classification
+  belongs_to :status
   
   def severity(location)
     PluginSeverity.severify(self, location) ||

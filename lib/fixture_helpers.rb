@@ -2,6 +2,17 @@ require 'rubygems'
 require 'netaddr'
 
 module FixtureHelpers
+  def status(options)
+    fail unless options[:name]
+
+    status = Status.find_or_create_by_name(options[:name])
+    
+    if options[:default]
+      status.default = true
+      status.save!
+    end
+  end
+  
   def severity(options = {})
     fail unless options[:value] &&
                 options[:name]
