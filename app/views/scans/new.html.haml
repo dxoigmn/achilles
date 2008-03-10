@@ -19,7 +19,7 @@
       %ul
         - for location in Location.find(:all)
           %li
-            =check_box_tag('scan[location_ids][]', location.id)
+            =check_box_tag('scan[location_ids][]', location.id, (@scan.locations.include?(location)))
             =location
 
   =f.submit('Create')

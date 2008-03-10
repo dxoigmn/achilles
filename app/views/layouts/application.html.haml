@@ -13,6 +13,7 @@
       %ul
         %li{ :class => (controller.kind_of?(ScansController) ? 'active' : 'inactive') }= link_to('Scans', scans_path)
         %li{ :class => (controller.kind_of?(HostsController) ? 'active' : 'inactive') }= link_to('Hosts', hosts_path)
+        %li{ :class => (controller.kind_of?(VulnerabilitiesController) ? 'active' : 'inactive') }= link_to('Vulnerabilities', vulnerabilities_path)
         %li{ :class => (controller.kind_of?(PluginsController) ? 'active' : 'inactive') }= link_to('Plugins', plugins_path)
 
     - for key, value in flash
