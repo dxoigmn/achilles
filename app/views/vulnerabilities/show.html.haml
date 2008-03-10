@@ -1,0 +1,41 @@
+.section
+  .header
+    %h1=@vulnerability.name
+  
+  %dl
+    %dt
+      %div='Summary'
+    %dd=@vulnerability.summary
+
+    %dt
+      %div='Severity'
+    %dd=@vulnerability.severity
+
+    %dt
+      %div='Family'
+    %dd=@vulnerability.family
+
+    %dt
+      %div='Risk'
+    %dd=@vulnerability.risk
+
+    %dt
+      %div='Classification'
+    %dd=@vulnerability.classification
+
+    %dt
+      %div='Service'
+    %dd=@vulnerability.service
+
+    %dt
+      %div='Host'
+    %dd=link_to(@vulnerability.host.name, host_path(@vulnerability.host))
+
+    %dt
+      %div='Plugin'
+    %dd=link_to(@vulnerability.plugin.name, plugin_path(@vulnerability.plugin))
+
+    %dt
+      %div='Data'
+    %dd=@vulnerability.data.gsub("\n", "<br/>")
+  

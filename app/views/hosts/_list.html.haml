@@ -1,0 +1,17 @@
+%table
+  %thead
+    %tr
+      %th='Name'
+      %th='Ip'
+      %th='Vulnerabilities'
+      %th='Severity'
+
+  %tbody
+    - for host in hosts
+      %tr
+        %td= host.name
+        %td= host.ip
+        %td= host.vulnerabilities_count
+        %td= host.severity
+        %td= link_to('Show', host)
+

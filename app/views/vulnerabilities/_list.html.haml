@@ -1,0 +1,16 @@
+%table
+  %thead
+    %tr
+      %th='Name'
+      %th='Summary'
+      %th='Service'
+      %th='Severity'
+  
+  %tbody
+    - for vulnerability in vulnerabilities
+      %tr
+        %td=vulnerability.name
+        %td=vulnerability.summary
+        %td=vulnerability.service
+        %td=vulnerability.severity
+        %td=link_to('Show', vulnerability)

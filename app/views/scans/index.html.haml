@@ -1,0 +1,7 @@
+.section
+  .header
+    %h1='Listing'
+
+  =render(:partial => 'scans/list', :locals => { :scans => @scans })
+
+  =link_to('Add Scan', new_scan_path)

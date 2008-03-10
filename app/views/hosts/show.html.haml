@@ -1,0 +1,32 @@
+.section
+  .header
+    %h1=@host.name
+
+  %dl
+    %dt
+      %div='Ip Address'
+    %dd=@host.ip
+
+    %dt
+      %div='Last Scanned'
+    %dd=@host.scan_end
+    
+    %dt
+      %div='Severity'
+    %dd=@host.severity
+
+    - if @host.os_detected?
+      %dt
+        %div='OS Detection'
+      %dd=@host.os_detection.gsub("\n", "<br/>")
+
+    - if @host.tracerouted?
+      %dt
+        %div='Ip Address'
+      %dd=@host.traceroute.gsub("\n", "<br/>")
+
+.section
+  .header
+    %h1='Vulnerabilities'
+
+  =render(:partial => 'vulnerabilities/list', :locals => { :vulnerabilities => @host.vulnerabilities })

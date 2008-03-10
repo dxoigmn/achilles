@@ -20,7 +20,7 @@ class Host < ActiveRecord::Base
   end
   
   def os_detection
-    vulnerabilities.find_by_plugin_id(Plugin::OS_DETECTION) || nil
+    vulnerabilities.find_by_plugin_id(Plugin::OS_DETECTION).data rescue nil
   end
   
   def tracerouted?
@@ -28,11 +28,7 @@ class Host < ActiveRecord::Base
   end
   
   def traceroute
-    vulnerabilities.find_by_plugin_id(Plugin::TRACEROUTE) || nil
-  end
-  
-  def services
-    vulnerabilities.find(:all).group_by(&:service)
+    vulnerabilities.find_by_plugin_id(Plugin::TRACEROUTE).data rescue nil
   end
   
   def severity

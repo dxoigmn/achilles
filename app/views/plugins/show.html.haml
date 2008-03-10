@@ -1,0 +1,40 @@
+.section
+  .header
+    %h1=@plugin.name
+    
+  %dl
+    %dt
+      %div='Summary'
+    %dd=@plugin.summary
+    
+    %dt
+      %div='Status'
+    %dd=@plugin.status
+    
+    %dt
+      %div='Family'
+    %dd=@plugin.family
+
+    %dt
+      %div='Risk'
+    %dd=@plugin.risk
+    
+    %dt
+      %div='Classification'
+    %dd=@plugin.classification
+
+.section
+  .header
+    %h1='Severities'
+
+  %dl
+    - for location in Location.find(:all)
+      %dt
+        %div=location
+      %dd=@plugin.severity(location)
+
+.section
+  .header
+    %h1='Hosts'
+
+  =render(:partial => 'hosts/list', :locals => { :hosts => @plugin.hosts })

@@ -1,0 +1,5 @@
+.section
+  .header
+    %h1='Listing'
+    
+  =render(:partial => 'hosts/list', :locals => { :hosts => @hosts })

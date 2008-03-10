@@ -1,0 +1,27 @@
+.section
+  .header
+    %h1='Add Scan'
+  
+  -form_for(@scan) do |f|
+  
+  %dl
+    %dt
+      %div='Name'
+    %dd=f.text_field(:name)
+
+    %dt
+      %div='Start At'
+    %dd=f.datetime_select(:starts_at)
+
+    %dt
+      %div='Location'
+    %dd
+      %ul
+        - for location in Location.find(:all)
+          %li
+            =check_box_tag('scan[location_ids][]', location.id)
+            =location
+
+  =f.submit('Create')
+  
+  -end

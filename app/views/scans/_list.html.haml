@@ -1,0 +1,18 @@
+%table
+  %thead
+    %tr
+      %th='Name'
+      %th='Starts At'
+      %th='Locations'
+      %th='State'
+      %th='Hosts'
+  
+  %tbody
+    -for scan in scans
+      %tr
+        %td=scan.name
+        %td=scan.starts_at
+        %td=scan.location_names
+        %td=scan.state.capitalize
+        %td=scan.hosts_count
+        %td=link_to('Show', scan)

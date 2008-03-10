@@ -1,0 +1,16 @@
+%table
+  %thead
+    %tr
+      %th='Name'
+      %th='Summary'
+      %th='Classification'
+      %th='Vulnerabilities'
+
+  %tbody
+    - for plugin in plugins
+      %tr
+        %td=plugin.name
+        %td=plugin.summary
+        %td=plugin.classification
+        %td=plugin.vulnerabilities_count
+        %td=link_to('Show', plugin)

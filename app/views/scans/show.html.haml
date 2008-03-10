@@ -1,0 +1,28 @@
+.section
+  .header
+    %h1=@scan.name
+
+  %dl
+    %dt
+      %div='Starts At'
+    %dd=@scan.starts_at
+  
+    %dt
+      %div='State'
+    %dd=@scan.state.capitalize
+  
+    %dt
+      %div='Locations'
+    %dd=@scan.location_names
+
+    - if @scan.running? || @scan.finished?
+      %dt
+        %div='Output'
+      %dd=@scan.output.gsub("\n", "<br/>")
+
+-if @scan.finished?
+  .section
+    .header
+      %h1='Hosts'
+
+    =render(:partial => 'hosts/list', :locals => { :hosts => @scan.hosts })
