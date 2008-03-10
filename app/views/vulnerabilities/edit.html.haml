@@ -1,0 +1,14 @@
+.section
+  .header
+    %h1='Editing Vulnerability'
+
+  - form_for(@vulnerability) do |form|
+    %dl.editing
+      %dt
+        %div= 'Severity'
+      %dd= form.select(:severity_id, Severity.find(:all, :order => :value).map { |severity| [severity.name, severity.id] })
+
+    = form.submit('Update')
+
+  = link_to('Show', @vulnerability)
+  = link_to('Back', vulnerabilities_path)

@@ -1,0 +1,34 @@
+.section
+  .header
+    %h1='Editing Host'
+
+  - form_for(@host) do |form|
+    %dl.editing
+      %dt
+        %div= 'Name'
+      %dd= form.text_field(:name)
+
+      %dt
+        %div= 'Ip Address'
+      %dd= form.text_field(:ip, :value => @host.ip)
+
+      %dt
+        %div= 'Location'
+      %dd= form.select(:location_id, Location.find(:all).map { |location| [location.name, location.id] })
+
+      %dt
+        %div= 'Description'
+      %dd=find_and_preserve(form.text_area(:description))
+
+      %dt
+        %div= 'Evaluation'
+      %dd=find_and_preserve(form.text_area(:evaluation))
+
+      %dt
+        %div= 'Remediation'
+      %dd=find_and_preserve(form.text_area(:remediation))
+
+    = form.submit('Update')
+
+  = link_to('Show', @host)
+  = link_to('Back', hosts_path)
