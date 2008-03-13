@@ -1,6 +1,6 @@
 class ScansController < ApplicationController
   def index
-    @scans = Scan.find(:all, :include => :locations)
+    @scans = Scan.find(:all, :include => :locations, :page => { :current => params[:page], :size => 15 })
   end
 
   def show

@@ -1,17 +1,22 @@
 %table
   %thead
     %tr
-      %th='Name'
-      %th='Ip'
-      %th='Vulnerabilities'
-      %th='Severity'
+      %th{ :width => '20%' }='Ip'
+      %th{ :width => '50%' }='Name'
+      %th{ :width => '15%' }='Severity'
+      %th{ :width => '10%' }='Vulnerabilities'
+
+  - if hosts.respond_to?(:page)
+    %tfoot
+      %tr
+        %th{ :colspan => 4 }=paginating_links(hosts, :window_size => 3)
 
   %tbody
     - for host in hosts
       %tr
-        %td= host.name
         %td= host.ip
-        %td= host.vulnerabilities_count
+        %td= host.name
         %td= host.severity
+        %td= host.vulnerabilities_count
         %td= link_to('Show', host)
 

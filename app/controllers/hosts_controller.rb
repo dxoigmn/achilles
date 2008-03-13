@@ -1,6 +1,6 @@
 class HostsController < ApplicationController
   def index
-    @hosts = Host.find(:all)
+    @hosts = Host.find(:all, :page => { :current => params[:page], :size => 15 })
   end
 
   def show

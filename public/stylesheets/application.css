@@ -106,7 +106,13 @@ div.section table {
 
 div.section table thead th {
   background-color: #e6e6e6;
-  padding: 0.25em;
+  padding: 0.5em;
+}
+
+div.section table tfoot th {
+  background-color: #e6e6e6;
+  padding: 0.5em;
+  font-size: x-small;
 }
 
 div.section table td {

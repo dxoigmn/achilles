@@ -1,18 +1,21 @@
 %table
   %thead
     %tr
-      %th='Name'
-      %th='Starts At'
-      %th='Locations'
-      %th='State'
-      %th='Hosts'
-  
+      %th{ :width => '20%' }='Name'
+      %th{ :width => '50%' }='Locations'
+      %th{ :width => '15%' }='Starts At'
+      %th{ :width => '10%' }='State'
+
+  - if scans.respond_to?(:page)
+    %tfoot
+      %tr
+        %th{ :colspan => 4 }=paginating_links(scans, :window_size => 3)
+
   %tbody
     -for scan in scans
       %tr
         %td=scan.name
-        %td=scan.starts_at
         %td=scan.location_names
+        %td=scan.starts_at
         %td=scan.state.capitalize
-        %td=scan.hosts_count
         %td=link_to('Show', scan)

@@ -1,10 +1,15 @@
 %table
   %thead
     %tr
-      %th='Name'
-      %th='Summary'
-      %th='Service'
-      %th='Severity'
+      %th{ :width => '20%' }='Name'
+      %th{ :width => '50%' }='Summary'
+      %th{ :width => '15%' }='Service'
+      %th{ :width => '10%' }='Severity'
+      
+  - if vulnerabilities.respond_to?(:page)
+    %tfoot
+      %tr
+        %th{ :colspan => 4 }=paginating_links(vulnerabilities, :window_size => 3)
   
   %tbody
     - for vulnerability in vulnerabilities

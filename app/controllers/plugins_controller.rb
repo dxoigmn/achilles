@@ -1,6 +1,6 @@
 class PluginsController < ApplicationController
   def index
-    @plugins = Plugin.find(:all, :include => :classification)
+    @plugins = Plugin.find(:all, :include => :classification, :page => { :current => params[:page], :size => 15 })
   end
 
   def show
