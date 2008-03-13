@@ -89,6 +89,10 @@ div.section div.header h1 {
   margin-top: 0;
 }
 
+div.section div.footer {
+  margin-top: 1em;
+}
+
 div.section:first-child div.header h1 {
   font-size: x-large;
 }
@@ -112,7 +116,6 @@ div.section table thead th {
 div.section table tfoot th {
   background-color: #e6e6e6;
   padding: 0.5em;
-  font-size: x-small;
 }
 
 div.section table td {
