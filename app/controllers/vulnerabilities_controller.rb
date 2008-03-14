@@ -1,10 +1,10 @@
 class VulnerabilitiesController < ApplicationController
   def index
-    @vulnerabilities = Vulnerability.find(:all, :page => { :current => params[:page], :size => 15 })
+    @vulnerabilities = Vulnerability.find(:all, :include => [:severity, :plugin], :page => { :current => params[:page], :size => 15 })
   end
 
   def show
-    @vulnerability = Vulnerability.find(params[:id], :include => [:plugin, :host])
+    @vulnerability = Vulnerability.find(params[:id], :include => { :plugin => [:family, :status, :risk, :classification], :host => [], :severity => [] })
   end
   
   def edit

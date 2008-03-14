@@ -1,8 +1,8 @@
 class Host < ActiveRecord::Base
   has_many :vulnerabilities
   has_many :severities, :through => :vulnerabilities
-  belongs_to :location, :counter_cache => true
-  belongs_to :scan, :counter_cache => true
+  belongs_to :location#, :counter_cache => true
+  belongs_to :scan#, :counter_cache => true
   
   def ip
     NetAddr.i_to_ip(read_attribute(:ip))
@@ -11,8 +11,10 @@ class Host < ActiveRecord::Base
   def ip=(value)
     value = NetAddr.ip_to_i(value)
     
-    write_attribute(:ip, value)
-    self.location = Location.locate(value)
+    unless value == read_attribute(:ip)
+      write_attribute(:ip, value)
+      self.location = Location.locate(value)
+    end
   end
   
   def os_detected?
@@ -20,7 +22,13 @@ class Host < ActiveRecord::Base
   end
   
   def os_detection
-    vulnerabilities.find_by_plugin_id(Plugin::OS_DETECTION).data rescue nil
+    data = nil
+
+    vulnerabilities.each do |vulnerability| 
+      data = vulnerability.data if vulnerability.plugin_id == Plugin::OS_DETECTION
+    end
+    
+    data
   end
   
   def tracerouted?
@@ -28,10 +36,16 @@ class Host < ActiveRecord::Base
   end
   
   def traceroute
-    vulnerabilities.find_by_plugin_id(Plugin::TRACEROUTE).data rescue nil
+    data = nil
+
+    vulnerabilities.each do |vulnerability| 
+      data = vulnerability.data if vulnerability.plugin_id == Plugin::TRACEROUTE
+    end
+    
+    data
   end
   
   def severity
-    severities.sort_by(&:value).last
+    vulnerabilities.map(&:severity).sort_by(&:value).last
   end
 end

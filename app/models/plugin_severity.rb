@@ -2,18 +2,8 @@ class PluginSeverity < ActiveRecord::Base
   belongs_to :plugin
   
   def self.severify(plugin, location)
-    plugin_id   = nil
     location_id = nil
-    
-    case plugin
-    when Fixnum
-      plugin_id = plugin
-    when Plugin
-      plugin_id = plugin.id
-    else
-      fail "plugin must be an id or Plugin"
-    end
-    
+        
     case location
     when Fixnum
       location_id = location
@@ -22,7 +12,19 @@ class PluginSeverity < ActiveRecord::Base
     else
       fail "location must be an id or Family"
     end
+
+    severity = nil
+
+    if Fixnum === plugin
+      severity = PluginSeverity.find(:first, :conditions => { :plugin_id => plugin.id, :location_id => location_id }).severity rescue nil
+    elsif Plugin === plugin
+      plugin.plugin_severities.each do |plugin_severity|
+        severity = plugin_severity.severity if plugin_severity.location_id == location_id
+      end
+    else
+      fail "plugin must be an id or Plugin"
+    end
     
-    PluginSeverity.find(:first, :conditions => { :plugin_id => plugin_id, :location_id => location_id }).severity rescue nil
+    severity
   end
 end

@@ -42,7 +42,7 @@
     %h1='Severities'
 
   %dl
-    - for location in Location.find(:all)
+    - for location in @locations
       %dt
         %div=location
       %dd=@plugin.severity(location)

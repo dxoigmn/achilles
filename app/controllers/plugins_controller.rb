@@ -4,7 +4,8 @@ class PluginsController < ApplicationController
   end
 
   def show
-    @plugin = Plugin.find(params[:id], :include => :hosts)
+    @plugin = Plugin.find(params[:id], :include => { :classification => { :vulnerability_severities => :severity }, :status => [], :family => [], :risk => [], :hosts => { :vulnerabilities => :severity }, :vulnerabilities => :severity, :plugin_severities => [] })
+    @locations = Location.find(:all)
   end
   
   def edit

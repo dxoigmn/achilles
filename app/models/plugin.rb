@@ -6,6 +6,7 @@ class Plugin < ActiveRecord::Base
 
   has_many :vulnerabilities
   has_many :hosts, :through => :vulnerabilities
+  has_many :plugin_severities
 
   belongs_to :family
   belongs_to :risk
