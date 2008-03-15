@@ -9,4 +9,5 @@
         %div= 'Severity'
       %dd= form.select(:severity_id, Severity.find(:all, :order => :value).map { |severity| [severity.name, severity.id] })
 
-    = form.submit('Update')
+    .footer
+      = form.submit('Update')

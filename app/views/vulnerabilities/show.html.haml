@@ -56,4 +56,5 @@
       %div= 'Remediation'
     %dd= find_and_preserve("<pre>#{@vulnerability.remediation}</pre>")
 
-  = link_to('Edit', edit_vulnerability_path(@vulnerability))
+  .footer
+    = link_to('Edit', edit_vulnerability_path(@vulnerability))
