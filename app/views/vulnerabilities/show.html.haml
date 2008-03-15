@@ -1,58 +1,59 @@
 .section
   .header
-    %h1=@vulnerability.name
+    %h1= link_to('Vulnerabilities', vulnerabilities_path)
+    %h2= @vulnerability.name
   
   %dl
     %dt
-      %div='Summary'
-    %dd=@vulnerability.summary
+      %div= 'Summary'
+    %dd= @vulnerability.summary
 
     %dt
-      %div='Severity'
-    %dd=@vulnerability.severity
+      %div= 'Severity'
+    %dd= @vulnerability.severity
 
     %dt
-      %div='Status'
-    %dd=@vulnerability.status
+      %div= 'Status'
+    %dd= @vulnerability.status
 
     %dt
-      %div='Family'
-    %dd=@vulnerability.family
+      %div= 'Family'
+    %dd= @vulnerability.family
 
     %dt
-      %div='Risk'
-    %dd=@vulnerability.risk
+      %div= 'Risk'
+    %dd= @vulnerability.risk
 
     %dt
-      %div='Classification'
-    %dd=@vulnerability.classification
+      %div= 'Classification'
+    %dd= @vulnerability.classification
 
     %dt
-      %div='Service'
-    %dd=@vulnerability.service
+      %div= 'Service'
+    %dd= @vulnerability.service
 
     %dt
-      %div='Host'
-    %dd=link_to(@vulnerability.host.name, host_path(@vulnerability.host))
+      %div= 'Host'
+    %dd= link_to(@vulnerability.host.name, host_path(@vulnerability.host))
 
     %dt
-      %div='Plugin'
-    %dd=link_to(@vulnerability.plugin.name, plugin_path(@vulnerability.plugin))
+      %div= 'Plugin'
+    %dd= link_to(@vulnerability.plugin.name, plugin_path(@vulnerability.plugin))
 
     %dt
-      %div='Data'
-    %dd=find_and_preserve("<pre>#{@vulnerability.data}</pre>")
+      %div= 'Data'
+    %dd= find_and_preserve("<pre>#{@vulnerability.data}</pre>")
   
     %dt
-      %div='Description'
-    %dd=find_and_preserve("<pre>#{@vulnerability.description}</pre>")
+      %div= 'Description'
+    %dd= find_and_preserve("<pre>#{@vulnerability.description}</pre>")
       
     %dt
-      %div='Evaluation'
-    %dd=find_and_preserve("<pre>#{@vulnerability.evaluation}</pre>")
+      %div= 'Evaluation'
+    %dd= find_and_preserve("<pre>#{@vulnerability.evaluation}</pre>")
     
     %dt
-      %div='Remediation'
-    %dd=find_and_preserve("<pre>#{@vulnerability.remediation}</pre>")
+      %div= 'Remediation'
+    %dd= find_and_preserve("<pre>#{@vulnerability.remediation}</pre>")
 
-  =link_to('Edit', edit_vulnerability_path(@vulnerability))
+  = link_to('Edit', edit_vulnerability_path(@vulnerability))

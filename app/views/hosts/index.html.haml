@@ -1,5 +1,5 @@
 .section
   .header
-    %h1='Listing'
+    %h1= 'Hosts'
     
-  =render(:partial => 'hosts/list', :locals => { :hosts => @hosts })
+  = render(:partial => 'hosts/list', :locals => { :hosts => @hosts })

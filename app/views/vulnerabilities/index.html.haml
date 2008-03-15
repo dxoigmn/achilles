@@ -1,5 +1,6 @@
 .section
   .header
-    %h1='Listing'
+    %h1= 'Vulnerabilities'
 
-  =render(:partial => 'vulnerabilities/list', :locals => { :vulnerabilities => @vulnerabilities })
+  = render(:partial => 'vulnerabilities/list', :locals => { :vulnerabilities => @vulnerabilities })
+  

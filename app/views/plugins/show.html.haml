@@ -1,54 +1,55 @@
 .section
   .header
-    %h1=@plugin.name
+    %h1= link_to('Plugins', plugins_path)
+    %h2= @plugin.name
     
   %dl
     %dt
-      %div='Summary'
-    %dd=@plugin.summary
+      %div= 'Summary'
+    %dd= @plugin.summary
     
     %dt
-      %div='Status'
-    %dd=@plugin.status
+      %div= 'Status'
+    %dd= @plugin.status
     
     %dt
-      %div='Family'
-    %dd=@plugin.family
+      %div= 'Family'
+    %dd= @plugin.family
 
     %dt
-      %div='Risk'
-    %dd=@plugin.risk
+      %div= 'Risk'
+    %dd= @plugin.risk
     
     %dt
-      %div='Classification'
-    %dd=@plugin.classification
+      %div= 'Classification'
+    %dd= @plugin.classification
 
     %dt
-      %div='Description'
-    %dd=find_and_preserve("<pre>#{@plugin.description}</pre>")
+      %div= 'Description'
+    %dd= find_and_preserve("<pre>#{@plugin.description}</pre>")
     
     %dt
-      %div='Evaluation'
-    %dd=find_and_preserve("<pre>#{@plugin.evaluation}</pre>")
+      %div= 'Evaluation'
+    %dd= find_and_preserve("<pre>#{@plugin.evaluation}</pre>")
   
     %dt
-      %div='Remediation'
-    %dd=find_and_preserve("<pre>#{@plugin.remediation}</pre>")
+      %div= 'Remediation'
+    %dd= find_and_preserve("<pre>#{@plugin.remediation}</pre>")
 
-  =link_to('Edit', edit_plugin_path(@plugin))
+  = link_to('Edit', edit_plugin_path(@plugin))
 
 .section
   .header
-    %h1='Severities'
+    %h1= 'Severities'
 
   %dl
     - for location in @locations
       %dt
-        %div=location
-      %dd=@plugin.severity(location)
+        %div= location
+      %dd= @plugin.severity(location)
 
 .section
   .header
-    %h1='Hosts'
+    %h1= 'Hosts'
 
-  =render(:partial => 'hosts/list', :locals => { :hosts => @plugin.hosts })
+  = render(:partial => 'hosts/list', :locals => { :hosts => @plugin.hosts })

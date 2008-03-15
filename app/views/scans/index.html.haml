@@ -1,7 +1,7 @@
 .section
   .header
-    %h1='Listing'
+    %h1= 'Scans'
 
-  =render(:partial => 'scans/list', :locals => { :scans => @scans })
+  = render(:partial => 'scans/list', :locals => { :scans => @scans })
 
-  .footer=link_to('Add Scan', new_scan_path)
+  .footer= link_to('Add Scan', new_scan_path)

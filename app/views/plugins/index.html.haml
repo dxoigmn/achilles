@@ -1,5 +1,5 @@
 .section
   .header
-    %h1='Listing'
+    %h1= 'Plugins'
   
-  =render(:partial => 'plugins/list', :locals => { :plugins => @plugins })
+  = render(:partial => 'plugins/list', :locals => { :plugins => @plugins })

@@ -1,6 +1,7 @@
 .section
   .header
-    %h1='Editing Plugin'
+    %h1= link_to('Plugins', plugins_path)
+    %h2= link_to(@plugin.name, plugin_path(@plugin))
 
   - form_for(@plugin) do |form|
     %dl.editing
@@ -26,17 +27,14 @@
 
       %dt
         %div= 'Description'
-      %dd=find_and_preserve(form.text_area(:description))
+      %dd= find_and_preserve(form.text_area(:description, :rows => 5))
 
       %dt
         %div= 'Evaluation'
-      %dd=find_and_preserve(form.text_area(:evaluation))
+      %dd= find_and_preserve(form.text_area(:evaluation, :rows => 5))
 
       %dt
         %div= 'Remediation'
-      %dd=find_and_preserve(form.text_area(:remediation))
+      %dd= find_and_preserve(form.text_area(:remediation, :rows => 5))
 
     = form.submit('Update')
-
-  = link_to('Show', @plugin)
-  = link_to('Back', plugins_path)

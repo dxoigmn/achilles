@@ -3,11 +3,11 @@
 %html{html_attrs}
   %head
     %meta{ :'http-equiv' => 'content-type', :content => 'text/html;charset=UTF-8' }
-    %title='Achilles'
+    %title= 'Achilles'
     %link{ :href => '/stylesheets/application.css', :media => 'screen', :rel => 'stylesheet', :type => 'text/css' }
   %body
     #header
-      %h1='Achilles'
+      %h1= 'Achilles'
 
     #nav
       %ul
@@ -17,7 +17,7 @@
         %li{ :class => (controller.kind_of?(PluginsController) ? 'active' : 'inactive') }= link_to('Plugins', plugins_path)
 
     - for key, value in flash
-      .flash{ :id=> key }=value
+      .flash{ :id=> key }= value
 
     #article
-      =yield
+      = yield

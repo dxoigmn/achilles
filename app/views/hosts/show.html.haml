@@ -1,50 +1,51 @@
 .section
   .header
-    %h1=@host.name
+    %h1= link_to('Hosts', hosts_path)
+    %h2= @host.name
 
   %dl
     %dt
-      %div='Ip Address'
-    %dd=@host.ip
+      %div= 'Ip Address'
+    %dd= @host.ip
 
     %dt
-      %div='Location'
-    %dd=@host.location
+      %div= 'Location'
+    %dd= @host.location
 
     %dt
-      %div='Last Scanned'
-    %dd=@host.scan_end
+      %div= 'Last Scanned'
+    %dd= @host.scan_end
     
     %dt
-      %div='Severity'
-    %dd=@host.severity
+      %div= 'Severity'
+    %dd= @host.severity
 
     - if @host.os_detected?
       %dt
-        %div='OS Detection'
-      %dd=find_and_preserve("<pre>#{@host.os_detection}</pre>")
+        %div= 'OS Detection'
+      %dd= find_and_preserve("<pre>#{@host.os_detection}</pre>")
 
     - if @host.tracerouted?
       %dt
-        %div='Traceroute'
-      %dd=find_and_preserve("<pre>#{@host.traceroute}</pre>")
+        %div= 'Traceroute'
+      %dd= find_and_preserve("<pre>#{@host.traceroute}</pre>")
 
     %dt
-      %div='Description'
-    %dd=find_and_preserve("<pre>#{@host.description}</pre>")
+      %div= 'Description'
+    %dd= find_and_preserve("<pre>#{@host.description}</pre>")
     
     %dt
-      %div='Evaluation'
-    %dd=find_and_preserve("<pre>#{@host.evaluation}</pre>")
+      %div= 'Evaluation'
+    %dd= find_and_preserve("<pre>#{@host.evaluation}</pre>")
   
     %dt
-      %div='Remediation'
-    %dd=find_and_preserve("<pre>#{@host.remediation}</pre>")
+      %div= 'Remediation'
+    %dd= find_and_preserve("<pre>#{@host.remediation}</pre>")
 
-  =link_to('Edit', edit_host_path(@host))
+  = link_to('Edit', edit_host_path(@host))
 
 .section
   .header
-    %h1='Vulnerabilities'
+    %h1= 'Vulnerabilities'
 
-  =render(:partial => 'vulnerabilities/list', :locals => { :vulnerabilities => @host.vulnerabilities })
+  = render(:partial => 'vulnerabilities/list', :locals => { :vulnerabilities => @host.vulnerabilities })

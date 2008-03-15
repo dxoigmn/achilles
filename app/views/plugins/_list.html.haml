@@ -1,21 +1,21 @@
 %table
   %thead
     %tr
-      %th{ :width => '20%' }='Name'
-      %th{ :width => '50%' }='Summary'
-      %th{ :width => '15%' }='Classification'
-      %th{ :width => '10%' }='Vulnerabilities'
+      %th{ :width => '20%' }= 'Name'
+      %th{ :width => '50%' }= 'Summary'
+      %th{ :width => '15%' }= 'Classification'
+      %th{ :width => '10%' }= 'Vulnerabilities'
 
   - if plugins.respond_to?(:page)
     %tfoot
       %tr
-        %th{ :colspan => 4 }=paginating_links(plugins, :window_size => 3)
+        %th{ :colspan => 4 }= paginating_links(plugins, :window_size => 3)
 
   %tbody
     - for plugin in plugins
       %tr
-        %td=plugin.name
-        %td=plugin.summary
-        %td=plugin.classification
-        %td=plugin.vulnerabilities_count
-        %td=link_to('Show', plugin)
+        %td= plugin.name
+        %td= plugin.summary
+        %td= plugin.classification
+        %td= plugin.vulnerabilities_count
+        %td= link_to('Show', plugin)
