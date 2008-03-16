@@ -183,6 +183,8 @@ module Nessus
       host.scan_start = DateTime.parse(nessus_host.scan_start)
       host.scan_end   = DateTime.parse(nessus_host.scan_end)
       host.save!
+      
+      scan.locations << host.location
 
       nessus_host.vulnerabilities.each do |nessus_vulnerability|
         nessus_plugin = nessus_report.plugins.find { |plugin| plugin.id == nessus_vulnerability.plugin_id }

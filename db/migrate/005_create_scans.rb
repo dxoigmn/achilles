@@ -6,7 +6,6 @@ class CreateScans < ActiveRecord::Migration
       t.text :output
       t.string :state
       t.integer :hosts_count, :null => false, :default => 0
-      t.integer :location_id
       t.timestamps
     end
     

@@ -5,7 +5,7 @@ require File.join(File.dirname(__FILE__), '..', 'config', 'environment')
 if ARGV.size < 2
   puts "Usage: ./import [scan name] [file/dir 1] [file/dir 2] ... [file/dir n]"
 else
-  scan = Scan.find_or_create_by_name(:name => ARGV.shift, :starts_at => Time.now)
+  scan = Scan.find_or_create_by_name(:name => ARGV.shift, :starts_at => Time.now, :output => '')
 
   scan.start!
   

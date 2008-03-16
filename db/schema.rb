@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(:version => 9) do
 
   create_table "hosts", :force => true do |t|
     t.string   "name"
-    t.integer  "ip",                    :default => 0, :null => false
+    t.integer  "ip",                    :limit => 10, :default => 0, :null => false
     t.datetime "scan_start"
     t.datetime "scan_end"
-    t.integer  "vulnerabilities_count", :default => 0, :null => false
+    t.integer  "vulnerabilities_count",               :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "location_id"
@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(:version => 9) do
     t.text     "output"
     t.string   "state"
     t.integer  "hosts_count", :default => 0, :null => false
-    t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

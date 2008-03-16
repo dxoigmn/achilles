@@ -1,5 +1,5 @@
 class Location < ActiveRecord::Base
-  has_and_belongs_to_many :scans
+  has_and_belongs_to_many :scans, :uniq => true
   has_many :hosts
   has_many :subnets
   has_many :plugin_severities
