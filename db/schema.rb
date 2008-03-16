@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 10) do
+ActiveRecord::Schema.define(:version => 9) do
 
   create_table "classifications", :force => true do |t|
     t.string "name"
@@ -60,8 +60,6 @@ ActiveRecord::Schema.define(:version => 10) do
     t.datetime "updated_at"
   end
 
-  add_index "plugin_severities", ["plugin_id"], :name => "index_plugin_severities_on_plugin_id"
-
   create_table "plugins", :force => true do |t|
     t.string   "name"
     t.string   "version"
@@ -81,11 +79,6 @@ ActiveRecord::Schema.define(:version => 10) do
     t.text     "remediation"
     t.boolean  "visible",               :default => true, :null => false
   end
-
-  add_index "plugins", ["classification_id"], :name => "index_plugins_on_classification_id"
-  add_index "plugins", ["family_id"], :name => "index_plugins_on_family_id"
-  add_index "plugins", ["risk_id"], :name => "index_plugins_on_risk_id"
-  add_index "plugins", ["status_id"], :name => "index_plugins_on_status_id"
 
   create_table "risks", :force => true do |t|
     t.string "name"
@@ -133,10 +126,6 @@ ActiveRecord::Schema.define(:version => 10) do
     t.integer  "severity_id"
   end
 
-  add_index "vulnerabilities", ["plugin_id"], :name => "index_vulnerabilities_on_plugin_id"
-  add_index "vulnerabilities", ["host_id"], :name => "index_vulnerabilities_on_host_id"
-  add_index "vulnerabilities", ["severity_id"], :name => "index_vulnerabilities_on_severity_id"
-
   create_table "vulnerability_severities", :force => true do |t|
     t.integer  "location_id"
     t.integer  "classification_id"
@@ -144,8 +133,5 @@ ActiveRecord::Schema.define(:version => 10) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "vulnerability_severities", ["classification_id"], :name => "index_vulnerability_severities_on_classification_id"
-  add_index "vulnerability_severities", ["severity_id"], :name => "index_vulnerability_severities_on_severity_id"
 
 end

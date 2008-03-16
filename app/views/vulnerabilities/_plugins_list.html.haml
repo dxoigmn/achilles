@@ -1,0 +1,19 @@
+%table
+  %thead
+    %tr
+      %th{ :width => '50%' }= 'Hostname'
+      %th{ :width => '25%' }= 'Service'
+      %th{ :width => '20%' }= 'Severity'
+      
+  - if vulnerabilities.respond_to?(:page)
+    %tfoot
+      %tr
+        %th{ :colspan => 4 }= paginating_links(vulnerabilities, :window_size => 3)
+  
+  %tbody
+    - for vulnerability in vulnerabilities
+      %tr
+        %td= vulnerability.host.name
+        %td= vulnerability.service
+        %td= vulnerability.severity
+        %td= link_to('Show', vulnerability)

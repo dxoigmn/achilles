@@ -49,4 +49,4 @@
   .header
     %h1= 'Vulnerabilities'
 
-  = render(:partial => 'vulnerabilities/list', :locals => { :vulnerabilities => @host.visible_vulnerabilities })
+  = render(:partial => 'vulnerabilities/hosts_list', :locals => { :vulnerabilities => @host.visible_vulnerabilities })
