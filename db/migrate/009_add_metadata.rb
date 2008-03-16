@@ -1,12 +1,12 @@
 class AddMetadata < ActiveRecord::Migration
   def self.up
-    add_column :hosts, :description, :text, :null => false, :default => ""
-    add_column :hosts, :evaluation, :text, :null => false, :default => ""
-    add_column :hosts, :remediation, :text, :null => false, :default => ""
+    add_column :hosts, :description, :text
+    add_column :hosts, :evaluation, :text
+    add_column :hosts, :remediation, :text
     
-    add_column :plugins, :description, :text, :null => false, :default => ""
-    add_column :plugins, :evaluation, :text, :null => false, :default => ""
-    add_column :plugins, :remediation, :text, :null => false, :default => ""
+    add_column :plugins, :description, :text
+    add_column :plugins, :evaluation, :text
+    add_column :plugins, :remediation, :text
     add_column :plugins, :visible, :boolean, :null => false, :default => true
   end
 

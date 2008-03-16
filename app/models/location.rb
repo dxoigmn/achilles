@@ -9,7 +9,18 @@ class Location < ActiveRecord::Base
     read_attribute(:name)
   end
   
-  def self.locate(ip_address)
+  def self.locate(ip)
+    ip_address = nil
+
+    case ip
+    when Fixnum
+      ip_address = ip
+    when String
+      ip_address = NetAddr.ip_to_i(ip)
+    else
+      fail "ip must be of type Fixnum or String: #{ip.class}"
+    end
+    
     subnet = Subnet.find(:first,
                          :conditions => ["? BETWEEN lowest_ip_address AND highest_ip_address", ip_address],
                          :include => :location)

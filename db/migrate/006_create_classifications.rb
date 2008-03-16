@@ -1,7 +1,7 @@
 class CreateClassifications < ActiveRecord::Migration
   def self.up
     create_table :classifications do |t|
-      t.string :name, :null => false, :default => ''
+      t.string :name
     end
     
     create_table :plugin_classifications, :id => false do |t|

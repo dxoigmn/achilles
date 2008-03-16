@@ -25,6 +25,10 @@
     %dd= @plugin.classification
 
     %dt
+      %div= 'Visible'
+    %dd= @plugin.visible.to_s.capitalize
+
+    %dt
       %div= 'Description'
     %dd= find_and_preserve("<pre>#{@plugin.description}</pre>")
     

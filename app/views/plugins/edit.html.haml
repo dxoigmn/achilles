@@ -23,7 +23,11 @@
 
       %dt
         %div= 'Classification'
-      %dd= form.text_field(:classification)
+      %dd= form.select(:classification_id, Classification.find(:all).map { |classification| [classification.name, classification.id] })
+
+      %dt
+        %div= 'Visible'
+      %dd= form.select(:visible, [['True', true],['False', false]])
 
       %dt
         %div= 'Description'

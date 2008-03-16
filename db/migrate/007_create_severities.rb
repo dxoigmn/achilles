@@ -1,7 +1,7 @@
 class CreateSeverities < ActiveRecord::Migration
   def self.up
     create_table :severities do |t|
-      t.string :name, :null => false, :default => ''
+      t.string :name
       t.integer :value, :null => false, :default => 0
     end
 

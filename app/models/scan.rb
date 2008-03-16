@@ -18,6 +18,7 @@ class Scan < ActiveRecord::Base
   
   def output!(str)
     puts str
+    output ||= ""
     output << str + "\n"
     save!
   end

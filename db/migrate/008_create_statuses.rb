@@ -1,7 +1,7 @@
 class CreateStatuses < ActiveRecord::Migration
   def self.up
     create_table :statuses do |t|
-      t.string :name, :null => false, :default => ''
+      t.string :name
       t.boolean :default, :null => false, :default => false
     end
     

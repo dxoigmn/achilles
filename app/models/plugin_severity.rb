@@ -10,7 +10,7 @@ class PluginSeverity < ActiveRecord::Base
     when Location
       location_id = location.id
     else
-      fail "location must be an id or Family"
+      fail "location must be of type Fixnum or Location: #{location.class}"
     end
 
     severity = nil
@@ -22,7 +22,7 @@ class PluginSeverity < ActiveRecord::Base
         severity = plugin_severity.severity if plugin_severity.location_id == location_id
       end
     else
-      fail "plugin must be an id or Plugin"
+      fail "plugin must be of type Fixnum or Plugin: #{plugin.class}"
     end
     
     severity

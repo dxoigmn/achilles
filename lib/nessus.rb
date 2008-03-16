@@ -149,7 +149,9 @@ module Nessus
       when /^critical/i;  'Critical'
       when /^high/i;      'High'
       when /^medium/i;    'Medium'
-      else;               'Low'
+      when /^low/i;       'Low'
+      else;               'Unknown'
+        puts "WARNING: Unknown risk, #{@risk}"
       end
     end
   end
@@ -177,6 +179,7 @@ module Nessus
       host            = scan.hosts.new
       host.name       = nessus_host.name
       host.ip         = Resolv.getaddress(nessus_host.ip)
+      host.location   = Location.locate(host.ip)
       host.scan_start = DateTime.parse(nessus_host.scan_start)
       host.scan_end   = DateTime.parse(nessus_host.scan_end)
       host.save!

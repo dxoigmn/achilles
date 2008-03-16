@@ -1,10 +1,10 @@
 class CreateHosts < ActiveRecord::Migration
   def self.up
     create_table :hosts do |t|
-      t.string :name, :null => false, :default => ''
+      t.string :name
       t.integer :ip, :null => false, :default => 0
-      t.datetime :scan_start, :null => false, :default => ''
-      t.datetime :scan_end, :null => false, :default => ''
+      t.datetime :scan_start
+      t.datetime :scan_end
       t.integer :vulnerabilities_count, :null => false, :default => 0
       
       t.timestamps

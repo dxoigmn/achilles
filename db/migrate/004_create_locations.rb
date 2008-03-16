@@ -1,15 +1,15 @@
 class CreateLocations < ActiveRecord::Migration
   def self.up
     create_table :locations do |t|
-      t.string :name, :null => false, :default => ''
+      t.string :name
       t.integer :hosts_count, :null => false, :default => 0
       t.timestamps
     end
     
     create_table :subnets do |t|
-      t.string :name, :null => false, :default => ''
-      t.integer :lowest_ip_address, :null => false, :default => 0
-      t.integer :highest_ip_address, :null => false, :default => 0
+      t.string :name
+      t.column :lowest_ip_address, 'integer unsigned', :null => false, :default => 0
+      t.column :highest_ip_address, 'integer unsigned', :null => false, :default => 0
       t.integer :location_id
 
       t.timestamps

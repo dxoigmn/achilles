@@ -16,7 +16,7 @@ class PluginClassification < ActiveRecord::Base
     when Risk
       risk_id = risk.id
     else
-      fail "risk must be an id of Family"
+      fail "risk must be of type Fixnum or Family: #{risk.class}"
     end
     
     case family
@@ -25,9 +25,15 @@ class PluginClassification < ActiveRecord::Base
     when Family
       family_id = family.id
     else
-      fail "family must be an id of Family"
+      fail "family must be of type Fixnum or Family: #{risk.class}"
     end
+
+    plugin_classification = PluginClassification.find(:first, :conditions => { :risk_id => risk_id, :family_id => family_id })
     
-    PluginClassification.find(:first, :conditions => { :risk_id => risk_id, :family_id => family_id }).classification rescue nil
+    if plugin_classification
+      plugin_classification.classification
+    else
+      nil
+    end
   end
 end

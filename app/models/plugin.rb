@@ -13,6 +13,10 @@ class Plugin < ActiveRecord::Base
   belongs_to :classification
   belongs_to :status
   
+  def visible?
+    read_attribute(:visible)
+  end
+
   def severity(location)
     PluginSeverity.severify(self, location) ||
     VulnerabilitySeverity.severify(self.classification, location)

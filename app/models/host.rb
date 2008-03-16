@@ -1,20 +1,19 @@
 class Host < ActiveRecord::Base
   has_many :vulnerabilities
   has_many :severities, :through => :vulnerabilities
-  belongs_to :location#, :counter_cache => true
-  belongs_to :scan#, :counter_cache => true
+  belongs_to :location, :counter_cache => true
+  belongs_to :scan, :counter_cache => true
+  
+  def visible_vulnerabilities
+    vulnerabilities.select { |vulnerability| vulnerability.visible? }
+  end
   
   def ip
     NetAddr.i_to_ip(read_attribute(:ip))
   end
   
   def ip=(value)
-    value = NetAddr.ip_to_i(value)
-    
-    unless value == read_attribute(:ip)
-      write_attribute(:ip, value)
-      self.location = Location.locate(value)
-    end
+    write_attribute(:ip, NetAddr.ip_to_i(value))
   end
   
   def os_detected?
@@ -46,6 +45,6 @@ class Host < ActiveRecord::Base
   end
   
   def severity
-    vulnerabilities.map(&:severity).sort_by(&:value).last
+    visible_vulnerabilities.map(&:severity).sort_by(&:value).last
   end
 end
