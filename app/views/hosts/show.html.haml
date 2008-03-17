@@ -1,9 +1,11 @@
 .section
   .header
-    %h1= link_to('Hosts', hosts_path)
-    %h2= @host.name
+    %h1
+      %ul
+        %li= link_to('Hosts', hosts_path)
+        %li= @host.name
 
-  %dl
+  %dl.left
     %dt
       %div= 'Ip Address'
     %dd= @host.ip
@@ -12,24 +14,16 @@
       %div= 'Location'
     %dd= @host.location
 
-    %dt
-      %div= 'Last Scanned'
-    %dd= @host.scan_end
-    
+  %dl.right
     %dt
       %div= 'Severity'
     %dd= @host.severity
 
-    - if @host.os_detected?
-      %dt
-        %div= 'OS Detection'
-      %dd= find_and_preserve("<pre>#{@host.os_detection}</pre>")
+    %dt
+      %div= 'Last Scanned'
+    %dd= @host.scan_end
 
-    - if @host.tracerouted?
-      %dt
-        %div= 'Traceroute'
-      %dd= find_and_preserve("<pre>#{@host.traceroute}</pre>")
-
+  %dl
     %dt
       %div= 'Description'
     %dd= find_and_preserve("<pre>#{@host.description}</pre>")

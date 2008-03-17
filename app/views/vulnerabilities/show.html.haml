@@ -1,13 +1,17 @@
 .section
   .header
-    %h1= link_to('Vulnerabilities', vulnerabilities_path)
-    %h2= @vulnerability.name
+    %h1
+      %ul
+        %li= link_to('Hosts', hosts_path)
+        %li= link_to(@vulnerability.host.name, host_path(@vulnerability.host))
+        %li= @vulnerability.name
   
   %dl
     %dt
       %div= 'Summary'
     %dd= @vulnerability.summary
 
+  %dl.left
     %dt
       %div= 'Severity'
     %dd= @vulnerability.severity
@@ -16,30 +20,16 @@
       %div= 'Status'
     %dd= @vulnerability.status
 
-    %dt
-      %div= 'Family'
-    %dd= @vulnerability.family
-
-    %dt
-      %div= 'Risk'
-    %dd= @vulnerability.risk
-
-    %dt
-      %div= 'Classification'
-    %dd= @vulnerability.classification
-
+  %dl.right
     %dt
       %div= 'Service'
     %dd= @vulnerability.service
 
     %dt
-      %div= 'Host'
-    %dd= link_to(@vulnerability.host.name, host_path(@vulnerability.host))
-
-    %dt
       %div= 'Plugin'
     %dd= link_to(@vulnerability.plugin.name, plugin_path(@vulnerability.plugin))
 
+  %dl
     %dt
       %div= 'Data'
     %dd= find_and_preserve("<pre>#{@vulnerability.data}</pre>")

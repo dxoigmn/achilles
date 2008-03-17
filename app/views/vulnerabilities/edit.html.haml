@@ -1,7 +1,10 @@
 .section
   .header
-    %h1= link_to('Vulnerabilities', vulnerabilities_path)
-    %h2= link_to(@vulnerability.name, vulnerability_path(@vulnerability))
+    %h1
+      %ul
+        %li= link_to('Hosts', hosts_path)
+        %li= link_to(@vulnerability.host.name, host_path(@vulnerability.host))
+        %li= link_to(@vulnerability.name, vulnerability_path(@vulnerability))
 
   - form_for(@vulnerability) do |form|
     %dl.editing

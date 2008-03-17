@@ -1,7 +1,9 @@
 .section
   .header
-    %h1= link_to('Scans', scans_path)
-    %h2= @scan.name
+    %h1
+      %ul
+        %li= link_to('Scans', scans_path)
+        %li= @scan.name
 
   %dl
     %dt

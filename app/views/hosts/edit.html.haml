@@ -1,7 +1,9 @@
 .section
   .header
-    %h1= link_to('Hosts', hosts_path)
-    %h2= link_to(@host.name, host_path(@host))
+    %h1
+      %ul
+        %li= link_to('Hosts', hosts_path)
+        %li= link_to(@host.name, host_path(@host))
 
   - form_for(@host) do |form|
     %dl.editing

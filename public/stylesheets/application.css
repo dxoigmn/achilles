@@ -74,39 +74,54 @@ div.flash#error {
   border: 1px solid #EA8F8F;
 }
 
+div#article {
+  margin: 1em;
+}
+
 div.section {
   background-color: #f9f9f9;
-  margin: 1em;
   padding: 1em;
+  margin-bottom: 1em;
   border-right: 2px solid #999999;
   border-bottom: 2px solid #999999;
   border-top: 2px solid #ffffff;
   border-left: 2px solid #ffffff;
 }
 
-div.section:first-child div.header {
-  margin-bottom: 3em;
+div.section div.header h1,
+div.section div.header h2,
+div.section div.header h3 {
+  margin: 0 0 0.5em 0;
+  font-size: large;
 }
 
-div.section:first-child div.header h1,
-div.section:first-child div.header h2 {
-  font-size: x-large;
+div.section div.header h1 ul {
   margin: 0;
-  float: left;
+  padding: 0;
 }
 
-div.section:first-child div.header h1:after {
-  content: "/";
+div.section div.header h1 ul li {
+  display: inline;
+  margin: 0;
+  padding-left: 0;
+}
+
+div.section div.header h1 ul li:first-child:before {
+  content: "";
+}
+
+div.section div.header h1 ul li:before {
+  content: ":: ";
   color: #000000;
+}
+
+
+div.section:first-child div.header h1 {
+  font-size: x-large;
 }
 
 div.section:first-child div.header a {
   color: #000000;
-}
-
-div.section div.header h1 {
-  font-size: large;
-  margin-top: 0;
 }
 
 div.section div.footer {
@@ -145,6 +160,19 @@ div.section table tbody td {
 
 div.section dl {
   margin: 0;
+  clear: both;
+}
+
+div.section dl.left {
+  clear: left;
+  float: left;
+  width: 50%;
+}
+
+div.section dl.right {
+  clear: right;
+  float: right;
+  width: 50%;
 }
 
 div.section dl dt {

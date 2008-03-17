@@ -1,7 +1,9 @@
 .section
   .header
-    %h1= link_to('Plugins', plugins_path)
-    %h2= link_to(@plugin.name, plugin_path(@plugin))
+    %h1
+      %ul
+        %li= link_to('Plugins', plugins_path)
+        %li= link_to(@plugin.name, plugin_path(@plugin))
 
   - form_for(@plugin) do |form|
     %dl.editing

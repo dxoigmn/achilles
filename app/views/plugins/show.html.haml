@@ -1,17 +1,25 @@
 .section
   .header
-    %h1= link_to('Plugins', plugins_path)
-    %h2= @plugin.name
-    
+    %h1
+      %ul
+        %li=link_to('Plugins', plugins_path)
+        %li=@plugin.name
+
   %dl
     %dt
       %div= 'Summary'
     %dd= @plugin.summary
-    
+
+  %dl.left
     %dt
-      %div= 'Status'
-    %dd= @plugin.status
-    
+      %div= 'Visible'
+    %dd= @plugin.visible.to_s.capitalize
+
+    %dt
+      %div= 'Classification'
+    %dd= @plugin.classification
+
+  %dl.right
     %dt
       %div= 'Family'
     %dd= @plugin.family
@@ -19,15 +27,8 @@
     %dt
       %div= 'Risk'
     %dd= @plugin.risk
-    
-    %dt
-      %div= 'Classification'
-    %dd= @plugin.classification
 
-    %dt
-      %div= 'Visible'
-    %dd= @plugin.visible.to_s.capitalize
-
+  %dl
     %dt
       %div= 'Description'
     %dd= find_and_preserve("<pre>#{@plugin.description}</pre>")
