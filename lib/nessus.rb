@@ -217,7 +217,6 @@ module Nessus
           plugin.risk                   = Risk.find_or_create_by_name(nessus_plugin.risk)
           plugin.summary                = nessus_plugin.summary
           plugin.classification         = PluginClassification.classify(plugin.risk, plugin.family)
-          plugin.status                 = Status.default
           plugin.save!
         else
           scan.output!("Please import data for plugin #{nessus_vulnerability.plugin_id}") unless plugin
@@ -230,6 +229,7 @@ module Nessus
         vulnerability.data        = nessus_vulnerability.data.strip.split(/\n/).map { |line| line.strip }.join("\n")
         vulnerability.plugin      = plugin
         vulnerability.severity    = plugin.severity(host.location)
+        vulnerability.status      = Status.default
         vulnerability.save!
       end
     end

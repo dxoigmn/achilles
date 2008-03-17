@@ -11,10 +11,13 @@ class Plugin < ActiveRecord::Base
   belongs_to :family
   belongs_to :risk
   belongs_to :classification
-  belongs_to :status
   
   def visible?
     read_attribute(:visible)
+  end
+
+  def visible
+    read_attribute(:visible).to_s.capitalize
   end
 
   def severity(location)

@@ -1,9 +1,10 @@
 %table
   %thead
     %tr
-      %th{ :width => '50%' }= 'Hostname'
-      %th{ :width => '25%' }= 'Service'
-      %th{ :width => '20%' }= 'Severity'
+      %th{ :width => '45%' }= 'Hostname'
+      %th{ :width => '15%' }= 'Service'
+      %th{ :width => '15%' }= 'Severity'
+      %th{ :width => '20%' }= 'Status'
       
   - if vulnerabilities.respond_to?(:page)
     %tfoot
@@ -16,4 +17,5 @@
         %td= vulnerability.host.name
         %td= vulnerability.service
         %td= vulnerability.severity
+        %td= vulnerability.status
         %td= link_to('Show', vulnerability)

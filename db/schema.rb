@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(:version => 9) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "classification_id"
-    t.integer  "status_id"
     t.text     "description"
     t.text     "evaluation"
     t.text     "remediation"
@@ -123,6 +122,11 @@ ActiveRecord::Schema.define(:version => 9) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "severity_id"
+    t.integer  "status_id"
+    t.text     "description"
+    t.text     "evaluation"
+    t.text     "remediation"
+    t.boolean  "visible"
   end
 
   create_table "vulnerability_severities", :force => true do |t|

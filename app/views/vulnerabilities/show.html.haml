@@ -4,12 +4,7 @@
       %ul
         %li= link_to('Hosts', hosts_path)
         %li= link_to(@vulnerability.host.name, host_path(@vulnerability.host))
-        %li= @vulnerability.name
-  
-  %dl
-    %dt
-      %div= 'Summary'
-    %dd= @vulnerability.summary
+        %li= @vulnerability.plugin.name
 
   %dl.left
     %dt

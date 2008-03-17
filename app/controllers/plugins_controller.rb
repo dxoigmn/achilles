@@ -8,7 +8,7 @@ class PluginsController < ApplicationController
 
   def show
     @plugin = Plugin.find(params[:id],
-                          :include => { :classification => { :vulnerability_severities => :severity }, :vulnerabilities => [ :host, :severity ], :status => [], :family => [], :risk => [], :plugin_severities => [] },
+                          :include => { :classification => { :vulnerability_severities => :severity }, :vulnerabilities => [ :host, :severity ], :family => [], :risk => [], :plugin_severities => [] },
                           :order => 'severities.value DESC, hosts.name ASC, vulnerabilities.protocol ASC, vulnerabilities.port ASC, vulnerabilities.service ASC')
     @locations = Location.find(:all, :order => 'locations.name')
   end

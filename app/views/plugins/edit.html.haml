@@ -29,7 +29,7 @@
 
       %dt
         %div= 'Visible'
-      %dd= form.select(:visible, [['True', true],['False', false]])
+      %dd= form.select(:visible,[['True', true],['False', false]],  :selected => @plugin.visible?)
 
       %dt
         %div= 'Description'

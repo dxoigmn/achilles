@@ -4,13 +4,30 @@
       %ul
         %li= link_to('Hosts', hosts_path)
         %li= link_to(@vulnerability.host.name, host_path(@vulnerability.host))
-        %li= link_to(@vulnerability.name, vulnerability_path(@vulnerability))
+        %li= link_to(@vulnerability.plugin.name, vulnerability_path(@vulnerability))
 
   - form_for(@vulnerability) do |form|
     %dl.editing
       %dt
         %div= 'Severity'
       %dd= form.select(:severity_id, Severity.find(:all, :order => :value).map { |severity| [severity.name, severity.id] })
+
+      %dt
+        %div= 'Status'
+      %dd= form.select(:status_id, Status.find(:all).map { |status| [status.name, status.id]})
+
+      %dt
+        %div= 'Description'
+      %dd= find_and_preserve(form.text_area(:description, :rows => 5))
+
+      %dt
+        %div= 'Evaluation'
+      %dd= find_and_preserve(form.text_area(:evaluation, :rows => 5))
+
+      %dt
+        %div= 'Remediation'
+      %dd
+        %div= find_and_preserve(form.text_area(:remediation, :rows => 5))
 
     .footer
       = form.submit('Update')

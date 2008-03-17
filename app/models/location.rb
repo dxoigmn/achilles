@@ -6,7 +6,7 @@ class Location < ActiveRecord::Base
   has_many :vulnerability_severities
   
   def to_s
-    read_attribute(:name)
+    name
   end
   
   def self.locate(ip)
