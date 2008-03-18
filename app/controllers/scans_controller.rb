@@ -2,13 +2,13 @@ class ScansController < ApplicationController
   def index
     @scans = Scan.find(:all,
                        :include => :locations,
-                       :page => { :current => params[:page], :size => 15 },
+                       :page => {:current => params[:page], :size => 15},
                        :order => 'scans.starts_at ASC')
   end
 
   def show
     @scan = Scan.find(params[:id],
-                      :include => { :locations => [], :hosts => { :vulnerabilities => [:severity, :plugin] } })
+                      :include => [{:hosts => {:vulnerabilities => [:severity, :plugin]}}, :locations])
   end
   
   def new

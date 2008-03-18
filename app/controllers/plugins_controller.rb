@@ -2,13 +2,13 @@ class PluginsController < ApplicationController
   def index
     @plugins = Plugin.find(:all,
                            :include => :classification,
-                           :page => { :current => params[:page], :size => 15 },
+                           :page => {:current => params[:page], :size => 15},
                            :order => 'plugins.name ASC')
   end
 
   def show
     @plugin = Plugin.find(params[:id],
-                          :include => { :classification => { :vulnerability_severities => :severity }, :vulnerabilities => [ :host, :severity ], :family => [], :risk => [], :plugin_severities => [] },
+                          :include => [{:classification => {:vulnerability_severities => :severity}}, {:vulnerabilities => [:host, :severity]}, :family, :risk, :plugin_severities],
                           :order => 'severities.value DESC, hosts.name ASC, vulnerabilities.protocol ASC, vulnerabilities.port ASC, vulnerabilities.service ASC')
     @locations = Location.find(:all, :order => 'locations.name')
   end
