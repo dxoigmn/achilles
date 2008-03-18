@@ -11,6 +11,10 @@
         %th{ :colspan => 4 }= paginating_links(vulnerabilities, :window_size => 3)
   
   %tbody
+    - if vulnerabilities.size == 0
+      %tr
+        %td{:colspan => 4}= '&nbsp;'
+      
     - for vulnerability in vulnerabilities
       %tr
         %td= vulnerability.plugin.summary

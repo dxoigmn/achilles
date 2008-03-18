@@ -12,6 +12,10 @@
         %th{ :colspan => 4 }= paginating_links(plugins, :window_size => 3)
 
   %tbody
+    - if plugins.size == 0
+      %tr
+        %td{:colspan => 4}= '&nbsp;'
+      
     - for plugin in plugins
       %tr
         %td= plugin.name

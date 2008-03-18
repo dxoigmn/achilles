@@ -12,6 +12,10 @@
         %th{ :colspan => 4 }= paginating_links(scans, :window_size => 3)
 
   %tbody
+    - if scans.size == 0
+      %tr
+        %td{:colspan => 4}= '&nbsp;'
+      
     -for scan in scans
       %tr
         %td= scan.name

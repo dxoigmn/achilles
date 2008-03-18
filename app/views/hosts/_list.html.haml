@@ -12,6 +12,10 @@
         %th{ :colspan => 4 }= paginating_links(hosts, :window_size => 3)
 
   %tbody
+    - if hosts.size == 0
+      %tr
+        %td{:colspan => 4}= '&nbsp;'
+  
     - for host in hosts
       %tr
         %td= host.ip
