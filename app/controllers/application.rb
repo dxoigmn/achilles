@@ -2,6 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 require 'netaddr'
+require 'chronic'
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time

@@ -16,9 +16,9 @@ class ScansController < ApplicationController
   end
 
   def create
+    params[:scan][:starts_at] = Chronic.parse(params[:scan][:starts_at])
+
     @scan = Scan.new(params[:scan])
-    
-    p @scan.locations
 
     respond_to do |format|
       if @scan.save
