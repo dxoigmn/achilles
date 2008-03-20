@@ -1,0 +1,9 @@
+div#summary {
+  float: left;
+  width: 70%;
+}
+
+div#severities {
+  float: right;
+  width: 25%;
+}

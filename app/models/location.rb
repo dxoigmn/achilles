@@ -3,7 +3,7 @@ class Location < ActiveRecord::Base
   has_many :hosts
   has_many :subnets
   has_many :plugin_severities
-  has_many :vulnerability_severities
+  has_many :severities
   
   def to_s
     name

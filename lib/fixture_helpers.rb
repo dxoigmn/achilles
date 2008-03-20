@@ -13,35 +13,26 @@ module FixtureHelpers
     end
   end
   
-  def severity(options = {})
-    fail unless options[:value] &&
-                options[:name]
-              
-    severity        = Severity.find_or_create_by_name(options[:name])
-    severity.value  = options[:value]
-    severity.save!
-  end
-
   def severify(options)
     options[:location_id]       = Location.find_or_create_by_name(options.delete(:location)).id             if options[:location]
     options[:classification_id] = Classification.find_or_create_by_name(options.delete(:classification)).id if options[:classification]
-    options[:severity_id]       = Severity.find_or_create_by_name(options.delete(:as)).id                   if options[:as]
+    options[:severity]          = options.delete(:as)                                                       if options[:as]
   
     fail unless options[:location_id] &&
                 options[:classification_id] &&
-                options[:severity_id]
+                options[:severity]
   
-    vulnerability_severity = VulnerabilitySeverity.find(:first, :conditions => { :location_id => options[:location_id], 
-                                                                                 :classification_id => options[:classification_id] })
+    severity = Severity.find(:first, :conditions => { :location_id => options[:location_id], 
+                                                      :classification_id => options[:classification_id] })
 
-    unless vulnerability_severity
-      vulnerability_severity                    = VulnerabilitySeverity.new
-      vulnerability_severity.location_id        = options[:location_id]
-      vulnerability_severity.classification_id  = options[:classification_id]
+    unless severity
+      severity                    = Severity.new
+      severity.location_id        = options[:location_id]
+      severity.classification_id  = options[:classification_id]
     end
   
-    vulnerability_severity.severity_id = options[:severity_id]  
-    vulnerability_severity.save!
+    severity.severity = options[:severity]  
+    severity.save!
   end
   
   def classify(options)

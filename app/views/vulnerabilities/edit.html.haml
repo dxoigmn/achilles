@@ -10,7 +10,7 @@
     %dl.editing
       %dt
         %div= 'Severity'
-      %dd= form.select(:severity_id, Severity.find(:all, :order => :value).map { |severity| [severity.name, severity.id] })
+      %dd= form.select(:severity, [['Deferred', nil], 1, 2, 3, 4, 5], :selected => @vulnerability.real_severity)
 
       %dt
         %div= 'Status'

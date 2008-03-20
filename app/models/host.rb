@@ -1,6 +1,5 @@
 class Host < ActiveRecord::Base
   has_many :vulnerabilities
-  has_many :severities, :through => :vulnerabilities
   belongs_to :location, :counter_cache => true
   belongs_to :scan, :counter_cache => true
   
@@ -45,6 +44,6 @@ class Host < ActiveRecord::Base
   end
   
   def severity
-    visible_vulnerabilities.map(&:severity).sort_by(&:value).last
+    visible_vulnerabilities.map(&:severity).max
   end
 end

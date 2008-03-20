@@ -6,42 +6,53 @@
         %li= link_to(@plugin.name, plugin_path(@plugin))
 
   - form_for(@plugin) do |form|
-    %dl.editing
-      %dt
-        %div= 'Name'
-      %dd= form.text_field(:name)
+    #summary
+      %dl.editing
+        %dt
+          %div= 'Name'
+        %dd= form.text_field(:name)
 
-      %dt
-        %div= 'Summary'
-      %dd= form.text_field(:summary)
+        %dt
+          %div= 'Summary'
+        %dd= form.text_field(:summary)
 
-      %dt
-        %div= 'Family'
-      %dd= form.select(:family_id, Family.find(:all).map { |family| [family.name, family.id] })
+        %dt
+          %div= 'Family'
+        %dd= form.select(:family_id, Family.find(:all).map { |family| [family.name, family.id] })
 
-      %dt
-        %div= 'Risk'
-      %dd= form.select(:risk_id, Risk.find(:all).map { |risk| [risk.name, risk.id] })
+        %dt
+          %div= 'Risk'
+        %dd= form.select(:risk_id, Risk.find(:all).map { |risk| [risk.name, risk.id] })
 
-      %dt
-        %div= 'Classification'
-      %dd= form.select(:classification_id, Classification.find(:all).map { |classification| [classification.name, classification.id] })
+        %dt
+          %div= 'Classification'
+        %dd= form.select(:classification_id, Classification.find(:all).map { |classification| [classification.name, classification.id] })
 
-      %dt
-        %div= 'Visible'
-      %dd= form.select(:visible,[['True', true],['False', false]],  :selected => @plugin.visible?)
+        %dt
+          %div= 'Visible'
+        %dd= form.select(:visible, [['True', true], ['False', false]],  :selected => @plugin.visible?)
 
-      %dt
-        %div= 'Description'
-      %dd= find_and_preserve(form.text_area(:description, :rows => 5))
+        %dt
+          %div= 'Description'
+        %dd= find_and_preserve(form.text_area(:description, :rows => 5))
 
-      %dt
-        %div= 'Evaluation'
-      %dd= find_and_preserve(form.text_area(:evaluation, :rows => 5))
+        %dt
+          %div= 'Evaluation'
+        %dd= find_and_preserve(form.text_area(:evaluation, :rows => 5))
 
-      %dt
-        %div= 'Remediation'
-      %dd= find_and_preserve(form.text_area(:remediation, :rows => 5))
+        %dt
+          %div= 'Remediation'
+        %dd= find_and_preserve(form.text_area(:remediation, :rows => 5))
+
+    #severities
+      .header
+        %h1= 'Severities'
+    
+      %dl
+        - for location in @locations
+          %dt
+            %div= location
+          %dd= select_tag("plugin_severities[#{location.id}][]", options_for_select([['Deferred', nil], 1, 2, 3, 4, 5]), :selected => @plugin.plugin_severities.find_by_location_id(location.id))
 
     .footer
       = form.submit('Update')

@@ -1,6 +1,6 @@
 class Classification < ActiveRecord::Base
   has_many :plugins
-  has_many :vulnerability_severities
+  has_many :severities
   
   def to_s
     name

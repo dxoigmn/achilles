@@ -16,11 +16,11 @@ div#nav {
 }
 
 div#nav ul {
-  padding: 0.75em 0 0.25em 10em;
+  padding: 0.75em 0 0.5em 10em;
 }
 
 div#nav ul li {
-  padding: 0.5em 1em 0.5em 1em;
+  padding: 0.5em 1em 0.75em 1em;
   display: inline;
   font-family: arial;
   font-size: small;
@@ -74,10 +74,16 @@ div.section {
   border-left: 2px solid #ffffff;
 }
 
+div.section div.header:first-child h1,
+div.section div.header:first-child h2,
+div.section div.header:first-child h3 {
+  margin-top: 0;
+}
+
 div.section div.header h1,
 div.section div.header h2,
 div.section div.header h3 {
-  margin: 0 0 0.5em 0;
+  margin: 1em 0 0.5em 0;
   font-size: large;
   font-weight: bold;
 }
@@ -107,6 +113,7 @@ div.section:first-child div.header a {
 
 div.section div.footer {
   margin-top: 1em;
+  clear: both;
 }
 
 div.section pre {
@@ -123,11 +130,14 @@ div.section table {
 div.section table thead th {
   background-color: #e6e6e6;
   padding: 0.5em;
+  font-weight: bold;
 }
 
 div.section table tfoot th {
   background-color: #e6e6e6;
   padding: 0.5em;
+  text-align: center;
+  font-weight: bold;
 }
 
 div.section table td {
@@ -166,7 +176,7 @@ div.section dl dt {
   float: left;
   width: 9em;
   text-align: right;
-  height: 3em;
+  height: 2em;
   display: table;
 }
 
@@ -179,7 +189,7 @@ div.section dl dt div {
 div.section dl dd {
   margin: 0 0 0.5em 10em;
   background-color: #e6e6e6;
-  padding: 1em;
+  padding: 0.5em;
   font-size: small;
   min-height: 1em;
 }

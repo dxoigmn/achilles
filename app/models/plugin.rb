@@ -7,6 +7,7 @@ class Plugin < ActiveRecord::Base
   has_many :vulnerabilities
   has_many :hosts, :through => :vulnerabilities
   has_many :plugin_severities
+  has_many :severities
 
   belongs_to :family
   belongs_to :risk
@@ -22,6 +23,6 @@ class Plugin < ActiveRecord::Base
 
   def severity(location)
     PluginSeverity.severify(self, location) ||
-    VulnerabilitySeverity.severify(self.classification, location)
+    Severity.severify(self.classification, location)
   end
 end

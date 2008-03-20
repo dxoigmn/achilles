@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(:version => 9) do
   create_table "plugin_severities", :force => true do |t|
     t.integer  "plugin_id"
     t.integer  "location_id"
-    t.integer  "severity_id"
+    t.integer  "severity"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -94,8 +94,11 @@ ActiveRecord::Schema.define(:version => 9) do
   end
 
   create_table "severities", :force => true do |t|
-    t.string  "name"
-    t.integer "value", :default => 0, :null => false
+    t.integer  "location_id"
+    t.integer  "classification_id"
+    t.integer  "severity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "statuses", :force => true do |t|
@@ -121,20 +124,12 @@ ActiveRecord::Schema.define(:version => 9) do
     t.integer  "host_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "severity_id"
+    t.integer  "severity"
     t.integer  "status_id"
     t.text     "description"
     t.text     "evaluation"
     t.text     "remediation"
     t.boolean  "visible"
-  end
-
-  create_table "vulnerability_severities", :force => true do |t|
-    t.integer  "location_id"
-    t.integer  "classification_id"
-    t.integer  "severity_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
 end
