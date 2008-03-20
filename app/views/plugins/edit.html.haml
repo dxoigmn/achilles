@@ -49,10 +49,10 @@
         %h1= 'Severities'
     
       %dl
-        - for location in @locations
+        - for plugin_severity in @plugin.plugin_severities
           %dt
-            %div= location
-          %dd= select_tag("plugin_severities[#{location.id}][]", options_for_select([['Deferred', nil], 1, 2, 3, 4, 5]), :selected => @plugin.plugin_severities.find_by_location_id(location.id))
+            %div= plugin_severity.location
+          %dd= select_tag("plugin_severities[#{plugin_severity.location.id}][]", options_for_select([['Deferred', nil], 1, 2, 3, 4, 5]), :selected => plugin_severity.severity)
 
     .footer
       = form.submit('Update')

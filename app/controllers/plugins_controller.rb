@@ -5,12 +5,10 @@ class PluginsController < ApplicationController
 
   def show
     @plugin = Plugin.find(params[:id])
-    @locations = Location.find(:all, :order => 'locations.name')
   end
   
   def edit
-    @plugin     = Plugin.find(params[:id])
-    @locations  = Location.find(:all, :order => 'name')
+    @plugin = Plugin.find(params[:id])
   end
   
   def update

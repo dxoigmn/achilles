@@ -47,10 +47,10 @@
       %h1= 'Severities'
       
     %dl
-      - for location in @locations
+      - for plugin_severity in @plugin.plugin_severities
         %dt
-          %div= location
-        %dd= @plugin.severity(location)
+          %div= plugin_severity.location
+        %dd= @plugin.severity(plugin_severity.location)
 
   .footer
     = link_to('Edit', edit_plugin_path(@plugin))
