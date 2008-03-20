@@ -195,9 +195,11 @@ div.section dl dd {
 }
 
 input[type='text'],
-textarea {
-  padding: 0.25em;
+textarea,
+select {
+  padding: 0.25em 0 0.25em 0;
   border: none;
+  width: 100%;
 }
 
 div.section dl dd ul {

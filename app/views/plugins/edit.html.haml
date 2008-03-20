@@ -9,13 +9,19 @@
     #summary
       %dl.editing
         %dt
-          %div= 'Name'
-        %dd= form.text_field(:name)
-
-        %dt
           %div= 'Summary'
         %dd= form.text_field(:summary)
 
+      %dl.editing.left
+        %dt
+          %div= 'Visible'
+        %dd= form.select(:visible, [['True', true], ['False', false]],  :selected => @plugin.visible?)
+
+        %dt
+          %div= 'Classification'
+        %dd= form.select(:classification_id, Classification.find(:all).map { |classification| [classification.name, classification.id] })
+
+      %dl.editing.right
         %dt
           %div= 'Family'
         %dd= form.select(:family_id, Family.find(:all).map { |family| [family.name, family.id] })
@@ -24,14 +30,7 @@
           %div= 'Risk'
         %dd= form.select(:risk_id, Risk.find(:all).map { |risk| [risk.name, risk.id] })
 
-        %dt
-          %div= 'Classification'
-        %dd= form.select(:classification_id, Classification.find(:all).map { |classification| [classification.name, classification.id] })
-
-        %dt
-          %div= 'Visible'
-        %dd= form.select(:visible, [['True', true], ['False', false]],  :selected => @plugin.visible?)
-
+      %dl.editing
         %dt
           %div= 'Description'
         %dd= find_and_preserve(form.text_area(:description, :rows => 5))
