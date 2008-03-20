@@ -10,11 +10,11 @@
       %dl.editing
         %dt
           %div= 'Location'
-        %dd= form.select(:location_id, Location.find(:all).map { |location| [location.name, location.id]})
+        %dd= @severity.location
 
         %dt
           %div= 'Classification'
-        %dd= form.select(:classification_id, Classification.find(:all).map { |classification| [classification.name, classification.id]})
+        %dd= @severity.classification
 
         %dt
           %div= 'Severity'

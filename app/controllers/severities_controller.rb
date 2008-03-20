@@ -8,7 +8,7 @@ class SeveritiesController < ApplicationController
   end
 
   def edit
-    @severity = Severity.find(params[:id])
+    @severity = Severity.find(params[:id], :include => [:location, :classification])
   end
 
   def update
