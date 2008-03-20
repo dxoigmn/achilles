@@ -17,7 +17,7 @@
 
       %dt
         %div= 'Location'
-      %dd= form.select(:location_id, Location.find(:all).map { |location| [location.name, location.id] })
+      %dd= form.select(:location_id, Location.choices)
 
       %dt
         %div= 'Description'

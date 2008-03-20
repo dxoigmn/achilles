@@ -35,6 +35,10 @@ class Location < ActiveRecord::Base
     end
   end
   
+  def self.choices
+    Location.find(:all).map { |location| [location.name, location.id] }
+  end
+  
   private
     def add_severities
       Classification.find(:all).each { |classification| severities.create(:classification => classification) }

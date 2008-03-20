@@ -9,4 +9,8 @@ class Status < ActiveRecord::Base
   def self.default
     Status.find(:first, :conditions => { :default => true })
   end
+  
+  def self.choices
+    Status.find(:all).map { |status| [status.name, status.id] }
+  end
 end

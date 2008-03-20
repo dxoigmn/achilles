@@ -19,16 +19,16 @@
 
         %dt
           %div= 'Classification'
-        %dd= form.select(:classification_id, Classification.find(:all).map { |classification| [classification.name, classification.id] })
+        %dd= form.select(:classification_id, Classification.choices)
 
       %dl.editing.right
         %dt
           %div= 'Family'
-        %dd= form.select(:family_id, Family.find(:all).map { |family| [family.name, family.id] })
+        %dd= form.select(:family_id, Family.choices)
 
         %dt
           %div= 'Risk'
-        %dd= form.select(:risk_id, Risk.find(:all).map { |risk| [risk.name, risk.id] })
+        %dd= form.select(:risk_id, Risk.choices)
 
       %dl.editing
         %dt
@@ -51,7 +51,7 @@
         - for plugin_severity in @plugin.plugin_severities
           %dt
             %div= plugin_severity.location
-          %dd= select_tag("plugin_severities[#{plugin_severity.id}][severity]", options_for_select([['Deferred', nil], 1, 2, 3, 4, 5], plugin_severity.severity))
+          %dd= select("plugin_severities[#{plugin_severity.id}]", :severity, Severity.choices, :selected => plugin_severity.severity)
 
     .footer
       = form.submit('Update')
