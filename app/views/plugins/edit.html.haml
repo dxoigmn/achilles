@@ -51,7 +51,7 @@
         - for plugin_severity in @plugin.plugin_severities
           %dt
             %div= plugin_severity.location
-          %dd= select_tag("plugin_severities[#{plugin_severity.location.id}][]", options_for_select([['Deferred', nil], 1, 2, 3, 4, 5]), :selected => plugin_severity.severity)
+          %dd= select_tag("plugin_severities[#{plugin_severity.id}][severity]", options_for_select([['Deferred', nil], 1, 2, 3, 4, 5], plugin_severity.severity))
 
     .footer
       = form.submit('Update')

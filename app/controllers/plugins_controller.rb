@@ -14,8 +14,15 @@ class PluginsController < ApplicationController
   def update
     @plugin = Plugin.find(params[:id])
 
+    updated = @plugin.update_attributes(params[:plugin])
+
+    params[:plugin_severities].each do |id, values|
+      plugin_severity = PluginSeverity.find(id)
+      updated &&= plugin_severity.update_attributes(values)
+    end
+    
     respond_to do |format|
-      if @plugin.update_attributes(params[:plugin])
+      if updated
         flash[:notice] = 'Plugin was successfully updated.'
         format.html { redirect_to(@plugin) }
       else
