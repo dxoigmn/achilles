@@ -26,7 +26,7 @@ class ScansController < ApplicationController
         format.html { redirect_to(@scan) }
       else
         flash[:error] = 'Failed to create scan. Please try again.'
-        format.html { render :action => "new" }
+        format.html { render :action => :new }
       end
     end
   end

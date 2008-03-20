@@ -1,4 +1,6 @@
 class Location < ActiveRecord::Base
+  after_create :add_severities
+  
   has_and_belongs_to_many :scans, :uniq => true
   has_many :hosts
   has_many :subnets
@@ -31,4 +33,15 @@ class Location < ActiveRecord::Base
       nil
     end
   end
+  
+  private
+    def add_severities
+      Classification.find(:all).each do |classification|
+        severity                = Severity.new()
+        severity.classification = classification
+        severity.location       = self
+        severity.severity       = nil
+        severity.save!
+      end
+    end
 end

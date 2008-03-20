@@ -15,6 +15,7 @@
         %li{ :class => (controller.kind_of?(ScansController) ? 'active' : 'inactive') }= link_to('Scans', scans_path)
         %li{ :class => (controller.kind_of?(HostsController) || controller.kind_of?(VulnerabilitiesController) ? 'active' : 'inactive') }= link_to('Hosts', hosts_path)
         %li{ :class => (controller.kind_of?(PluginsController) ? 'active' : 'inactive') }= link_to('Plugins', plugins_path)
+        %li{ :class => (controller.kind_of?(SeveritiesController) ? 'active' : 'inactive') }= link_to('Severities', severities_path)
 
     - for key, value in flash
       .flash{ :id=> key }= value

@@ -1,0 +1,24 @@
+.section
+  .header
+    %h1
+      %ul
+        %li= link_to('Severities', severities_path)
+        %li= 'Edit'
+
+  - form_for(@severity) do |form|
+    #summary
+      %dl.editing
+        %dt
+          %div= 'Location'
+        %dd= form.select(:location_id, Location.find(:all).map { |location| [location.name, location.id]})
+
+        %dt
+          %div= 'Classification'
+        %dd= form.select(:classification_id, Classification.find(:all).map { |classification| [classification.name, classification.id]})
+
+        %dt
+          %div= 'Severity'
+        %dd= form.select(:severity, (1..5).to_a)
+
+    .footer
+      = form.submit('Update')

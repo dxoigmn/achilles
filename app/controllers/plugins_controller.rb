@@ -26,8 +26,8 @@ class PluginsController < ApplicationController
         flash[:notice] = 'Plugin was successfully updated.'
         format.html { redirect_to(@plugin) }
       else
-        flash[:notice] = 'Failed to update plugin. Please try again.'
-        format.html { render :action => "edit" }
+        flash[:error] = 'Failed to update plugin. Please try again.'
+        format.html { render :action => :edit }
       end
     end
   end

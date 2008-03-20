@@ -24,8 +24,8 @@ class HostsController < ApplicationController
         flash[:notice] = 'Host was successfully updated.'
         format.html { redirect_to(@host) }
       else
-        flash[:notice] = 'Failed to update Host. Please try again.'
-        format.html { render :action => "edit" }
+        flash[:error] = 'Failed to update Host. Please try again.'
+        format.html { render :action => :edit }
       end
     end
   end

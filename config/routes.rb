@@ -3,5 +3,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :vulnerabilities
   map.resources :hosts
   map.resources :plugins
+  map.resources :severities
   map.root :controller => 'Hosts'
 end

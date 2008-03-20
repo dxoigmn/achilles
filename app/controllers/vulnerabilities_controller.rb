@@ -16,8 +16,8 @@ class VulnerabilitiesController < ApplicationController
         flash[:notice] = 'Vulnerability was successfully updated.'
         format.html { redirect_to(@vulnerability) }
       else
-        flash[:notice] = 'Failed to update vulnerability. Please try again.'
-        format.html { render :action => "edit" }
+        flash[:error] = 'Failed to update vulnerability. Please try again.'
+        format.html { render :action => :edit }
       end
     end
   end
