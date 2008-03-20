@@ -15,7 +15,7 @@
       %dl.editing.left
         %dt
           %div= 'Visible'
-        %dd= form.select(:visible, [['True', true], ['False', false]],  :selected => @plugin.visible?)
+        %dd= form.check_box(:visible, :checked => @plugin.visible?)
 
         %dt
           %div= 'Classification'
