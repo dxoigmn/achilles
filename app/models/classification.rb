@@ -10,12 +10,6 @@ class Classification < ActiveRecord::Base
 
   private
     def add_severities
-      Location.find(:all).each do |location|
-        severity                = Severity.new()
-        severity.classification = self
-        severity.location       = location
-        severity.severity       = nil
-        severity.save!
-      end
+      Location.find(:all).each { |location| severities.create(:location => location) }
     end
 end

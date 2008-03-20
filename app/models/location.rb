@@ -1,5 +1,6 @@
 class Location < ActiveRecord::Base
   after_create :add_severities
+  after_create :add_plugin_severities
   
   has_and_belongs_to_many :scans, :uniq => true
   has_many :hosts
@@ -36,12 +37,10 @@ class Location < ActiveRecord::Base
   
   private
     def add_severities
-      Classification.find(:all).each do |classification|
-        severity                = Severity.new()
-        severity.classification = classification
-        severity.location       = self
-        severity.severity       = nil
-        severity.save!
-      end
+      Classification.find(:all).each { |classification| severities.create(:classification => classification) }
+    end
+    
+    def add_plugin_severities
+      Location.find(:all).each { |location| plugin_severities.create(:location => location) }
     end
 end
