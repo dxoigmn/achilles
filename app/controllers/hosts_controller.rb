@@ -1,10 +1,10 @@
 class HostsController < ApplicationController
   def index
-    @hosts = Host.find(:all, :page => {:current => params[:page], :size => 15})
+    @hosts = Host.find(:all, :page => {:current => params[:page], :size => 15}, :include => :location)
   end
 
   def show
-    @host = Host.find(params[:id])
+    @host = Host.find(params[:id], :include => [:location, {:vulnerabilities => :plugin}])
   end
   
   def edit

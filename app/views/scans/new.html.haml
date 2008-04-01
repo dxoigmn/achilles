@@ -16,7 +16,7 @@
         %div= 'Locations'
       %dd
         %ul
-          - for location in Location.find(:all)
+          - for location in @locations
             %li
               = check_box_tag('scan[location_ids][]', location.id, (@scan.locations.include?(location)))
               = location

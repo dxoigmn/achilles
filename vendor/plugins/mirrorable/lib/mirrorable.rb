@@ -32,6 +32,11 @@ module Mirrorable
     
     def acts_as_modifiable(field, &block)
       class_eval <<-END
+        def real_#{field.to_s}
+          return nil unless #{field.to_s}_modified?
+          read_attribute(:#{field})
+        end
+      
         def update_#{field.to_s}_unless_modified
           write_attribute(:#{field}, #{field}_default) unless read_attribute(#{field}_modified)
         end
