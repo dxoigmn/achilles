@@ -34,6 +34,10 @@ class Scan < ActiveRecord::Base
     end
   end
   
+  def subnets
+    locations.map(&:subnets).flatten.uniq
+  end
+  
   def self.run!
     scan = Scan.find_in_state(:first, :waiting, :order => 'starts_at', :output => '')
     
@@ -42,9 +46,15 @@ class Scan < ActiveRecord::Base
     scan.start!
     scan.output!("Executing nessus....")
     
-    # TODO: Execute nessus to output to file
+    subnets = scan.subnets.map(&:cidr).join(' ')
+    targets = File.join(RAILS_ROOT, 'data', 'scans', scan.name, 'targets')
+    results = File.join(RAILS_ROOT, 'data', 'scans', scan.name, 'results')
+    
+    `nmap -sP -PE -PT -PM -oG #{targets}.nmap #{subnets}`
+    `grep -i "Status: Up" #{targets}.nmap | cut -d" " -f2 > #{targets}.lst`
+    `/data/opt/nessus/bin/nessus -T xml -q 127.0.0.1 1241 students students #{targets}.lst #{results}.xml`
 
-    Nessus.process(scan, File.join(RAILS_ROOT, 'data', 'results.xml'))
+    Nessus.process(scan, "#{results}.xml")
 
     scan.stop!
   end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 9) do
+ActiveRecord::Schema.define(:version => 10) do
 
   create_table "classifications", :force => true do |t|
     t.string "name"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 9) do
     t.text     "description"
     t.text     "evaluation"
     t.text     "remediation"
+    t.integer  "severity"
   end
 
   create_table "locations", :force => true do |t|
@@ -117,19 +118,20 @@ ActiveRecord::Schema.define(:version => 9) do
 
   create_table "vulnerabilities", :force => true do |t|
     t.string   "protocol"
-    t.integer  "port",        :default => 0, :null => false
+    t.integer  "port",              :default => 0,     :null => false
     t.string   "service"
     t.text     "data"
     t.integer  "plugin_id"
     t.integer  "host_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "severity"
     t.integer  "status_id"
     t.text     "description"
     t.text     "evaluation"
     t.text     "remediation"
     t.boolean  "visible"
+    t.integer  "severity"
+    t.boolean  "severity_modified", :default => false
   end
 
 end

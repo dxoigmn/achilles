@@ -15,14 +15,10 @@ class CreateSeverities < ActiveRecord::Migration
 
       t.timestamps
     end
-    
-    add_column :vulnerabilities, :severity, :integer, :null => true, :default => nil
   end
 
   def self.down
     drop_table :severities
     drop_table :plugin_severities
-
-    remove_column :vulnerabilities, :severity
   end
 end

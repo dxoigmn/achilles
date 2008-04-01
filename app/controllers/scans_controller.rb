@@ -4,7 +4,8 @@ class ScansController < ApplicationController
   end
 
   def show
-    @scan = Scan.find(params[:id])
+    @scan   = Scan.find(params[:id])
+    @hosts  = Host.find(:all, :conditions => { :scan_id => @scan.id }, :page => { :current => params[:page], :size => 15 })
   end
   
   def new

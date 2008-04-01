@@ -5,54 +5,52 @@ module Mirrorable
   end
   
   module ClassMethods
-    def mirror(field, &block)
+    def acts_as_mirrorable(field, &block)
       class_eval <<-END
-        def real_#{field}
-          read_attribute :#{field}
+        def #{field.to_s}
+          read_attribute(:#{field}) ||
+          #{field}_mirror
         end
         
-        def #{field}
-          real_#{field} ||
-          mirror_#{field}
+        def real_#{field.to_s}
+          read_attribute(:#{field})
         end
         
-        def #{field}=(value)
-          value = nil if value.empty?
-          write_attribute :#{field}, value
+        def #{field.to_s}=(value)
+          value = nil if value.respond_to?(:empty?) && value.empty?
+          write_attribute('#{field}', value)
+          
+          puts "SEVERITY"
+          puts real_#{field.to_s}
         end
       END
       
       class_eval do
-        define_method "mirror_#{field}", &block
+        define_method "#{field}_mirror", &block
       end
     end
-        
-    def modifiable(field)
+    
+    def acts_as_modifiable(field, &block)
       class_eval <<-END
-        def modified_#{field}
-          if read_attribute(:modified_#{field})
-            read_attribute(:#{field}).to_s
-          else
-            nil.to_s
-          end
+        def update_#{field.to_s}_unless_modified
+          write_attribute(:#{field}, #{field}_default) unless read_attribute(#{field}_modified)
         end
-        
-        def update_#{field}
-          unless read_attribute(:modified_#{field})
-            write_attribute :#{field}, unmodified_#{field}
-          end
-        end
-        
-        def #{field}=(value)
-          if value && !value.empty?
-            write_attribute :modified_#{field}, true
-            write_attribute :#{field}, value
+
+        def #{field.to_s}=(value)
+          if value.nil? ||
+             (value.respond_to?(:empty?) && value.empty?)
+            write_attribute(:#{field}_modified, false)
+            update_#{field}
           else
-            write_attribute :modified_#{field}, false
-            write_attribute :#{field}, unmodified_#{field}
+            write_attribute(:#{field}_modified, true)
+            write_attribute(:#{field}, value)
           end
         end
       END
+      
+      class_eval do
+        define_method "#{field.to_s}_default", &block
+      end
     end
   end
 end

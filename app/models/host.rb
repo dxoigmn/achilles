@@ -43,7 +43,7 @@ class Host < ActiveRecord::Base
     data
   end
   
-  def severity
+  acts_as_mirrorable(:severity) do
     visible_vulnerabilities.map(&:severity).max
   end
 end
