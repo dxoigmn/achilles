@@ -10,6 +10,8 @@ RAILS_GEM_VERSION = '2.0.2' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 require File.join(File.dirname(__FILE__), '..', 'vendor', 'plugins', 'app_config', 'lib', 'configuration')
+require 'netaddr'
+require 'chronic'
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
@@ -57,7 +59,9 @@ Rails::Initializer.run do |config|
 
   # Make Active Record use UTC-base instead of local time
   #config.active_record.default_timezone = :utc
-  
-  config.app_config.nessus_path         = '/opt/local/bin/nessus'
-  config.app_config.nessus_results_path = '/store/monthlyscans/results/nessus/%Y-%m-%d-results.xml'
+
+  config.app_config.nmap_path           = 'nmap'
+  config.app_config.nmap_results_path   = 'data/results/nmap/%Y-%m-%d-results.nmap'
+  config.app_config.nessus_path         = 'nessus -q <host> <port> <username> <password>'
+  config.app_config.nessus_results_path = 'data/results/nessus/%Y-%m-%d-results.xml'
 end

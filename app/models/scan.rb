@@ -39,22 +39,25 @@ class Scan < ActiveRecord::Base
   end
   
   def self.run!
-    scan = Scan.find_in_state(:first, :waiting, :order => 'starts_at', :output => '')
+    scan = Scan.find_in_state(:first, :waiting, :order => 'starts_at')
     
     return unless scan && Time.now >= scan.starts_at
 
     scan.start!
-    scan.output!("Executing nessus....")
-    
-    subnets = scan.subnets.map(&:cidr).join(' ')
-    targets = File.join(RAILS_ROOT, 'data', 'scans', scan.name, 'targets')
-    results = File.join(RAILS_ROOT, 'data', 'scans', scan.name, 'results')
-    
-    `nmap -sP -PE -PT -PM -oG #{targets}.nmap #{subnets}`
-    `grep -i "Status: Up" #{targets}.nmap | cut -d" " -f2 > #{targets}.lst`
-    `/data/opt/nessus/bin/nessus -T xml -q 127.0.0.1 1241 students students #{targets}.lst #{results}.xml`
 
-    Nessus.process(scan, "#{results}.xml")
+    subnets         = scan.subnets.map(&:cidr).join(' ')
+    cur_time        = Time.now
+    nmap_results    = File.expand_path(cur_time.strftime(AppConfig.nmap_results_path))
+    nessus_results  = File.expand_path(cur_time.strftime(AppConfig.nessus_results_path))
+    
+    scan.output!("Finding live hosts in #{subnets}...")
+    `#{AppConfig.nmap_path} -n -sP -PE -PT -PM #{subnets} | grep -i "appears to be up" | cut -d" " -f2 > #{nmap_results}`
+    scan.output!("Nmap results saved to #{nmap_results}")
+    scan.output!("Scaning live hosts in #{subnets}...")
+    `#{AppConfig.nessus_path} -T xml #{nmap_results} #{nessus_results}`
+    scan.output!("Nessus results saved to #{nessus_results}")
+
+    Nessus.process(scan, nessus_results)
 
     scan.stop!
   end
