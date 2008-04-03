@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 10) do
+ActiveRecord::Schema.define(:version => 11) do
 
   create_table "classifications", :force => true do |t|
     t.string "name"
@@ -45,6 +45,11 @@ ActiveRecord::Schema.define(:version => 10) do
   create_table "locations_scans", :id => false, :force => true do |t|
     t.integer "location_id"
     t.integer "scan_id"
+  end
+
+  create_table "locations_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "location_id"
   end
 
   create_table "plugin_classifications", :id => false, :force => true do |t|
@@ -113,6 +118,13 @@ ActiveRecord::Schema.define(:version => 10) do
     t.integer  "lowest_ip_address",  :limit => 10, :default => 0, :null => false
     t.integer  "highest_ip_address", :limit => 10, :default => 0, :null => false
     t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.integer  "page_size",  :default => 15
     t.datetime "created_at"
     t.datetime "updated_at"
   end

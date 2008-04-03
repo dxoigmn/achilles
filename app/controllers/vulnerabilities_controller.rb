@@ -1,15 +1,20 @@
 class VulnerabilitiesController < ApplicationController
   def show
     @vulnerability = Vulnerability.find(params[:id],
-                                        :include => [:plugin, :host, :status])
+                                        :include => [:plugin, :host, :status],
+                                        :conditions => {'hosts.location_id' => session[:user].locations})
   end
   
   def edit
-    @vulnerability = Vulnerability.find(params[:id])
+    @vulnerability = Vulnerability.find(params[:id],
+                                        :include => [:host],
+                                        :conditions => {'hosts.location_id' => session[:user].locations})
   end
   
   def update
-    @vulnerability = Vulnerability.find(params[:id])
+    @vulnerability = Vulnerability.find(params[:id],
+                                        :include => [:host],
+                                        :conditions => {'hosts.location_id' => session[:user].locations})
 
     respond_to do |format|
       if @vulnerability.update_attributes(params[:vulnerability])

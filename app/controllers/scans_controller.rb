@@ -2,7 +2,7 @@ class ScansController < ApplicationController
   def index
     @scans = Scan.find(:all,
                        :include => [:locations],
-                       :page => {:current => params[:page], :size => 15},
+                       :page => {:current => params[:page], :size => session[:user].page_size},
                        :order => 'scans.starts_at ASC')
   end
 
@@ -11,13 +11,16 @@ class ScansController < ApplicationController
                       :include => [:locations])
     
     @hosts = Host.find_all_by_scan_id(@scan.id,
-                                      :page => { :current => params[:page], :size => 15 },
+                                      :page => { :current => params[:page], :size => session[:user].page_size},
+                                      :conditions => {:location_id => session[:user].locations},
                                       :include => [:location])
   end
   
   def new
     @scan       = Scan.new
-    @locations  = Location.find(:all)
+    
+    @locations  = Location.find(:all,
+                                :conditions => {:id => session[:user].locations})
   end
 
   def create

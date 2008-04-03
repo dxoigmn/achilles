@@ -2,22 +2,19 @@ class SeveritiesController < ApplicationController
   def index
     @severities = Severity.find(:all,
                                 :include => [:location, :classification],
+                                :conditions => { :location_id => session[:user].locations },
                                 :order => 'locations.name, classifications.name')
-  end
-
-  def show
-    @severity = Severity.find(params[:id],
-                              :include => [:location, :classification],
-                              :order => 'locations.name ASC, classifications.name ASC')
   end
 
   def edit
     @severity = Severity.find(params[:id],
-                              :include => [:location, :classification])
+                              :include => [:location, :classification],
+                              :conditions => { :location_id => session[:user].locations })
   end
 
   def update
-    @severity = Severity.find(params[:id])
+    @severity = Severity.find(params[:id],
+                              :conditions => { :location_id => session[:user].locations })
 
     respond_to do |format|
       if @severity.update_attributes(params[:severity])

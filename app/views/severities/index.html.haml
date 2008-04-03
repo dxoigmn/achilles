@@ -1,5 +1,5 @@
 .section
   .header
-    %h1= 'Severities' << (@severities.size > 15 ? " (#{@severities.size})" : "")
+    %h1= 'Severities' << (@severities.size > 1 ? " (#{@severities.size})" : "")
 
   = render(:partial => 'severities/list', :locals => { :severities => @severities })

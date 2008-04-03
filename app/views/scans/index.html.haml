@@ -1,6 +1,6 @@
 .section
   .header
-    %h1= 'Scans' << (@scans.size > 15 ? " (#{@scans.size})" : '')
+    %h1= 'Scans' << (@scans.page_count > 1 ? " (#{@scans.size})" : '')
 
   = render(:partial => 'scans/list', :locals => { :scans => @scans })
 

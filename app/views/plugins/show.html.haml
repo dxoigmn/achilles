@@ -57,6 +57,6 @@
 
 .section
   .header
-    %h1= 'Vulnerabilities'
+    %h1= 'Vulnerabilities' << (@vulnerabilities.size > 0 ? " (#{@vulnerabilities.size})" : '')
 
   = render(:partial => 'vulnerabilities/plugins_list', :locals => { :vulnerabilities => @vulnerabilities })

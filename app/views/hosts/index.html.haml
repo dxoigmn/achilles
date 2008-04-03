@@ -1,5 +1,5 @@
 .section
   .header
-    %h1= 'Hosts' << (@hosts.size > 15 ? " (#{@hosts.size})" : '')
+    %h1= 'Hosts' << (@hosts.page_count > 1 ? " (#{@hosts.size})" : '')
     
   = render(:partial => 'hosts/list', :locals => { :hosts => @hosts })

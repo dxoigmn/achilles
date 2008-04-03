@@ -1,23 +1,27 @@
 class HostsController < ApplicationController
   def index
     @hosts = Host.find(:all,
-                       :page => {:current => params[:page], :size => 15},
+                       :page => {:current => params[:page], :size => session[:user].page_size},
+                       :conditions => {:location_id => session[:user].locations},
                        :include => [:location],
                        :order => 'hosts.severity DESC, locations.name ASC, hosts.name ASC, hosts.vulnerabilities_count DESC')
   end
 
   def show
     @host = Host.find(params[:id],
+                      :conditions => {:location_id => session[:user].locations},
                       :include => [:location, {:vulnerabilities => [:plugin, :status]}],
                       :order => 'statuses.default DESC, vulnerabilities.severity DESC, vulnerabilities.port ASC, vulnerabilities.service ASC, vulnerabilities.protocol ASC')
   end
   
   def edit
-    @host = Host.find(params[:id])
+    @host = Host.find(params[:id],
+                      :conditions => {:location_id => session[:user].locations})
   end
   
   def update
-    @host = Host.find(params[:id])
+    @host = Host.find(params[:id],
+                      :conditions => {:location_id => session[:user].locations})
 
     respond_to do |format|
       if @host.update_attributes(params[:host])
