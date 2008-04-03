@@ -6,6 +6,7 @@
     %title= 'Achilles'
     %link{ :href => '/stylesheets/reset.css', :media => 'screen', :rel => 'stylesheet', :type => 'text/css' }
     = stylesheets
+    = javascripts :include => ['jquery', 'jquery-template']
   %body
     #header
       %h1= 'Achilles'
@@ -16,6 +17,7 @@
         %li{ :class => (controller.kind_of?(HostsController) || controller.kind_of?(VulnerabilitiesController) ? 'active' : 'inactive') }= link_to('Hosts', hosts_path)
         %li{ :class => (controller.kind_of?(PluginsController) ? 'active' : 'inactive') }= link_to('Plugins', plugins_path)
         %li{ :class => (controller.kind_of?(SeveritiesController) ? 'active' : 'inactive') }= link_to('Severities', severities_path)
+        %li{ :class => (controller.kind_of?(LocationsController) ? 'active' : 'inactive') }= link_to('Locations', locations_path)
 
     - for key, value in flash
       .flash{ :id=> key }= value

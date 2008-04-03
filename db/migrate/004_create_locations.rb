@@ -8,8 +8,8 @@ class CreateLocations < ActiveRecord::Migration
     
     create_table :subnets do |t|
       t.string :name
-      t.column :lowest_ip_address, 'integer unsigned', :null => false, :default => 0
-      t.column :highest_ip_address, 'integer unsigned', :null => false, :default => 0
+      t.column :lowest_ip_address, 'integer unsigned', :null => false, :default => NetAddr.ip_to_i('0.0.0.0')
+      t.column :highest_ip_address, 'integer unsigned', :null => false, :default => NetAddr.ip_to_i('255.255.255.255')
       t.integer :location_id
 
       t.timestamps

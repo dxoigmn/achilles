@@ -1,0 +1,7 @@
+.section
+  .header
+    %h1= 'Locations' << (@locations.page_count > 1 ? " (#{@locations.size})" : '')
+    
+  = render(:partial => 'locations/list', :locals => { :locations => @locations })
+
+  .footer= link_to('Add Location', new_location_path)

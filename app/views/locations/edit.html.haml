@@ -1,0 +1,31 @@
+- form_for(@location) do |form|
+  .section
+    .header
+      %h1
+        %ul
+          %li= link_to('Locations', locations_path)
+          %li= link_to(@location.name, location_path(@location))
+
+      %dl
+        %dt
+          %div= 'Name'
+        %dd= form.text_field(:name)
+
+      .header
+        %h2= 'Subnets'
+
+      %table
+        %thead
+          %tr
+            %th{ :width => '50%' }= 'Name'
+            %th{ :width => '45%'}= 'CIDR'
+
+        %tfoot
+          %tr
+            %th{ :colspan => 2 }= form.add_associated_link 'Add New Subnet', @location.subnets.build
+
+        %tbody#subnets
+          = form.render_associated_form(@location.subnets, :new => 3)
+
+      .footer
+        = form.submit('Update')

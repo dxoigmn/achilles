@@ -1,0 +1,11 @@
+.section
+  .header
+    %h1
+      %ul
+        %li= link_to('Locations', locations_path)
+        %li= @location.name
+  
+  = render(:partial => 'subnets/list', :locals => { :subnets => @location.subnets })
+
+  .footer
+    = link_to('Edit', edit_location_path(@location))

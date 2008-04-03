@@ -1,0 +1,20 @@
+%table
+  %thead
+    %tr
+      %th{ :width => '95%' }= 'Name'
+
+  - if locations.respond_to?(:page)
+    %tfoot
+      %tr
+        %th= paginating_links(locations, :window_size => 3)
+
+  %tbody
+    - if locations.size == 0
+      %tr
+        %td= '&nbsp;'
+  
+    - for location in locations
+      %tr
+        %td= location.name
+        %td= link_to('Show', location)
+

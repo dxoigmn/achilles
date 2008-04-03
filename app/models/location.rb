@@ -1,9 +1,10 @@
 class Location < ActiveRecord::Base
   after_create :add_severities
-  
+  before_save :remove_blank_subnets
+
   has_and_belongs_to_many :scans, :uniq => true
   has_many :hosts
-  has_many :subnets
+  has_many :subnets, :attributes => true
   has_many :plugin_severities
   has_many :severities
   
@@ -41,5 +42,9 @@ class Location < ActiveRecord::Base
   private
     def add_severities
       Classification.find(:all).each { |classification| severities.create(:classification => classification) }
+    end
+    
+    def remove_blank_subnets
+      subnets.delete subnets.select { |subnet| subnet.name.blank? }
     end
 end
