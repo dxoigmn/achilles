@@ -1,14 +1,19 @@
 class SeveritiesController < ApplicationController
   def index
-    @severities = Severity.find(:all, :include => [:location, :classification], :order => 'locations.name, classifications.name')
+    @severities = Severity.find(:all,
+                                :include => [:location, :classification],
+                                :order => 'locations.name, classifications.name')
   end
 
   def show
-    @severity = Severity.find(params[:id], :include => [:location, :classification])
+    @severity = Severity.find(params[:id],
+                              :include => [:location, :classification],
+                              :order => 'locations.name ASC, classifications.name ASC')
   end
 
   def edit
-    @severity = Severity.find(params[:id], :include => [:location, :classification])
+    @severity = Severity.find(params[:id],
+                              :include => [:location, :classification])
   end
 
   def update

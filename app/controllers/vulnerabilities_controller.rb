@@ -1,6 +1,7 @@
 class VulnerabilitiesController < ApplicationController
   def show
-    @vulnerability = Vulnerability.find(params[:id], :include => [:plugin, :host, :status])
+    @vulnerability = Vulnerability.find(params[:id],
+                                        :include => [:plugin, :host, :status])
   end
   
   def edit

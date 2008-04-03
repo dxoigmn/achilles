@@ -51,7 +51,7 @@
         - for plugin_severity in @plugin.plugin_severities
           %dt
             %div= plugin_severity.location
-          %dd= select("plugin_severities[#{plugin_severity.id}]", :severity, Severity.choices, :selected => plugin_severity.severity)
+          %dd= select("plugin_severities[#{plugin_severity.id}]", :severity, Severity.choices, :selected => plugin_severity.real_severity)
 
     .footer
       = form.submit('Update')

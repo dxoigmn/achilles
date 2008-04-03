@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 10) do
     t.integer  "severity"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "severity_modified", :default => false
   end
 
   create_table "plugins", :force => true do |t|

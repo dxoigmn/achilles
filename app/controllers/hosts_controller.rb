@@ -1,10 +1,15 @@
 class HostsController < ApplicationController
   def index
-    @hosts = Host.find(:all, :page => {:current => params[:page], :size => 15}, :include => :location)
+    @hosts = Host.find(:all,
+                       :page => {:current => params[:page], :size => 15},
+                       :include => [:location],
+                       :order => 'hosts.severity DESC, locations.name ASC, hosts.name ASC, hosts.vulnerabilities_count DESC')
   end
 
   def show
-    @host = Host.find(params[:id], :include => [:location, {:vulnerabilities => :plugin}])
+    @host = Host.find(params[:id],
+                      :include => [:location, {:vulnerabilities => [:plugin, :status]}],
+                      :order => 'statuses.default DESC, vulnerabilities.severity DESC, vulnerabilities.port ASC, vulnerabilities.service ASC, vulnerabilities.protocol ASC')
   end
   
   def edit

@@ -34,7 +34,12 @@ module Mirrorable
           read_attribute(:#{field})
         end
       
-        def update_#{field.to_s}_unless_modified
+        def update_#{field.to_s}!
+          update_#{field.to_s}
+          save!
+        end
+      
+        def update_#{field.to_s}
           write_attribute(:#{field}, #{field}_default) unless read_attribute(#{field}_modified)
         end
 
@@ -42,7 +47,7 @@ module Mirrorable
           if value.nil? ||
              (value.respond_to?(:empty?) && value.empty?)
             write_attribute(:#{field}_modified, false)
-            update_#{field}
+            update_#{field.to_s}
           else
             write_attribute(:#{field}_modified, true)
             write_attribute(:#{field}, value)

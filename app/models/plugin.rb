@@ -5,7 +5,8 @@ class Plugin < ActiveRecord::Base
   HOST_FDQN     = 12053
   
   after_create :add_plugin_severities
-
+  after_save :update_vulnerability_severities!
+  
   has_many :vulnerabilities
   has_many :hosts, :through => :vulnerabilities
   has_many :plugin_severities
@@ -25,8 +26,11 @@ class Plugin < ActiveRecord::Base
   end
   
   def severity(location)
-    plugin_severities.find_by_location_id(location.id).severity ||
-    severities.find_by_location_id(location.id).severity
+    plugin_severities.find_by_location_id(location.id).severity
+  end
+  
+  def update_vulnerability_severities!
+    vulnerabilities.map(&:update_severity!)
   end
   
   private

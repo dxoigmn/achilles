@@ -43,7 +43,9 @@ class Host < ActiveRecord::Base
     data
   end
   
-  acts_as_mirrorable(:severity) do
-    visible_vulnerabilities.map(&:severity).max
+  def update_severity!
+    max_severity = visible_vulnerabilities.map(&:severity).max
+    write_attribute(:severity, max_severity) if read_attribute(:severity) != max_severity
+    save!
   end
 end

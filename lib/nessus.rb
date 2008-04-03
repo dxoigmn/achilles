@@ -232,13 +232,8 @@ module Nessus
         vulnerability.data              = nessus_vulnerability.data.strip.split(/\n/).map { |line| line.strip }.join("\n")
         vulnerability.plugin_id         = nessus_vulnerability.plugin_id
         vulnerability.status            = Status.default
-        vulnerability.severity          = plugin.severity(host.location)
-        vulnerability.severity_modified = false
         vulnerability.save!
       end
-      
-      host.severity = host.vulnerabilities.map(&:severity).max
-      host.save!
     end
   end
 end

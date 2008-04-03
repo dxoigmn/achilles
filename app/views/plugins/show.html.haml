@@ -50,7 +50,7 @@
       - for plugin_severity in @plugin.plugin_severities
         %dt
           %div= plugin_severity.location
-        %dd= @plugin.severity(plugin_severity.location)
+        %dd= plugin_severity.severity
 
   .footer
     = link_to('Edit', edit_plugin_path(@plugin))
@@ -59,4 +59,4 @@
   .header
     %h1= 'Vulnerabilities'
 
-  = render(:partial => 'vulnerabilities/plugins_list', :locals => { :vulnerabilities => @plugin.vulnerabilities })
+  = render(:partial => 'vulnerabilities/plugins_list', :locals => { :vulnerabilities => @vulnerabilities })
