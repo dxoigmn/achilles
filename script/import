@@ -13,7 +13,7 @@ else
   
   ARGV.each do |arg|
     files << arg if File.file?(arg)
-    files << Dir.glob(File.join(arg, '*')) if File.directory?(arg)
+    files << Dir.glob(File.join(arg, '*.xml')) if File.directory?(arg)
   end
   
   files.flatten.each do |file|
