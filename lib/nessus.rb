@@ -192,27 +192,6 @@ module Nessus
     nessus_report = NessusReport.new
     REXML::Document.parse_stream(File.new(file), XMLListener.new(nessus_report))
 
-    scan.output!("Importing #{nessus_report.plugins.size} plugins from #{file}...")
-
-    nessus_report.plugins.each do |nessus_plugin|
-      plugin = Plugin.find_by_id(nessus_plugin.id)
-
-      unless plugin
-        plugin                        = Plugin.new
-        plugin.id                     = nessus_plugin.id
-        plugin.name                   = nessus_plugin.name
-        plugin.version                = nessus_plugin.version
-        plugin.family                 = Family.find_or_create_by_name(nessus_plugin.family)
-        plugin.cve                    = nessus_plugin.cve
-        plugin.bugtraq                = nessus_plugin.bugtraq
-        plugin.category               = nessus_plugin.category
-        plugin.risk                   = Risk.find_or_create_by_name(nessus_plugin.risk)
-        plugin.summary                = nessus_plugin.summary
-        plugin.classification         = PluginClassification.classify(plugin.risk, plugin.family)
-        plugin.save!
-      end
-    end
-
     scan.output!("Importing #{nessus_report.hosts.size} hosts from #{file}...")
 
     nessus_report.hosts.each do |nessus_host|
@@ -227,15 +206,39 @@ module Nessus
       scan.locations << host.location
 
       nessus_host.vulnerabilities.each do |nessus_vulnerability|
-        vulnerability             = host.vulnerabilities.new
-        vulnerability.protocol    = nessus_vulnerability.protocol
-        vulnerability.port        = nessus_vulnerability.port
-        vulnerability.service     = nessus_vulnerability.service
-        vulnerability.data        = nessus_vulnerability.data.strip.split(/\n/).map { |line| line.strip }.join("\n")
-        vulnerability.plugin_id   = nessus_vulnerability.plugin_id
-        vulnerability.status      = Status.default
+        plugin = Plugin.find_by_id(nessus_vulnerability.plugin_id)
+
+        unless plugin
+          nessus_plugin = nessus_report.plugins.find { |nessus_plugin| nessus_plugin.id == nessus_vulnerability.plugin_id }
+          
+          plugin                        = Plugin.new
+          plugin.id                     = nessus_plugin.id
+          plugin.name                   = nessus_plugin.name
+          plugin.version                = nessus_plugin.version
+          plugin.family                 = Family.find_or_create_by_name(nessus_plugin.family)
+          plugin.cve                    = nessus_plugin.cve
+          plugin.bugtraq                = nessus_plugin.bugtraq
+          plugin.category               = nessus_plugin.category
+          plugin.risk                   = Risk.find_or_create_by_name(nessus_plugin.risk)
+          plugin.summary                = nessus_plugin.summary
+          plugin.classification         = PluginClassification.classify(plugin.risk, plugin.family)
+          plugin.save!
+        end
+
+        vulnerability                   = host.vulnerabilities.new
+        vulnerability.protocol          = nessus_vulnerability.protocol
+        vulnerability.port              = nessus_vulnerability.port
+        vulnerability.service           = nessus_vulnerability.service
+        vulnerability.data              = nessus_vulnerability.data.strip.split(/\n/).map { |line| line.strip }.join("\n")
+        vulnerability.plugin_id         = nessus_vulnerability.plugin_id
+        vulnerability.status            = Status.default
+        vulnerability.severity          = plugin.severity(host.location)
+        vulnerability.severity_modified = false
         vulnerability.save!
       end
+      
+      host.severity = host.vulnerabilities.map(&:severity).max
+      host.save!
     end
   end
 end

@@ -19,9 +19,6 @@ module Mirrorable
         def #{field.to_s}=(value)
           value = nil if value.respond_to?(:empty?) && value.empty?
           write_attribute('#{field}', value)
-          
-          puts "SEVERITY"
-          puts real_#{field.to_s}
         end
       END
       
