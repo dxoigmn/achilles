@@ -13,12 +13,12 @@
 
     #nav
       %ul
-        %li{ :class => (controller.kind_of?(ScansController) ? 'active' : 'inactive') }= link_to('Scans', scans_path)
-        %li{ :class => (controller.kind_of?(HostsController) || controller.kind_of?(VulnerabilitiesController) ? 'active' : 'inactive') }= link_to('Hosts', hosts_path)
-        %li{ :class => (controller.kind_of?(PluginsController) ? 'active' : 'inactive') }= link_to('Plugins', plugins_path)
-        %li{ :class => (controller.kind_of?(SeveritiesController) ? 'active' : 'inactive') }= link_to('Severities', severities_path)
-        %li{ :class => (controller.kind_of?(PluginClassificationsController) ? 'active' : 'inactive') }= link_to('Classifications', plugin_classifications_path)
-        %li{ :class => (controller.kind_of?(LocationsController) ? 'active' : 'inactive') }= link_to('Locations', locations_path)
+        = nav_link(:scans)
+        = nav_link(:hosts)
+        = nav_link(:plugins)
+        = nav_link(:severities)
+        = nav_link(:plugin_classifications)
+        = nav_link(:locations)
 
     - for key, value in flash
       .flash{ :id=> key }= value

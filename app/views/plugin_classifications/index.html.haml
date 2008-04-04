@@ -1,5 +1,5 @@
 .section
   .header
-    %h1= 'Classifications' << (@plugin_classifications.size > 1 ? " (#{@plugin_classifications.size})" : "")
+    %h1= 'Plugin Classifications' << (@plugin_classifications.size > 1 ? " (#{@plugin_classifications.size})" : "")
     
   = render(:partial => 'plugin_classifications/list', :locals => { :plugin_classifications => @plugin_classifications })
