@@ -1,5 +1,5 @@
 class Classification < ActiveRecord::Base
-  after_create :add_severities
+  after_create :add_severities!
 
   has_many :plugins
   has_many :severities
@@ -13,7 +13,7 @@ class Classification < ActiveRecord::Base
   end
 
   private
-    def add_severities
+    def add_severities!
       Location.find(:all).each { |location| severities.create(:location => location) }
     end
 end

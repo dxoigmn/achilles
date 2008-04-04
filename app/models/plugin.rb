@@ -5,6 +5,7 @@ class Plugin < ActiveRecord::Base
   HOST_FDQN     = 12053
   
   after_create :add_plugin_severities
+  before_save :update_plugin_severities!
   after_save :update_vulnerability_severities!
   
   has_many :vulnerabilities
@@ -31,6 +32,17 @@ class Plugin < ActiveRecord::Base
   
   def update_vulnerability_severities!
     vulnerabilities.map(&:update_severity!)
+  end
+  
+  def update_plugin_severities!
+    plugin_severities.map(&:update_severity!)
+  end
+  
+  def classify!
+    classification_id = PluginClassification.classify(risk, family).id rescue nil
+    
+    write_attribute(:classification_id, classification_id)
+    save!
   end
   
   private

@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(:version => 11) do
     t.integer "location_id"
   end
 
-  create_table "plugin_classifications", :id => false, :force => true do |t|
+  create_table "plugin_classifications", :force => true do |t|
     t.integer "risk_id"
     t.integer "family_id"
     t.integer "classification_id"

@@ -4,7 +4,7 @@ class CreateClassifications < ActiveRecord::Migration
       t.string :name
     end
     
-    create_table :plugin_classifications, :id => false do |t|
+    create_table :plugin_classifications do |t|
       t.integer :risk_id
       t.integer :family_id
       t.integer :classification_id

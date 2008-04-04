@@ -1,0 +1,23 @@
+.section
+  .header
+    %h1
+      %ul
+        %li= link_to('Classifications', plugin_classifications_path)
+        %li= 'Edit'
+  
+  - form_for(@plugin_classification) do |f|
+    %dl
+      %dt
+        %div= 'Risk'
+      %dd= f.select(:risk_id, Risk.choices)
+
+      %dt
+        %div= 'Family'
+      %dd= f.select(:family_id, Family.choices)
+
+      %dt
+        %div= 'Classification'
+      %dd= f.select(:classification_id, Classification.choices)
+
+    .footer
+      = f.submit('Update')

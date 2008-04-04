@@ -6,7 +6,7 @@ class PluginSeverity < ActiveRecord::Base
   belongs_to :location
   
   acts_as_modifiable(:severity) do
-    plugin.severities.find_by_location_id(location.id).severity
+    plugin.severities.find_by_location_id(location.id).severity rescue nil
   end
   
   def update_plugin_vulnerability_severities!

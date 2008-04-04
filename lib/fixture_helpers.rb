@@ -13,6 +13,20 @@ module FixtureHelpers
     end
   end
   
+  def classification(options)
+    fail unless options[:name]
+    
+    classification = Classification.find_or_create_by_name(options[:name])
+  end
+
+  def user(options)
+    fail unless options[:name]
+    
+    user = User.find_or_create_by_name(options[:name])
+    
+    options[:locations].each { |location| user.locations << Location.find_by_name(location) } if options[:locations]
+  end
+  
   def severify(options)
     options[:location_id]       = Location.find_or_create_by_name(options.delete(:location)).id             if options[:location]
     options[:classification_id] = Classification.find_or_create_by_name(options.delete(:classification)).id if options[:classification]

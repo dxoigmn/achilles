@@ -45,6 +45,6 @@ class Location < ActiveRecord::Base
     end
     
     def remove_blank_subnets
-      subnets.delete subnets.select { |subnet| subnet.name.blank? }
+      subnets.delete(subnets.select { |subnet| subnet.name.blank? })
     end
 end

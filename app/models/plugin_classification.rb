@@ -1,10 +1,16 @@
 class PluginClassification < ActiveRecord::Base
+  after_save :update_plugins
+
   belongs_to :classification
   belongs_to :risk
   belongs_to :family
   has_many :plugins, :finder_sql => 'SELECT plugins.* FROM plugins ' +
                                     'WHERE plugins.family_id = #{family_id} AND ' +
                                     '      plugins.risk_id = #{risk_id}'
+
+  def update_plugins
+    Plugin.find_all_by_classification_id(nil).map(&:classify!)
+  end                                  
 
   def self.classify(risk, family)
     risk_id   = nil

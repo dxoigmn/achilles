@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # :secret => 'c3412e6be5ef83402305802bbb9b85d9'
 
   before_filter do |controller|
-    controller.session[:user] ||= User.find_by_name(controller.request.env["REMOTE_USER"], :include => [:locations])
+    controller.session[:user] ||= User.find_by_name(controller.request.env["REMOTE_USER"] || '', :include => [:locations])
     raise SecurityTransgression unless controller.session[:user]
   end
   
