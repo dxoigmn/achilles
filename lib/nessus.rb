@@ -1,164 +1,22 @@
+require 'rubygems'
 require 'resolv'
 require 'netaddr'
-require 'rexml/document'
-require 'rexml/streamlistener'
-require 'rexml/parsers/streamparser'
+require 'xml/libxml'
+require 'yaml'
 
 module Nessus
-  class XMLListener
-    include REXML::StreamListener
-    
-    def initialize(report)
-      @report = report
-      @text   = nil
-    end
-    
-    def tag_start(name, attrs)
-      case name
-      when 'report'
-        version = attrs['version']
-        fail "Unsupported version: #{version}" unless version == '1.4'
-        
-      when 'plugins'
-        @report.plugins = []
-        
-      when 'plugin'
-        if @report.plugins
-          @plugin     = NessusPlugin.new
-          @plugin.id  = attrs['id'].to_i
-        end
-      
-      when 'results'
-        @report.hosts = []
-      
-      when 'result'
-        @host = NessusHost.new if @report.hosts
-
-      when 'host'
-        if @host
-          @host.name  = attrs['name']
-          @host.ip    = attrs['ip']
-        end
-        
-      when 'ports'
-        @host.vulnerabilities = []
-        
-      when 'port'
-        @last_protocol  = attrs['protocol']
-        @last_port      = attrs['portid'].to_i
-        
-      when 'service'
-        @last_service   = attrs['name']
-      
-      when 'information'
-        @vulnerability = NessusVulnerability.new
-        @vulnerability.protocol = @last_protocol
-        @vulnerability.port     = @last_port
-        @vulnerability.service  = @last_service
-      
-      end
-    end
-
-    def text(text)
-      @text = text
-    end
-
-    def tag_end(name)
-      case name
-      # Plugin attributes
-      when 'name'
-        @plugin.name = @text if @plugin
-        
-      when 'version'
-        @plugin.version = @text if @plugin
-        
-      when 'family'
-        @plugin.family = @text if @plugin
-      
-      when 'cve_id'
-        @plugin.cve = @text if @plugin
-      
-      when 'bugtraq_id'
-        @plugin.bugtraq = @text if @plugin
-      
-      when 'category'
-        @plugin.category = @text if @plugin
-      
-      when 'risk'
-        @plugin.risk = @text if @plugin
-      
-      when 'summary'
-        @plugin.summary = @text if @plugin
-      
-      when 'copyright'
-        @plugin.copyright = @text if @plugin
-      
-      when 'plugin'
-        if @plugin
-          @report.plugins << @plugin
-          @plugin = nil
-        end
-      
-      # Host attributes
-      when 'start'
-        @host.scan_start = @text if @host
-        
-      when 'end'
-        @host.scan_end = @text if @host
-      
-      when 'result'
-        if @host
-          @report.hosts << @host
-          @host = nil
-        end
-      
-      # Vulnerability attributes
-      when 'severity'
-        @vulnerability.severity = @text if @vulnerability
-        
-      when 'id'
-        @vulnerability.plugin_id = @text.to_i if @vulnerability
-        
-      when 'data'
-        @vulnerability.data = @text if @vulnerability
-      
-      when 'port'
-        @last_protocol  = nil
-        @last_port      = nil
-        @last_service   = nil
-          
-      when 'information'
-        @host.vulnerabilities << @vulnerability
-        @vulnerability = nil
-
-      end
-      
-      @text = nil
-    end
-  end
-  
   class NessusReport
-    attr_accessor :plugins, :hosts
-  end
+    attr_accessor :hosts
 
-  class NessusPlugin
-    attr_accessor :id, :name, :version, :family, :cve, :bugtraq, :category, :risk, :summary, :copyright
-
-    def risk
-      case @risk
-      when /^critical/i;      'Critical'
-      when /^high/i;          'High'
-      when /^medium/i;        'Medium'
-      when /^low|^none/i;     'Low'
-      when /^unknown|^risk/i; 'Unknown'
-      else;                   'Unknown'
-        puts "WARNING: Unknown risk, #{@risk}"
-      end
+    def self.parse(xml)
+      nessus_report       = NessusReport.new
+      nessus_report.hosts = xml.find('//ReportHost').map { |report_host| NessusHost.parse(report_host) }
+      nessus_report
     end
   end
-  
+
   class NessusHost
-    attr_accessor :name, :ip, :scan_start, :scan_end, :vulnerabilities
+    attr_accessor :name, :scan_start, :scan_end, :vulnerabilities
     
     def name
       return fqdn[1] if fqdn
@@ -167,7 +25,18 @@ module Nessus
     
     def ip
       return fqdn[0] if fqdn
-      @ip
+      Resolve.getaddress(name)
+    rescue
+      '0.0.0.0'
+    end
+
+    def self.parse(xml)
+      nessus_host                 = NessusHost.new
+      nessus_host.name            = xml.find_first('HostName').content
+      nessus_host.scan_start      = DateTime.parse(xml.find_first('startTime').content)
+      nessus_host.scan_end        = DateTime.parse(xml.find_first('stopTime').content)
+      nessus_host.vulnerabilities = xml.find('ReportItem').map { |report_item| NessusVulnerability.parse(report_item) }
+      nessus_host
     end
 
     private
@@ -175,7 +44,7 @@ module Nessus
         host_fqdn = vulnerabilities.find { |vulnerability| vulnerability.plugin_id == 12053 }
 
         if host_fqdn
-          return host_fqdn.data.strip.scan(/(\S+) resolves as (\S+)/).flatten
+          return host_fqdn.data.strip.scan(/(\S+) resolves as (\S+)./).flatten
         end
       
         nil
@@ -183,55 +52,103 @@ module Nessus
   end
 
   class NessusVulnerability
-    attr_accessor :protocol, :port, :service, :severity, :plugin_id, :data
+    attr_accessor :port, :severity, :plugin_name, :plugin_id, :data
+    
+    def self.parse(xml)
+      nessus_vulnerability              = NessusVulnerability.new
+      nessus_vulnerability.port         = xml.find_first('port').content
+      nessus_vulnerability.severity     = xml.find_first('severity').content.to_i
+      nessus_vulnerability.plugin_name  = xml.find_first('pluginName').content
+      nessus_vulnerability.plugin_id    = xml.find_first('pluginID').content.to_i
+      nessus_vulnerability.data         = xml.find_first('data').content.gsub("\\n", "\n").gsub("\\r", "\r").strip
+      nessus_vulnerability
+    end
   end
+  
+  class NessusPlugin
+    attr_accessor :id, :family, :name, :category, :copyright, :summary, :version, :cve, :bid, :xref, :risk
+    
+    def self.parse(scan, line)
+      return nil unless line =~ /\d+|[^|]+|[^|]+|[^|]+|[^|]+|[^|]+|[^|]+|[^|]+|[^|]+|.+/
+      
+      parts = line.split("|", 11)
+      
+      nessus_plugin           = NessusPlugin.new
+      nessus_plugin.id        = parts.shift.to_i
+      nessus_plugin.family    = parts.shift
+      nessus_plugin.name      = parts.shift
+      nessus_plugin.category  = parts.shift
+      nessus_plugin.copyright = parts.shift
+      nessus_plugin.summary   = parts.shift
+      nessus_plugin.version   = parts.shift
+      nessus_plugin.cve       = parts.shift
+      nessus_plugin.bid       = parts.shift
+      nessus_plugin.xref      = parts.shift
+      nessus_plugin.risk      = case parts.shift.gsub("\\n", "\n").gsub("\\r", "\r").strip.scan(/risk factor\s*:\s*(\w+)/im).flatten.first
+                                when /^critical/i;  'Critical'
+                                when /^high/i;      'High'
+                                when /^medium/i;    'Medium'
+                                when /^low/i;       'Low'
+                                when /^none/i;      'None'
+                                when /^risk/i;      'Unknown'
+                                when /^depends/i;   'Unknown'
+                                when nil;           'Unknown'
+                                else
+                                  scan.puts("WARNING: Unknown risk, \"#{@risk}\"") if scan
+                                  'Unknown'
+                                end
+      
+      nessus_plugin
+    end
+  end
+  
+  def self.process_plugins(scan, file)
+    scan.puts("Import plugins from #{file}") if scan
+    
+    File.open(file).each_line do |line|
+      nessus_plugin = NessusPlugin.parse(scan, line)
+      
+      next unless nessus_plugin
 
-  def self.process(scan, file)
-    scan.output!("Parsing #{file}...")
+      plugin = Plugin.find_by_id(nessus_plugin.id)
 
-    nessus_report = NessusReport.new
-    REXML::Document.parse_stream(File.new(file), XMLListener.new(nessus_report))
+      unless plugin
+        plugin          = Plugin.new
+        plugin.id       = nessus_plugin.id
+        plugin.name     = nessus_plugin.name
+        plugin.version  = nessus_plugin.version
+        plugin.family   = Family.find_or_create_by_name(nessus_plugin.family)
+        plugin.cve      = nessus_plugin.cve
+        plugin.bugtraq  = nessus_plugin.bid
+        plugin.category = nessus_plugin.category
+        plugin.risk     = Risk.find_or_create_by_name(nessus_plugin.risk)
+        plugin.summary  = nessus_plugin.summary
+        plugin.save!
+      end
+    end
+  end
+  
+  def self.process_results(scan, file)
+    scan.puts("Parsing #{file}...")
 
-    scan.output!("Importing #{nessus_report.hosts.size} hosts from #{file}...")
+    xml           = XML::Document.file(file)
+    nessus_report = NessusReport.parse(xml)
+
+    scan.puts("Importing #{nessus_report.hosts.size} hosts...")
 
     nessus_report.hosts.each do |nessus_host|
       host            = scan.hosts.new
       host.name       = nessus_host.name
       host.ip         = nessus_host.ip
-      host.location   = Location.locate(host.ip)
-      host.scan_start = DateTime.parse(nessus_host.scan_start)
-      host.scan_end   = DateTime.parse(nessus_host.scan_end)
+      host.scan_start = nessus_host.scan_start
+      host.scan_end   = nessus_host.scan_end
       host.save!
-      
-      scan.locations << host.location
-
+    
       nessus_host.vulnerabilities.each do |nessus_vulnerability|
-        plugin = Plugin.find_by_id(nessus_vulnerability.plugin_id)
-
-        unless plugin
-          nessus_plugin = nessus_report.plugins.find { |nessus_plugin| nessus_plugin.id == nessus_vulnerability.plugin_id }
-          
-          plugin                        = Plugin.new
-          plugin.id                     = nessus_plugin.id
-          plugin.name                   = nessus_plugin.name
-          plugin.version                = nessus_plugin.version
-          plugin.family                 = Family.find_or_create_by_name(nessus_plugin.family)
-          plugin.cve                    = nessus_plugin.cve
-          plugin.bugtraq                = nessus_plugin.bugtraq
-          plugin.category               = nessus_plugin.category
-          plugin.risk                   = Risk.find_or_create_by_name(nessus_plugin.risk)
-          plugin.summary                = nessus_plugin.summary
-          plugin.classification         = PluginClassification.classify(plugin.risk, plugin.family)
-          plugin.save!
-        end
-
         vulnerability                   = host.vulnerabilities.new
-        vulnerability.protocol          = nessus_vulnerability.protocol
         vulnerability.port              = nessus_vulnerability.port
-        vulnerability.service           = nessus_vulnerability.service
-        vulnerability.data              = nessus_vulnerability.data.strip.split(/\n/).map { |line| line.strip }.join("\n")
+        vulnerability.data              = nessus_vulnerability.data
         vulnerability.plugin_id         = nessus_vulnerability.plugin_id
-        vulnerability.status            = Status.default
         vulnerability.save!
       end
     end

@@ -1,5 +1,5 @@
 namespace :db do
-  desc "Loads initial database models for the current environment."
+  desc 'Loads initial database models for the current environment.'
   task :populate => :environment do
     Dir[File.join(RAILS_ROOT, 'db', 'fixtures', '*.rb')].sort.each do |fixture| 
       puts "Importing database fixture '#{File.basename(fixture)}'..."
@@ -12,7 +12,7 @@ namespace :db do
     end
   end
 
-  desc 'rebuild the database from scratch'
+  desc 'Rebuild the database from scratch'
   task :rebuild => :environment do
     Rake::Task['db:drop'].invoke
     Rake::Task['db:create'].invoke

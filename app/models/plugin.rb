@@ -7,6 +7,7 @@ class Plugin < ActiveRecord::Base
   after_create :add_plugin_severities
   before_save :update_plugin_severities!
   after_save :update_vulnerability_severities!
+  after_save :update_classification
   
   has_many :vulnerabilities
   has_many :hosts, :through => :vulnerabilities
@@ -48,5 +49,9 @@ class Plugin < ActiveRecord::Base
   private
     def add_plugin_severities
       Location.find(:all).each { |location| plugin_severities.create(:location => location) }
+    end
+    
+    def update_classification
+      self.classification = PluginClassification.classify(self.risk, self.family)
     end
 end

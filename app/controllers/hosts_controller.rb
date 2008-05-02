@@ -11,7 +11,7 @@ class HostsController < ApplicationController
     @host = Host.find(params[:id],
                       :conditions => {:location_id => session[:user].locations},
                       :include => [:location, {:vulnerabilities => [:plugin, :status]}],
-                      :order => 'statuses.default DESC, vulnerabilities.severity DESC, vulnerabilities.port ASC, vulnerabilities.service ASC, vulnerabilities.protocol ASC')
+                      :order => 'statuses."default" DESC, vulnerabilities.severity DESC, vulnerabilities.port ASC')
   end
   
   def edit

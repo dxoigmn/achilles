@@ -63,5 +63,6 @@ Rails::Initializer.run do |config|
   config.app_config.nmap_path           = 'nmap'
   config.app_config.nmap_results_path   = 'data/results/nmap/%Y-%m-%d-results.nmap'
   config.app_config.nessus_path         = 'nessus -q <host> <port> <username> <password>'
-  config.app_config.nessus_results_path = 'data/results/nessus/%Y-%m-%d-results.xml'
+  config.app_config.nessus_results_path = 'data/results/nessus/%Y-%m-%d-results.nessus'
+  config.app_config.nessus_plugins_path = 'data/results/nessus/%Y-%m-%d-plugins.lst'
 end

@@ -2,7 +2,7 @@
   %thead
     %tr
       %th{ :width => '50%' }= 'Summary'
-      %th{ :width => '15%' }= 'Service'
+      %th{ :width => '15%' }= 'Port'
       %th{ :width => '10%' }= 'Severity'
       %th{ :width => '20%' }= 'Status'
       
@@ -20,7 +20,7 @@
     - for vulnerability in vulnerabilities
       %tr
         %td= vulnerability.plugin.summary
-        %td= vulnerability.service
+        %td= vulnerability.port
         %td= vulnerability.severity
         %td= vulnerability.status
         %td= link_to('Show', vulnerability)

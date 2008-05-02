@@ -16,7 +16,7 @@ class PluginsController < ApplicationController
                                                             :page => { :current => params[:page], :size => session[:user].page_size},
                                                             :include => [:host, :status],
                                                             :conditions => {'hosts.location_id' => session[:user].locations},
-                                                            :order => 'statuses.default DESC, hosts.name ASC, vulnerabilities.severity DESC, vulnerabilities.port ASC, vulnerabilities.service ASC, vulnerabilities.protocol ASC')
+                                                            :order => 'statuses."default" DESC, hosts.name ASC, vulnerabilities.severity DESC, vulnerabilities.port ASC')
   end
   
   def edit

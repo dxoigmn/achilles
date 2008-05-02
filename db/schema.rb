@@ -130,9 +130,7 @@ ActiveRecord::Schema.define(:version => 11) do
   end
 
   create_table "vulnerabilities", :force => true do |t|
-    t.string   "protocol"
-    t.integer  "port",              :default => 0,     :null => false
-    t.string   "service"
+    t.string   "port"
     t.text     "data"
     t.integer  "plugin_id"
     t.integer  "host_id"

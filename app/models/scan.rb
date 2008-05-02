@@ -16,14 +16,14 @@ class Scan < ActiveRecord::Base
     transitions :to => :finished, :from => :running
   end
   
-  def output!(str)
-    puts str
-    if output
-      output << str + "\n"
+  def puts(str)
+    $stderr.puts str
+    if self.output
+      self.output << str + "\n"
     else
-      output = str + "\n"
+      self.output = str + "\n"
     end
-    save!
+    self.save!
   end
   
   def location_names
@@ -49,15 +49,26 @@ class Scan < ActiveRecord::Base
     cur_time        = Time.now
     nmap_results    = File.expand_path(cur_time.strftime(AppConfig.nmap_results_path))
     nessus_results  = File.expand_path(cur_time.strftime(AppConfig.nessus_results_path))
-    
-    scan.output!("Finding live hosts in #{subnets}...")
-    `#{AppConfig.nmap_path} -n -sP -PE -PT -PM #{subnets} | grep -i "appears to be up" | cut -d" " -f2 > #{nmap_results}`
-    scan.output!("Nmap results saved to #{nmap_results}")
-    scan.output!("Scaning live hosts in #{subnets}...")
-    `#{AppConfig.nessus_path} -T xml #{nmap_results} #{nessus_results}`
-    scan.output!("Nessus results saved to #{nessus_results}")
+    nessus_plugins  = File.expand_path(cur_time.strftime(AppConfig.nessus_plugins_path))
 
-    Nessus.process(scan, nessus_results)
+    FileUtils.mkdir_p(File.dirname(nmap_results))
+    FileUtils.mkdir_p(File.dirname(nessus_results))
+    FileUtils.mkdir_p(File.dirname(nessus_plugins))
+    
+    scan.puts("Finding live hosts in #{subnets}...")
+    `#{AppConfig.nmap_path} -n -sP -PE -PT -PM #{subnets} | grep -i "appears to be up" | cut -d" " -f2 > #{nmap_results}`
+    scan.puts("Nmap results saved to #{nmap_results}")
+    
+    scan.puts("Scanning live hosts in #{subnets}...")
+    `#{AppConfig.nessus_path} -T nessus #{nmap_results} #{nessus_results}`
+    scan.puts("Nessus results saved to #{nessus_results}")
+    
+    scan.puts("Retrieving plugins from Nessus...")
+    `#{AppConfig.nessus_path} -p > #{nessus_plugins}`
+    scan.puts("Nessus plugins saved to #{nessus_plugins}")
+    
+    Nessus.process_plugins(scan, nessus_plugins)
+    Nessus.process_results(scan, nessus_results)
 
     scan.stop!
   end

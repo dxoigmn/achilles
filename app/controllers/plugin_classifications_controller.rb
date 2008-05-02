@@ -1,7 +1,8 @@
 class PluginClassificationsController < ApplicationController
   def index
     @plugin_classifications = PluginClassification.find(:all,
-                                                 :include => [:risk, :classification, :family])
+                                                        :include => [:risk, :classification, :family],
+                                                        :order => 'risks.name ASC, families.name ASC')
   end
 
   def edit

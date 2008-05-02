@@ -4,7 +4,7 @@ status :name => 'Open (Needs Remediation)', :default => true
 status :name => 'Closed (Remediated)'
 status :name => 'Logged (No Remediation Necessary)'
 
-localize :name => 'world',               :cidr => '0.0.0.0/0',         :as => 'World'
+localize :name => 'All',      :cidr => '0.0.0.0/0',     :as => 'World'
 
 classification :name => 'Compromised'
 classification :name => 'Full Control - Remote'
