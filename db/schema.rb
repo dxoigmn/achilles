@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(:version => 11) do
 
   create_table "hosts", :force => true do |t|
     t.string   "name"
-    t.integer  "ip",                    :limit => 10, :default => 0, :null => false
+    t.integer  "ip",                    :default => 0, :null => false
     t.datetime "scan_start"
     t.datetime "scan_end"
-    t.integer  "vulnerabilities_count",               :default => 0, :null => false
+    t.integer  "vulnerabilities_count", :default => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "location_id"
@@ -115,8 +115,8 @@ ActiveRecord::Schema.define(:version => 11) do
 
   create_table "subnets", :force => true do |t|
     t.string   "name"
-    t.integer  "lowest_ip_address",  :limit => 10, :default => 0,          :null => false
-    t.integer  "highest_ip_address", :limit => 10, :default => 4294967295, :null => false
+    t.integer  "lowest_ip_address",  :default => 0,          :null => false
+    t.integer  "highest_ip_address", :default => 4294967295, :null => false
     t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
