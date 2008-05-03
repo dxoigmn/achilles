@@ -45,3 +45,5 @@ License
 Copyright (c) 2007-2008, The Trustees of Dartmouth College.
 
 Achilles is released as open source under a BSD license. See LICENSE for details.
+
+The several plugins (./vendor/plugins/) included in Achilles are copyright their respective authors.
