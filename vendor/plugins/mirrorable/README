@@ -1,13 +1,10 @@
 Mirrorable
 ==========
 
-Introduction goes here.
+Simple plugin to allow "mirroring" of values. That is an attribute of a model
+inherits its value from another model if the value of that attribute is 
+missing.
 
 
-Example
-=======
-
-Example goes here.
-
-
-Copyright (c) 2007 [name of plugin creator], released under the MIT license
+Copyright (c) 2007-2008 The Trustees of Dartmouth College, released under the
+BSD license

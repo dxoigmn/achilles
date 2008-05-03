@@ -16,21 +16,21 @@ In general, vulnerability severities are inherited in the following order:
 A minimal Achilles installation should specify locations, plugin classifications, and the severity matrix. Achilles will run with these being empty, but will be unable to prioritize vulnerabilities.
 
 Installation
-============
+------------
 
 Installing Achilles is similar to any other Rails-based application. You can play around with Achilles locally using a sqlite3 database but is recommended to use MySQL in production.
 
 To play around run the following commands:
 
-  rake db:create
-  rake db:migrate
-  rake db:populate
-  ./script/server
+    rake db:create
+    rake db:migrate
+    rake db:populate
+    ./script/server
 
 Once the server is running locally, you can open your web browser to http://0.0.0.0:3000.
 
 Dependencies
-============
+------------
 
 Achilles has been developed on Rails 2.0.2. It is recommended you run Achilles on this version as future version might not be backwards compatible.
 
@@ -38,3 +38,10 @@ Achilles is also dependent on the follow ruby gems:
   - Chronic
   - NetAddr
   - Haml
+
+License
+-------
+
+Copyright (c) 2007-2008 The Trustees of Dartmouth College, released as open source under a BSD license.
+
+See LICENSE for details.
