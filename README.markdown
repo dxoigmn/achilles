@@ -42,6 +42,6 @@ Achilles is also dependent on the follow ruby gems:
 License
 -------
 
-Copyright (c) 2007-2008 The Trustees of Dartmouth College, released as open source under a BSD license.
+Copyright (c) 2007-2008, The Trustees of Dartmouth College.
 
-See LICENSE for details.
+Achilles is released as open source under a BSD license. See LICENSE for details.
