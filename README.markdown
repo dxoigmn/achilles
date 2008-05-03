@@ -27,7 +27,7 @@ To play around run the following commands:
     rake db:populate
     ./script/server
 
-Once the server is running locally, you can open your web browser to http://0.0.0.0:3000.
+Once the server is running locally, you can open your web browser to <http://0.0.0.0:3000>.
 
 Dependencies
 ------------
