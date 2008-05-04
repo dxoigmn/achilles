@@ -20,7 +20,15 @@ Installation
 
 Installing Achilles is similar to any other Rails-based application. You can play around with Achilles locally using a sqlite3 database but is recommended to use MySQL in production.
 
-To play around run the following commands:
+To play around with Achilles you must first edit the config/environment.rb file. There are several things you will want to change:
+
+  1. The session secret (config.action_controller.session[:secret])
+  2. The nmap executable path (config.app_config.nmap_path)
+  3. Where results from nmap should be stored  (config.app_config.nmap_path_results)
+  4. The nessus executable path (config.app_config.nessus_path)
+  5. Where nessus results should be stored (config.app_config.nessus_results_path and config.app_config.nessus_plugins_path)
+
+Then run the following commands:
 
     rake db:create
     rake db:migrate
