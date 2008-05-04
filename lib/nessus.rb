@@ -102,6 +102,69 @@ module Nessus
     end
   end
   
+  def self.process(scan, results_file, plugins_file)
+    # Parse results
+    scan.puts("Parsing results in #{results_file}...")
+
+    nessus_report = NessusReport.parse(XML::Document.file(results_file))
+
+    # Parse plugins
+    scan.puts("Parsing plugins in #{plugins_file}...")
+    
+    nessus_plugins = {}
+    
+    File.open(plugins_file).each_line do |line|
+      nessus_plugin = NessusPlugin.parse(scan, line)
+      
+      next unless nessus_plugin
+
+      nessus_plugins[nessus_plugin.id] = nessus_plugin
+    end
+
+    # Import results
+    scan.puts("Importing #{nessus_report.hosts.size} hosts...")
+
+    nessus_report.hosts.each do |nessus_host|
+      scan.hosts.new do |host|
+        host.name       = nessus_host.name
+        host.ip         = nessus_host.ip
+        host.scan_start = nessus_host.scan_start
+        host.scan_end   = nessus_host.scan_end
+        host.save!
+    
+        nessus_host.vulnerabilities.each do |nessus_vulnerability|
+          host.vulnerabilities.new do |vulnerability|
+            nessus_plugin = nessus_plugins[nessus_vulnerability.plugin_id]
+            
+            fail "Couldn't find plugin #{nessus_vulnerability.plugin_id} referenced by vulnerability!" unless nessus_plugin
+            
+            plugin = Plugin.find_by_id(nessus_plugin.id)
+
+            unless plugin
+              Plugin.new do |plugin|
+                plugin.id       = nessus_plugin.id
+                plugin.name     = nessus_plugin.name
+                plugin.version  = nessus_plugin.version
+                plugin.family   = Family.find_or_create_by_name(nessus_plugin.family)
+                plugin.cve      = nessus_plugin.cve
+                plugin.bugtraq  = nessus_plugin.bid
+                plugin.category = nessus_plugin.category
+                plugin.risk     = Risk.find_or_create_by_name(nessus_plugin.risk)
+                plugin.summary  = nessus_plugin.summary
+                plugin.save!
+              end
+            end
+            
+            vulnerability.port    = nessus_vulnerability.port
+            vulnerability.data    = nessus_vulnerability.data
+            vulnerability.plugin  = plugin
+            vulnerability.save!
+          end
+        end
+      end
+    end
+  end
+  
   def self.process_plugins(scan, file)
     scan.puts("Import plugins from #{file}") if scan
     
@@ -113,17 +176,18 @@ module Nessus
       plugin = Plugin.find_by_id(nessus_plugin.id)
 
       unless plugin
-        plugin          = Plugin.new
-        plugin.id       = nessus_plugin.id
-        plugin.name     = nessus_plugin.name
-        plugin.version  = nessus_plugin.version
-        plugin.family   = Family.find_or_create_by_name(nessus_plugin.family)
-        plugin.cve      = nessus_plugin.cve
-        plugin.bugtraq  = nessus_plugin.bid
-        plugin.category = nessus_plugin.category
-        plugin.risk     = Risk.find_or_create_by_name(nessus_plugin.risk)
-        plugin.summary  = nessus_plugin.summary
-        plugin.save!
+        Plugin.new do |plugin|
+          plugin.id       = nessus_plugin.id
+          plugin.name     = nessus_plugin.name
+          plugin.version  = nessus_plugin.version
+          plugin.family   = Family.find_or_create_by_name(nessus_plugin.family)
+          plugin.cve      = nessus_plugin.cve
+          plugin.bugtraq  = nessus_plugin.bid
+          plugin.category = nessus_plugin.category
+          plugin.risk     = Risk.find_or_create_by_name(nessus_plugin.risk)
+          plugin.summary  = nessus_plugin.summary
+          plugin.save!
+        end
       end
     end
   end
@@ -131,25 +195,26 @@ module Nessus
   def self.process_results(scan, file)
     scan.puts("Parsing #{file}...")
 
-    xml           = XML::Document.file(file)
-    nessus_report = NessusReport.parse(xml)
+    nessus_report = NessusReport.parse(XML::Document.file(file))
 
     scan.puts("Importing #{nessus_report.hosts.size} hosts...")
 
     nessus_report.hosts.each do |nessus_host|
-      host            = scan.hosts.new
-      host.name       = nessus_host.name
-      host.ip         = nessus_host.ip
-      host.scan_start = nessus_host.scan_start
-      host.scan_end   = nessus_host.scan_end
-      host.save!
+      scan.hosts.new do |host|
+        host.name       = nessus_host.name
+        host.ip         = nessus_host.ip
+        host.scan_start = nessus_host.scan_start
+        host.scan_end   = nessus_host.scan_end
+        host.save!
     
-      nessus_host.vulnerabilities.each do |nessus_vulnerability|
-        vulnerability                   = host.vulnerabilities.new
-        vulnerability.port              = nessus_vulnerability.port
-        vulnerability.data              = nessus_vulnerability.data
-        vulnerability.plugin_id         = nessus_vulnerability.plugin_id
-        vulnerability.save!
+        nessus_host.vulnerabilities.each do |nessus_vulnerability|
+          host.vulnerabilities.new do |vulnerability|
+            vulnerability.port      = nessus_vulnerability.port
+            vulnerability.data      = nessus_vulnerability.data
+            vulnerability.plugin_id = nessus_vulnerability.plugin_id
+            vulnerability.save!
+          end
+        end
       end
     end
   end

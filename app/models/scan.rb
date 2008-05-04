@@ -67,8 +67,7 @@ class Scan < ActiveRecord::Base
     `#{AppConfig.nessus_path} -p > #{nessus_plugins}`
     scan.puts("Nessus plugins saved to #{nessus_plugins}")
     
-    Nessus.process_plugins(scan, nessus_plugins)
-    Nessus.process_results(scan, nessus_results)
+    Nessus.process(scan, nessus_results, nessus_plugins)
 
     scan.stop!
   end
