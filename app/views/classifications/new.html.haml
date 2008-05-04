@@ -1,0 +1,12 @@
+.section
+  .header
+    %h1= link_to('Classifications', classifications_path)
+  
+  - form_for(@classification) do |f|
+    %dl
+      %dt
+        %div= 'Name'
+      %dd= f.text_field(:name)
+
+    .footer
+      = f.submit('Update')

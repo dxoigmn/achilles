@@ -1,0 +1,20 @@
+%table
+  %thead
+    %tr
+      %th{ :width => '95%' }= 'Name'
+
+  - if classifications.respond_to?(:page)
+    %tfoot
+      %tr
+        %th= paginating_links(classifications, :window_size => 3)
+
+  %tbody
+    - if classifications.size == 0
+      %tr
+        %td= '&nbsp;'
+  
+    - for classification in classifications
+      %tr
+        %td= classification.name
+        %td= link_to('Edit', edit_classification_path(classification))
+
