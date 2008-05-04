@@ -9,6 +9,6 @@ class Subnet < ActiveRecord::Base
   end
 
   def cidr
-    "#{NetAddr.i_to_ip lowest_ip_address}/#{32 - (lowest_ip_address ^ highest_ip_address).to_s(2).length}"
+    "#{NetAddr.i_to_ip lowest_ip_address}/#{32 - ((lowest_ip_address == highest_ip_address) ? 0 : (lowest_ip_address ^ highest_ip_address).to_s(2).length)}"
   end
 end
