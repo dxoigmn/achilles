@@ -40,7 +40,7 @@ module Mirrorable
         end
       
         def update_#{field.to_s}
-          write_attribute(:#{field}, #{field}_default) unless read_attribute(#{field}_modified)
+          write_attribute(:#{field}, #{field}_default) unless read_attribute(:#{field}_modified)
         end
 
         def #{field.to_s}=(value)
