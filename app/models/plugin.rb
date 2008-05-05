@@ -4,8 +4,8 @@ class Plugin < ActiveRecord::Base
   SERVICE       = 10330
   HOST_FDQN     = 12053
   
-  after_create :add_plugin_severities
-  before_save :update_plugin_severities!
+  after_create :add_plugin_severities!
+  after_save :update_plugin_severities!
   after_save :update_vulnerability_severities!
   after_save :update_classification
   
@@ -47,8 +47,10 @@ class Plugin < ActiveRecord::Base
   end
   
   private
-    def add_plugin_severities
-      Location.find(:all).each { |location| plugin_severities.create(:location => location) }
+    def add_plugin_severities!
+      Location.find(:all).each do |location| 
+        plugin_severities.create(:location => location)
+      end
     end
     
     def update_classification

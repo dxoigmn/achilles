@@ -9,7 +9,7 @@ class PluginClassification < ActiveRecord::Base
                                     '      plugins.risk_id = #{risk_id}'
 
   def update_plugins
-    Plugin.find_all_by_classification_id(nil).map(&:classify!)
+    plugins.map(&:classify!)
   end                                  
 
   def self.classify(risk, family)

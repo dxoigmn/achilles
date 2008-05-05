@@ -3,17 +3,10 @@
 require File.join(File.dirname(__FILE__), '..', 'config', 'environment')
 
 def usage
-  puts "Usage: ./import [scan name] [file/dir 1] [file/dir 2] ... [file/dir n]"
-  puts "       ./import [plugins file]"  
+  puts "Usage: ./import [scan name] [directory 1] [directory 2]"
 end
 
-if ARGV.size == 1
-  if File.exists?(ARGV[0])
-    Nessus.process_plugins(nil, ARGV[0])
-  else
-    usage
-  end
-elsif ARGV.size > 1
+if ARGV.size == 2
   scan = Scan.find_or_create_by_name(:name => ARGV.shift, :starts_at => Time.now, :output => '')
 
   scan.start!
@@ -21,12 +14,13 @@ elsif ARGV.size > 1
   files = []
   
   ARGV.each do |arg|
-    files << arg if File.file?(arg)
     files << Dir.glob(File.join(arg, '*.nessus')) if File.directory?(arg)
   end
   
-  files.flatten.each do |file|
-    Nessus.process_results(scan, file)
+  files.flatten.each do |nessus_file|
+    plugins_file = File.join(File.dirname(nessus_file), File.basename(nessus_file, ".nessus") + ".plugins")
+
+    Nessus.process(scan, nessus_file, plugins_file)
   end
   
   scan.stop!

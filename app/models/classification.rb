@@ -14,6 +14,8 @@ class Classification < ActiveRecord::Base
 
   private
     def add_severities!
-      Location.find(:all).each { |location| severities.create(:location => location) }
+      Location.find(:all).each do |location| 
+        severities.create(:location => location)
+      end
     end
 end

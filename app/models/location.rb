@@ -41,7 +41,9 @@ class Location < ActiveRecord::Base
   
   private
     def add_severities
-      Classification.find(:all).each { |classification| severities.create(:classification => classification) }
+      Classification.find(:all).each do |classification| 
+        severities.create(:classification => classification)
+      end
     end
     
     def remove_blank_subnets

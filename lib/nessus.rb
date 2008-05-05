@@ -102,11 +102,11 @@ module Nessus
     end
   end
   
-  def self.process(scan, results_file, plugins_file)
+  def self.process(scan, nessus_file, plugins_file)
     # Parse results
-    scan.puts("Parsing results in #{results_file}...")
+    scan.puts("Parsing results in #{nessus_file}...")
 
-    nessus_report = NessusReport.parse(XML::Document.file(results_file))
+    nessus_report = NessusReport.parse(XML::Document.file(nessus_file))
 
     # Parse plugins
     scan.puts("Parsing plugins in #{plugins_file}...")
