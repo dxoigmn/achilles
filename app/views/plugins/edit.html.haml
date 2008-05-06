@@ -12,16 +12,10 @@
           %div= 'Summary'
         %dd= form.text_field(:summary)
 
-      %dl.editing.left
         %dt
           %div= 'Visible'
         %dd= form.check_box(:visible, :checked => @plugin.visible?)
 
-        %dt
-          %div= 'Classification'
-        %dd= form.select(:classification_id, Classification.choices)
-
-      %dl.editing.right
         %dt
           %div= 'Family'
         %dd= form.select(:family_id, Family.choices)
@@ -30,7 +24,6 @@
           %div= 'Risk'
         %dd= form.select(:risk_id, Risk.choices)
 
-      %dl.editing
         %dt
           %div= 'Description'
         %dd= find_and_preserve(form.text_area(:description, :rows => 5))

@@ -5,9 +5,9 @@ class Plugin < ActiveRecord::Base
   HOST_FDQN     = 12053
   
   after_create :add_plugin_severities!
+  before_save :update_classification
   after_save :update_plugin_severities!
   after_save :update_vulnerability_severities!
-  after_save :update_classification
   
   has_many :vulnerabilities
   has_many :hosts, :through => :vulnerabilities

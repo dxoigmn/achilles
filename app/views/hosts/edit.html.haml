@@ -16,10 +16,6 @@
       %dd= form.text_field(:ip, :value => @host.ip)
 
       %dt
-        %div= 'Location'
-      %dd= form.select(:location_id, Location.choices)
-
-      %dt
         %div= 'Description'
       %dd= find_and_preserve(form.text_area(:description, :rows => 5))
 

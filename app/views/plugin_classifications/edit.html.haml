@@ -9,11 +9,11 @@
     %dl
       %dt
         %div= 'Risk'
-      %dd= f.select(:risk_id, Risk.choices)
+      %dd= @plugin_classification.risk
 
       %dt
         %div= 'Family'
-      %dd= f.select(:family_id, Family.choices)
+      %dd= @plugin_classification.family
 
       %dt
         %div= 'Classification'
