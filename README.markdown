@@ -22,7 +22,7 @@ Installing Achilles is similar to any other Rails-based application. You can pla
 
 To play around with Achilles you must first edit the `config/environment.rb` file. There are several things you will want to change:
 
-  1. The session secret (`config.action_controller.session[:secret]`)
+  1. The session secret (`config.action_controller.session[:secret]`, use `rake secret` to generate a new secret)
   2. The nmap executable path (`config.app_config.nmap_path`)
   3. Where results from nmap should be stored  (`config.app_config.nmap_path_results`)
   4. The nessus executable path (`config.app_config.nessus_path`)
