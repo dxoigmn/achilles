@@ -13,7 +13,7 @@ class Host < ActiveRecord::Base
   
   def ip=(value)
     write_attribute(:ip, NetAddr.ip_to_i(value))
-    write_attribute(:location_id, Location.locate(ip))
+    write_attribute(:location_id, Location.locate(ip).id)
   end
   
   def os_detected?
