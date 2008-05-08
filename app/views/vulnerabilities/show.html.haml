@@ -1,5 +1,17 @@
 = section_for(@vulnerability) do
-  %dl.left
+  %dl
+    %dt
+      %div= 'Host'
+    %dd= link_to(@vulnerability.host.name, host_path(@vulnerability.host))
+    
+    %dt
+      %div= 'Plugin'
+    %dd= link_to(@vulnerability.plugin.name, plugin_path(@vulnerability.plugin))
+
+    %dt
+      %div= 'Summary'
+    %dd= @vulnerability.plugin.summary
+    
     %dt
       %div= 'Severity'
     %dd= @vulnerability.severity
@@ -8,16 +20,10 @@
       %div= 'Status'
     %dd= @vulnerability.status
 
-  %dl.right
     %dt
       %div= 'Port'
     %dd= @vulnerability.port
 
-    %dt
-      %div= 'Plugin'
-    %dd= link_to(@vulnerability.plugin.name, plugin_path(@vulnerability.plugin))
-
-  %dl
     %dt
       %div= 'Data'
     %dd= find_and_preserve("<pre>#{@vulnerability.data}</pre>")

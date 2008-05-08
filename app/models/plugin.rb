@@ -47,7 +47,11 @@ class Plugin < ActiveRecord::Base
   end
   
   def to_s
-    read_attribute(:summary)
+    read_attribute(:name)
+  end
+  
+  def self.choices
+    Plugin.find(:all, :order => :name).map { |plugin| [plugin.name, plugin.id.to_s] }
   end
   
   private

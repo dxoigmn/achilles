@@ -1,5 +1,5 @@
 = section_for(@host) do
-  %dl.left
+  %dl
     %dt
       %div= 'Ip Address'
     %dd= @host.ip
@@ -8,7 +8,6 @@
       %div= 'Location'
     %dd= @host.location
 
-  %dl.right
     %dt
       %div= 'Severity'
     %dd= @host.severity
@@ -17,7 +16,6 @@
       %div= 'Last Scanned'
     %dd= @host.scan_end
 
-  %dl
     %dt
       %div= 'Description'
     %dd= find_and_preserve("<pre>#{@host.description}</pre>")

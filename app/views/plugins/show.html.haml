@@ -1,20 +1,24 @@
 = section_for(@plugin) do
+  #severities
+    .header
+      %h1= 'Severities'
+    
+    %dl
+      - for plugin_severity in @plugin.plugin_severities
+        %dt
+          %div= plugin_severity.location
+        %dd= plugin_severity.severity
+      
   #summary
     %dl
       %dt
         %div= 'Summary'
       %dd= @plugin.summary
 
-    %dl.left
       %dt
         %div= 'Visible'
       %dd= @plugin.visible
 
-      %dt
-        %div= 'Classification'
-      %dd= @plugin.classification
-
-    %dl.right
       %dt
         %div= 'Family'
       %dd= @plugin.family
@@ -23,7 +27,10 @@
         %div= 'Risk'
       %dd= @plugin.risk
 
-    %dl
+      %dt
+        %div= 'Classification'
+      %dd= @plugin.classification
+
       %dt
         %div= 'Description'
       %dd= find_and_preserve("<pre>#{@plugin.description}</pre>")
@@ -35,16 +42,6 @@
       %dt
         %div= 'Remediation'
       %dd= find_and_preserve("<pre>#{@plugin.remediation}</pre>")
-
-  #severities
-    .header
-      %h1= 'Severities'
-      
-    %dl
-      - for plugin_severity in @plugin.plugin_severities
-        %dt
-          %div= plugin_severity.location
-        %dd= plugin_severity.severity
 
   .footer
     = link_to('Edit', edit_plugin_path(@plugin))

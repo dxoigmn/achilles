@@ -105,18 +105,12 @@ div.section div.header h1 ul li:before {
   color: #000000;
 }
 
-
-div.section:first-child div.header h1 {
-  font-size: x-large;
-}
-
 div.section:first-child div.header a {
   color: #000000;
 }
 
 div.section div.footer {
   margin-top: 1em;
-  clear: both;
 }
 
 div.section pre {
@@ -155,22 +149,6 @@ div.section table tbody td:first-child {
 div.section table thead th, 
 div.section table tbody td {
   text-align: center;
-}
-
-div.section dl {
-  clear: both;
-}
-
-div.section dl.left {
-  clear: left;
-  float: left;
-  width: 50%;
-}
-
-div.section dl.right {
-  clear: right;
-  float: right;
-  width: 50%;
 }
 
 div.section dl dt {

@@ -53,4 +53,8 @@ class Host < ActiveRecord::Base
     write_attribute(:severity, max_severity) if read_attribute(:severity) != max_severity
     save!
   end
+  
+  def self.choices
+    Host.find(:all).map { |host| [host.name, host.id.to_s]}
+  end
 end
