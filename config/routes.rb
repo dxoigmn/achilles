@@ -7,5 +7,5 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :locations
   map.resources :plugin_classifications
   map.resources :classifications
-  map.root :controller => 'Hosts'
+  map.root :controller => 'Scans'
 end
