@@ -1,25 +1,10 @@
 = section_for(@scan) do
   %dl
-    %dt
-      %div= 'Starts At'
-    %dd= @scan.starts_at
-    
-    %dt
-      %div= 'Last Updated'
-    %dd= @scan.updated_at
-  
-    %dt
-      %div= 'State'
-    %dd= @scan.state.capitalize
-  
-    %dt
-      %div= 'Locations'
-    %dd= @scan.location_names
-
-    - if @scan.running? || @scan.finished?
-      %dt
-        %div= 'Output'
-      %dd= find_and_preserve("<pre>#{@scan.output}</pre>")
+    = form_field('Starts At', @scan.starts_at)
+    = form_field('Last Updated', @scan.updated_at)
+    = form_field('State', @scan.state.capitalize)
+    = form_field('Locations', @scan.location_names)
+    = form_field('Output', "<pre>#{@scan.output}</pre>") if @scan.running? || @scan.finished?
 
 -if @scan.finished?
   = section_for(@hosts) do

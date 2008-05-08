@@ -1,44 +1,15 @@
 = section_for(@vulnerability) do
   %dl
-    %dt
-      %div= 'Host'
-    %dd= link_to(@vulnerability.host.name, host_path(@vulnerability.host))
-    
-    %dt
-      %div= 'Plugin'
-    %dd= link_to(@vulnerability.plugin.name, plugin_path(@vulnerability.plugin))
-
-    %dt
-      %div= 'Summary'
-    %dd= @vulnerability.plugin.summary
-    
-    %dt
-      %div= 'Severity'
-    %dd= @vulnerability.severity
-
-    %dt
-      %div= 'Status'
-    %dd= @vulnerability.status
-
-    %dt
-      %div= 'Port'
-    %dd= @vulnerability.port
-
-    %dt
-      %div= 'Data'
-    %dd= find_and_preserve("<pre>#{@vulnerability.data}</pre>")
-  
-    %dt
-      %div= 'Description'
-    %dd= find_and_preserve("<pre>#{@vulnerability.description}</pre>")
-      
-    %dt
-      %div= 'Evaluation'
-    %dd= find_and_preserve("<pre>#{@vulnerability.evaluation}</pre>")
-    
-    %dt
-      %div= 'Remediation'
-    %dd= find_and_preserve("<pre>#{@vulnerability.remediation}</pre>")
+    = form_field('Host', link_to(@vulnerability.host.name, host_path(@vulnerability.host)))
+    = form_field('Plugin', link_to(@vulnerability.plugin.name, plugin_path(@vulnerability.plugin)))
+    = form_field('Summary', @vulnerability.plugin.summary)
+    = form_field('Severity', @vulnerability.severity)
+    = form_field('Status', @vulnerability.status)
+    = form_field('Port', @vulnerability.port)
+    = form_field('Data', "<pre>#{@vulnerability.data}</pre>")
+    = form_field('Description', "<pre>#{@vulnerability.description}</pre>")
+    = form_field('Evaluation', "<pre>#{@vulnerability.evaluation}</pre>")
+    = form_field('Remediation', "<pre>#{@vulnerability.remediation}</pre>")
 
   .footer
     = link_to('Edit', edit_vulnerability_path(@vulnerability))

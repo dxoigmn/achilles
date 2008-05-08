@@ -1,9 +1,7 @@
 = section_for(@location) do
   - form_for(@location) do |f|
     %dl
-      %dt
-        %div= 'Name'
-      %dd= f.text_field(:name)
+      = form_field('Name', f.text_field(:name))
 
     .header
       %h2= 'Subnets'

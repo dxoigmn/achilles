@@ -1,32 +1,12 @@
 = section_for(@host) do
   %dl
-    %dt
-      %div= 'Ip Address'
-    %dd= @host.ip
-
-    %dt
-      %div= 'Location'
-    %dd= @host.location
-
-    %dt
-      %div= 'Severity'
-    %dd= @host.severity
-
-    %dt
-      %div= 'Last Scanned'
-    %dd= @host.scan_end
-
-    %dt
-      %div= 'Description'
-    %dd= find_and_preserve("<pre>#{@host.description}</pre>")
-    
-    %dt
-      %div= 'Evaluation'
-    %dd= find_and_preserve("<pre>#{@host.evaluation}</pre>")
-  
-    %dt
-      %div= 'Remediation'
-    %dd= find_and_preserve("<pre>#{@host.remediation}</pre>")
+    = form_field('Ip Address', @host.ip)
+    = form_field('Location', @host.location)
+    = form_field('Severity', @host.severity)
+    = form_field('Last Scanned', @host.scan_end)
+    = form_field('Description', "<pre>#{@host.description}</pre>")
+    = form_field('Evaluation', "<pre>#{@host.evaluation}</pre>")
+    = form_field('Remediation', "<pre>#{@host.remediation}</pre>")
 
   .footer
     = link_to('Edit', edit_host_path(@host))

@@ -5,43 +5,18 @@
     
     %dl
       - for plugin_severity in @plugin.plugin_severities
-        %dt
-          %div= plugin_severity.location
-        %dd= plugin_severity.severity
+        = form_field(plugin_severity.location, plugin_severity.severity)
       
   #summary
     %dl
-      %dt
-        %div= 'Summary'
-      %dd= @plugin.summary
-
-      %dt
-        %div= 'Visible'
-      %dd= @plugin.visible
-
-      %dt
-        %div= 'Family'
-      %dd= @plugin.family
-
-      %dt
-        %div= 'Risk'
-      %dd= @plugin.risk
-
-      %dt
-        %div= 'Classification'
-      %dd= @plugin.classification
-
-      %dt
-        %div= 'Description'
-      %dd= find_and_preserve("<pre>#{@plugin.description}</pre>")
-    
-      %dt
-        %div= 'Evaluation'
-      %dd= find_and_preserve("<pre>#{@plugin.evaluation}</pre>")
-  
-      %dt
-        %div= 'Remediation'
-      %dd= find_and_preserve("<pre>#{@plugin.remediation}</pre>")
+      = form_field('Summary', @plugin.summary)
+      = form_field('Visible', @plugin.visible)
+      = form_field('Family', @plugin.family)
+      = form_field('Risk', @plugin.risk)
+      = form_field('Classification', @plugin.classification)
+      = form_field('Description', "<pre>#{@plugin.description}</pre>")
+      = form_field('Evaluation', "<pre>#{@plugin.evaluation}</pre>")
+      = form_field('Remediation', "<pre>#{@plugin.remediation}</pre>")
 
   .footer
     = link_to('Edit', edit_plugin_path(@plugin))
