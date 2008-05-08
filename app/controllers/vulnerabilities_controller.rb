@@ -2,8 +2,9 @@ class VulnerabilitiesController < ApplicationController
   def index
     @vulnerabilities = Vulnerability.find(:all,
                                           :page => {:current => params[:page], :size => session[:user].page_size},
-                                          :include => :host,
-                                          :conditions => {'hosts.location_id' => session[:user].locations})
+                                          :include => [:host, :status],
+                                          :conditions => {'hosts.location_id' => session[:user].locations},
+                                          :order => 'statuses."default" DESC, vulnerabilities.severity DESC, vulnerabilities.port ASC')
   end
   
   def show
