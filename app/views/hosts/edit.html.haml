@@ -1,26 +1,11 @@
 = section_for(@host) do
   - form_for(@host) do |form|
     %dl.editing
-      %dt
-        %div= 'Name'
-      %dd= form.text_field(:name)
-
-      %dt
-        %div= 'Ip Address'
-      %dd= form.text_field(:ip, :value => @host.ip)
-
-      %dt
-        %div= 'Description'
-      %dd= find_and_preserve(form.text_area(:description, :rows => 5))
-
-      %dt
-        %div= 'Evaluation'
-      %dd= find_and_preserve(form.text_area(:evaluation, :rows => 5))
-
-      %dt
-        %div= 'Remediation'
-      %dd
-        %div= find_and_preserve(form.text_area(:remediation, :rows => 5))
+      = form_field('Name', form.text_field(:name))
+      = form_field('Ip Address', form.text_field(:ip, :value => @host.ip))
+      = form_field('Description', form.text_area(:description, :rows => 5))
+      = form_field('Evaluation', form.text_area(:evaluation, :rows => 5))
+      = form_field('Remediation', form.text_area(:remediation, :rows => 5))
 
     .footer
       = form.submit('Update')

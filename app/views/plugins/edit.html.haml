@@ -2,33 +2,13 @@
   - form_for(@plugin) do |form|
     #summary
       %dl.editing
-        %dt
-          %div= 'Summary'
-        %dd= form.text_field(:summary)
-
-        %dt
-          %div= 'Visible'
-        %dd= form.check_box(:visible, :checked => @plugin.visible?)
-
-        %dt
-          %div= 'Family'
-        %dd= form.select(:family_id, Family.choices)
-
-        %dt
-          %div= 'Risk'
-        %dd= form.select(:risk_id, Risk.choices)
-
-        %dt
-          %div= 'Description'
-        %dd= find_and_preserve(form.text_area(:description, :rows => 5))
-
-        %dt
-          %div= 'Evaluation'
-        %dd= find_and_preserve(form.text_area(:evaluation, :rows => 5))
-
-        %dt
-          %div= 'Remediation'
-        %dd= find_and_preserve(form.text_area(:remediation, :rows => 5))
+        = form_field('Summary', form.text_field(:summary))
+        = form_field('Visible', form.check_box(:visible, :checked => @plugin.visible?))
+        = form_field('Family', form.select(:family_id, Family.choices))
+        = form_field('Risk', form.select(:risk_id, Risk.choices))
+        = form_field('Description', form.text_area(:description, :rows => 5))
+        = form_field('Evaluation', form.text_area(:evaluation, :rows => 5))
+        = form_field('Remediation', form.text_area(:remediation, :rows => 5))
 
     #severities
       .header
@@ -36,9 +16,7 @@
     
       %dl
         - for plugin_severity in @plugin.plugin_severities
-          %dt
-            %div= plugin_severity.location
-          %dd= select("plugin_severities[#{plugin_severity.id}]", :severity, Severity.choices, :selected => plugin_severity.real_severity)
+          = form_field(plugin_severity.location, select("plugin_severities[#{plugin_severity.id}]", :severity, Severity.choices, :selected => plugin_severity.real_severity))
 
     .footer
       = form.submit('Update')

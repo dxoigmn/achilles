@@ -1,17 +1,9 @@
 = section_for(@plugin_classification, :header => [:plugin_classifications, 'Edit']) do
   - form_for(@plugin_classification) do |f|
-    %dl
-      %dt
-        %div= 'Risk'
-      %dd= @plugin_classification.risk
-
-      %dt
-        %div= 'Family'
-      %dd= @plugin_classification.family
-
-      %dt
-        %div= 'Classification'
-      %dd= f.select(:classification_id, Classification.choices)
+    %dl.editing
+      = form_field('Risk', @plugin_classification.risk)
+      = form_field('Family', @plugin_classification.family)
+      = form_field('Classification', f.select(:classification_id, Classification.choices))
 
     .footer
       = f.submit('Update')

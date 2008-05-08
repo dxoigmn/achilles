@@ -1,13 +1,8 @@
 = section_for(@scan) do
   - form_for(@scan) do |f|
     %dl
-      %dt
-        %div= 'Name'
-      %dd= f.text_field(:name)
-
-      %dt
-        %div= 'Start At'
-      %dd= f.text_field(:starts_at)
+      = form_field('Name', f.text_field(:name))
+      = form_field('Start At', f.text_field(:starts_at))
 
       %dt
         %div= 'Locations'

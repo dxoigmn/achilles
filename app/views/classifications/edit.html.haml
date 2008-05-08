@@ -1,9 +1,7 @@
 = section_for(@classification, :header => [:classifications, 'Edit']) do
   - form_for(@classification) do |f|
-    %dl
-      %dt
-        %div= 'Name'
-      %dd= f.text_field(:name)
+    %dl.editing
+      = form_field('Name', f.text_field(:name))
 
     .footer
       = f.submit('Update')

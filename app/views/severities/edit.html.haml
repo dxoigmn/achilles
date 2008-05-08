@@ -2,17 +2,9 @@
   - form_for(@severity) do |form|
     #summary
       %dl.editing
-        %dt
-          %div= 'Location'
-        %dd= @severity.location
-
-        %dt
-          %div= 'Classification'
-        %dd= @severity.classification
-
-        %dt
-          %div= 'Severity'
-        %dd= form.select(:severity, (1..5).to_a)
+        = form_field('Location', @severity.location)
+        = form_field('Classification', @severity.classification)
+        = form_field('Severity', form.select(:severity, (1..5).to_a))
 
     .footer
       = form.submit('Update')
