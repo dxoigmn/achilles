@@ -1,15 +1,15 @@
 %table
   %thead
     %tr
-      %th{ :width => '20%' }= 'Name'
-      %th{ :width => '45%' }= 'Locations'
-      %th{ :width => '20%' }= 'Starts At'
-      %th{ :width => '10%' }= 'State'
+      %th{:width => '20%'}= 'Name'
+      %th{:width => '45%'}= 'Locations'
+      %th{:width => '20%'}= 'Starts At'
+      %th{:width => '10%'}= 'State'
 
   - if scans.respond_to?(:page)
     %tfoot
       %tr
-        %th{ :colspan => 4 }= paginating_links(scans, :window_size => 3)
+        %th{:colspan => 4}= paginating_links(scans, :window_size => 3)
 
   %tbody
     - if scans.size == 0

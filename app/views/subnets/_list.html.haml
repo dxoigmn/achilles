@@ -1,13 +1,13 @@
 %table
   %thead
     %tr
-      %th{ :width => '50%' }= 'Name'
-      %th{ :width => '45%' }= 'CIDR'
+      %th{:width => '50%'}= 'Name'
+      %th{:width => '45%'}= 'CIDR'
 
   - if subnets.respond_to?(:page)
     %tfoot
       %tr
-        %th{ :colspan => 2 }= paginating_links(subnets, :window_size => 3)
+        %th{:colspan => 2}= paginating_links(subnets, :window_size => 3)
 
   %tbody
     - if subnets.size == 0
