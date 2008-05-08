@@ -1,7 +1,4 @@
-.section
-  .header
-    %h1= 'Classifications' << (@classifications.page_count > 1 ? " (#{@classifications.size})" : '')
-    
+= section_for(@classifications) do
   = render(:partial => 'classifications/list', :locals => { :classifications => @classifications })
 
   .footer= link_to('Add Classification', new_classification_path)

@@ -9,7 +9,7 @@ class Classification < ActiveRecord::Base
   end
 
   def self.choices
-    Classification.find(:all).map { |classification| [classification.name, classification.id] }
+    Classification.find(:all).map { |classification| [classification.name, classification.id.to_s] }
   end
 
   private

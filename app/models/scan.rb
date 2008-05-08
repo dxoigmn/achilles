@@ -38,6 +38,14 @@ class Scan < ActiveRecord::Base
     locations.map(&:subnets).flatten.uniq
   end
   
+  def to_s
+    read_attribute(:name)
+  end
+  
+  def self.choices
+    find(:all).map { |scan| [scan.name, scan.id.to_s] }
+  end
+  
   def self.run!
     scan = Scan.find_in_state(:first, :waiting, :order => 'starts_at')
     

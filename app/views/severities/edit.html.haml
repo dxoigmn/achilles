@@ -1,10 +1,4 @@
-.section
-  .header
-    %h1
-      %ul
-        %li= link_to('Severities', severities_path)
-        %li= 'Edit'
-
+= section_for(@severity, :header => [:severities, 'Edit']) do
   - form_for(@severity) do |form|
     #summary
       %dl.editing

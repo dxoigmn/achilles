@@ -1,31 +1,25 @@
-- form_for(@location) do |form|
-  .section
+= section_for(@location) do
+  - form_for(@location) do |form|
+    %dl
+      %dt
+        %div= 'Name'
+      %dd= form.text_field(:name)
+
     .header
-      %h1
-        %ul
-          %li= link_to('Locations', locations_path)
-          %li= link_to(@location.name, location_path(@location))
+      %h2= 'Subnets'
 
-      %dl
-        %dt
-          %div= 'Name'
-        %dd= form.text_field(:name)
+    %table
+      %thead
+        %tr
+          %th{ :width => '50%' }= 'Name'
+          %th{ :width => '45%'}= 'CIDR'
 
-      .header
-        %h2= 'Subnets'
+      %tfoot
+        %tr
+          %th{ :colspan => 2 }= form.add_associated_link 'Add New Subnet', @location.subnets.build
 
-      %table
-        %thead
-          %tr
-            %th{ :width => '50%' }= 'Name'
-            %th{ :width => '45%'}= 'CIDR'
+      %tbody#subnets
+        = form.render_associated_form(@location.subnets, :new => 3)
 
-        %tfoot
-          %tr
-            %th{ :colspan => 2 }= form.add_associated_link 'Add New Subnet', @location.subnets.build
-
-        %tbody#subnets
-          = form.render_associated_form(@location.subnets, :new => 3)
-
-      .footer
-        = form.submit('Update')
+    .footer
+      = form.submit('Update')

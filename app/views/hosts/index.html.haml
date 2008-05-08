@@ -1,5 +1,2 @@
-.section
-  .header
-    %h1= 'Hosts' << (@hosts.page_count > 1 ? " (#{@hosts.size})" : '')
-    
-  = render(:partial => 'hosts/list', :locals => { :hosts => @hosts })
+= section_for(@hosts) do
+  = render(:partial => 'hosts/list', :locals => {:hosts => @hosts})

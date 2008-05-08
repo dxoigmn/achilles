@@ -44,6 +44,10 @@ class Host < ActiveRecord::Base
     data
   end
   
+  def to_s
+    read_attribute(:name)
+  end
+  
   def update_severity!
     max_severity = visible_vulnerabilities.map(&:severity).delete_if { |i| i.nil? }.max rescue nil
     write_attribute(:severity, max_severity) if read_attribute(:severity) != max_severity

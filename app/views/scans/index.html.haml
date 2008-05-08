@@ -1,7 +1,4 @@
-.section
-  .header
-    %h1= 'Scans' << (@scans.page_count > 1 ? " (#{@scans.size})" : '')
-
+= section_for(@scans) do
   = render(:partial => 'scans/list', :locals => { :scans => @scans })
 
   .footer= link_to('Add Scan', new_scan_path)

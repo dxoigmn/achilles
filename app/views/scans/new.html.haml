@@ -1,7 +1,4 @@
-.section
-  .header
-    %h1= link_to('Scans', scans_path)
-  
+= section_for(@scan) do
   - form_for(@scan) do |f|
     %dl
       %dt

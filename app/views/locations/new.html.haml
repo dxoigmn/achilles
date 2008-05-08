@@ -1,8 +1,5 @@
-.section
+= section_for(@location) do
   - form_for(@location) do |f|
-    .header
-      %h1= link_to('Locations', locations_path)
-  
     %dl
       %dt
         %div= 'Name'
@@ -10,7 +7,7 @@
 
     .header
       %h2= 'Subnets'
-    
+
     %table
       %thead
         %tr

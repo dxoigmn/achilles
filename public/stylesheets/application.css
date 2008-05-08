@@ -66,12 +66,15 @@ div#article {
 
 div.section {
   background-color: #f9f9f9;
-  padding: 1em;
   margin-bottom: 1em;
   border-right: 2px solid #999999;
   border-bottom: 2px solid #999999;
   border-top: 2px solid #ffffff;
   border-left: 2px solid #ffffff;
+}
+
+div.section div.body {
+  padding: 1em;
 }
 
 div.section div.header:first-child h1,

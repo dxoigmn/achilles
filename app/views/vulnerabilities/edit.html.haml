@@ -1,11 +1,4 @@
-.section
-  .header
-    %h1
-      %ul
-        %li= link_to('Hosts', hosts_path)
-        %li= link_to(@vulnerability.host.name, host_path(@vulnerability.host))
-        %li= link_to(@vulnerability.plugin.name, vulnerability_path(@vulnerability))
-
+= section_for(@vulnerability) do
   - form_for(@vulnerability) do |form|
     %dl.editing
       %dt

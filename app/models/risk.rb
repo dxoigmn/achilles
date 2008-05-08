@@ -8,7 +8,7 @@ class Risk < ActiveRecord::Base
   end
   
   def self.choices
-    Risk.find(:all).map { |risk| [risk.name, risk.id] }
+    Risk.find(:all).map { |risk| [risk.name, risk.id.to_s] }
   end
 
   private

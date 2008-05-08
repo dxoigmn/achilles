@@ -46,6 +46,10 @@ class Plugin < ActiveRecord::Base
     save!
   end
   
+  def to_s
+    read_attribute(:summary)
+  end
+  
   private
     def add_plugin_severities!
       Location.find(:all).each do |location| 

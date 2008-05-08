@@ -1,5 +1,2 @@
-.section
-  .header
-    %h1= 'Plugin Classifications' << (@plugin_classifications.size > 1 ? " (#{@plugin_classifications.size})" : "")
-    
+= section_for(@plugin_classifications) do
   = render(:partial => 'plugin_classifications/list', :locals => { :plugin_classifications => @plugin_classifications })

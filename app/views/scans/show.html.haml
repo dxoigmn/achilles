@@ -1,10 +1,4 @@
-.section
-  .header
-    %h1
-      %ul
-        %li= link_to('Scans', scans_path)
-        %li= @scan.name
-
+= section_for(@scan) do
   %dl
     %dt
       %div= 'Starts At'
@@ -28,8 +22,5 @@
       %dd= find_and_preserve("<pre>#{@scan.output}</pre>")
 
 -if @scan.finished?
-  .section
-    .header
-      %h1='Hosts' << (@hosts.size > 1 ? " (#{@hosts.size})" : '')
-
+  = section_for(@hosts) do
     = render(:partial => 'hosts/list', :locals => { :hosts => @hosts })

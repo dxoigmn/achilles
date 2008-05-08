@@ -8,7 +8,7 @@ class Family < ActiveRecord::Base
   end
   
   def self.choices
-    Family.find(:all).map { |family| [family.name, family.id] }
+    Family.find(:all).map { |family| [family.name, family.id.to_s] }
   end
   
 

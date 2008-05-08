@@ -1,10 +1,4 @@
-.section
-  .header
-    %h1
-      %ul
-        %li= link_to('Plugin Classifications', plugin_classifications_path)
-        %li= 'Edit'
-  
+= section_for(@plugin_classification, :header => [:plugin_classifications, 'Edit']) do
   - form_for(@plugin_classification) do |f|
     %dl
       %dt

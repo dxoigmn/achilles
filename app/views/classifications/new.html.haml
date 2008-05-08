@@ -1,7 +1,4 @@
-.section
-  .header
-    %h1= link_to('Classifications', classifications_path)
-  
+= section_for(@classification) do
   - form_for(@classification) do |f|
     %dl
       %dt

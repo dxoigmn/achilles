@@ -11,6 +11,6 @@ class Status < ActiveRecord::Base
   end
   
   def self.choices
-    Status.find(:all).map { |status| [status.name, status.id] }
+    Status.find(:all).map { |status| [status.name, status.id.to_s] }
   end
 end

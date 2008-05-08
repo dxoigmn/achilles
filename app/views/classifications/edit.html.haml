@@ -1,10 +1,4 @@
-.section
-  .header
-    %h1
-      %ul
-        %li= link_to('Classifications', classifications_path)
-        %li= 'Edit'
-  
+= section_for(@classification, :header => [:classifications, 'Edit']) do
   - form_for(@classification) do |f|
     %dl
       %dt

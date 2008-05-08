@@ -1,4 +1,11 @@
 class VulnerabilitiesController < ApplicationController
+  def index
+    @vulnerabilities = Vulnerability.find(:all,
+                                          :page => {:current => params[:page], :size => session[:user].page_size},
+                                          :include => :host,
+                                          :conditions => {'hosts.location_id' => session[:user].locations})
+  end
+  
   def show
     @vulnerability = Vulnerability.find(params[:id],
                                         :include => [:plugin, :host, :status],

@@ -1,10 +1,4 @@
-.section
-  .header
-    %h1
-      %ul
-        %li= link_to('Hosts', hosts_path)
-        %li= link_to(@host.name, host_path(@host))
-
+= section_for(@host) do
   - form_for(@host) do |form|
     %dl.editing
       %dt

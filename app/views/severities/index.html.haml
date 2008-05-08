@@ -1,5 +1,2 @@
-.section
-  .header
-    %h1= 'Severities' << (@severities.size > 1 ? " (#{@severities.size})" : "")
-
+= section_for(@severities) do
   = render(:partial => 'severities/list', :locals => { :severities => @severities })

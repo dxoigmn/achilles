@@ -36,7 +36,7 @@ class Location < ActiveRecord::Base
   end
   
   def self.choices
-    Location.find(:all).map { |location| [location.name, location.id] }
+    Location.find(:all).map { |location| [location.name, location.id.to_s] }
   end
   
   private

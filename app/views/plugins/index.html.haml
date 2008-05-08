@@ -1,5 +1,2 @@
-.section
-  .header
-    %h1= 'Plugins' << (@plugins.page_count > 1 ? " (#{@plugins.size})" : '')
-  
+= section_for(@plugins) do
   = render(:partial => 'plugins/list', :locals => { :plugins => @plugins })

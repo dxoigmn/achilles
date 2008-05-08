@@ -1,10 +1,4 @@
-.section
-  .header
-    %h1
-      %ul
-        %li=link_to('Plugins', plugins_path)
-        %li=@plugin.name
-
+= section_for(@plugin) do
   #summary
     %dl
       %dt
@@ -55,8 +49,5 @@
   .footer
     = link_to('Edit', edit_plugin_path(@plugin))
 
-.section
-  .header
-    %h1= 'Vulnerabilities' << (@vulnerabilities.size > 0 ? " (#{@vulnerabilities.size})" : '')
-
+= section_for(@vulnerabilities) do
   = render(:partial => 'vulnerabilities/plugins_list', :locals => { :vulnerabilities => @vulnerabilities })
