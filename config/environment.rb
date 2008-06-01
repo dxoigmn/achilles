@@ -26,10 +26,10 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "aws-s3", :lib => "aws/s3"
 
-  config.gem "haml"
-  config.gem "chronic"
-  config.gem "netaddr"
-  config.gem "libxml-ruby", :lib => "xml/libxml"
+  config.gem "haml", :version => '2.0.0'
+  config.gem "chronic", :version => '0.2.3'
+  config.gem "netaddr", :version => '1.4.0'
+  config.gem "libxml-ruby", :version => '0.5.4', :lib => "xml/libxml"
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
