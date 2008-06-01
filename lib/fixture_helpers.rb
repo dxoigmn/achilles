@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'netaddr'
-
 module FixtureHelpers
   def status(options)
     fail unless options[:name]

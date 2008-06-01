@@ -43,9 +43,14 @@ Dependencies
 Achilles has been developed on Rails 2.0.2. It is recommended you run Achilles on this version as future version might not be backwards compatible.
 
 Achilles is also dependent on the follow ruby gems:
-  - Chronic
-  - NetAddr
-  - Haml
+  - chronic
+  - netaddr
+  - haml
+  - libxml-ruby
+
+Run the following command to install:
+
+    rake gems:install
 
 License
 -------

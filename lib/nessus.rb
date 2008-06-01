@@ -1,9 +1,3 @@
-require 'rubygems'
-require 'resolv'
-require 'netaddr'
-require 'xml/libxml'
-require 'yaml'
-
 module Nessus
   class NessusReport
     attr_accessor :hosts
