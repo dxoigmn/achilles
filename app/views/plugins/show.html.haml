@@ -21,5 +21,5 @@
   .footer
     = link_to('Edit', edit_plugin_path(@plugin))
 
-= section_for(@vulnerabilities) do
+= section_for(@vulnerabilities, :header => 'Vulnerabilities') do
   = render(:partial => 'vulnerabilities/plugins_list', :locals => { :vulnerabilities => @vulnerabilities })

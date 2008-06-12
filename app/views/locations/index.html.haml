@@ -1,4 +1,4 @@
-= section_for(@locations) do
+= section_for(@locations, :header => 'Locations') do
   = render(:partial => 'locations/list', :locals => { :locations => @locations })
 
   .footer= link_to('Add Location', new_location_path)

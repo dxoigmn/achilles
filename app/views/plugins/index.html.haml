@@ -1,2 +1,2 @@
-= section_for(@plugins) do
+= section_for(@plugins, :header => 'Plugins') do
   = render(:partial => 'plugins/list', :locals => {:plugins => @plugins})

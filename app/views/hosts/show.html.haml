@@ -11,5 +11,5 @@
   .footer
     = link_to('Edit', edit_host_path(@host))
 
-= section_for(@host.visible_vulnerabilities) do
+= section_for(@host.visible_vulnerabilities, :header => 'Vulnerabilities') do
   = render(:partial => 'vulnerabilities/hosts_list', :locals => { :vulnerabilities => @host.visible_vulnerabilities })

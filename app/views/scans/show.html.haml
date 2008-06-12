@@ -7,5 +7,5 @@
     = form_field('Output', "<pre>#{@scan.output}</pre>") if @scan.running? || @scan.finished?
 
 -if @scan.finished?
-  = section_for(@hosts) do
+  = section_for(@hosts, :header => 'Hosts') do
     = render(:partial => 'hosts/list', :locals => { :hosts => @hosts })

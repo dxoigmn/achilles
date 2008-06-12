@@ -1,2 +1,2 @@
-= section_for(@hosts) do
+= section_for(@hosts, :header => 'Hosts') do
   = render(:partial => 'hosts/list', :locals => {:hosts => @hosts})

@@ -1,2 +1,2 @@
-= section_for(@vulnerabilities) do
+= section_for(@vulnerabilities, :header => 'Vulnerabilities') do
   = render(:partial => 'vulnerabilities/hosts_list', :locals => {:vulnerabilities => @vulnerabilities})

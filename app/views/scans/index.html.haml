@@ -1,4 +1,4 @@
-= section_for(@scans) do
+= section_for(@scans, :header => 'Scans') do
   = render(:partial => 'scans/list', :locals => { :scans => @scans })
 
   .footer= link_to('Add Scan', new_scan_path)

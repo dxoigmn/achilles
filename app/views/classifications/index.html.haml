@@ -1,4 +1,4 @@
-= section_for(@classifications) do
+= section_for(@classifications, :header => 'Classifications') do
   = render(:partial => 'classifications/list', :locals => { :classifications => @classifications })
 
   .footer= link_to('Add Classification', new_classification_path)

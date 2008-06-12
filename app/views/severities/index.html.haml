@@ -1,2 +1,2 @@
-= section_for(@severities) do
+= section_for(@severities, :header => 'Severities') do
   = render(:partial => 'severities/list', :locals => { :severities => @severities })
