@@ -1,7 +1,7 @@
 = section_for(@vulnerability) do
   - form_for(@vulnerability) do |form|
     %dl.editing
-      = form_field('Severity', form.select(:severity, Severity.choices, :selected => @vulnerability.real_severity.to_s))
+      = form_field('Severity', form.select(:severity, Severity.choices, :selected => @vulnerability.real_severity))
       = form_field('Status', form.select(:status_id, Status.choices))
       = form_field('Description', form.text_area(:description, :rows => 5))
       = form_field('Evaluation', form.text_area(:evaluation, :rows => 5))
