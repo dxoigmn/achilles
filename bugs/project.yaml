@@ -1,0 +1,16 @@
+--- !ditz.rubyforge.org,2008-03-06/project 
+name: Achilles
+version: "0.3"
+components: 
+- !ditz.rubyforge.org,2008-03-06/component 
+  name: Achilles
+releases: 
+- !ditz.rubyforge.org,2008-03-06/release 
+  name: Alpha
+  status: :unreleased
+  release_time: 
+  log_events: 
+  - - 2008-06-27 21:00:33.324415 Z
+    - Cory Cornelius <dxoigmn@gmail.com>
+    - created
+    - ""
