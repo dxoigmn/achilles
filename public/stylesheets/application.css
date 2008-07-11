@@ -3,6 +3,10 @@ html, body {
   background-color: #e0e0e0;
 }
 
+a {
+  padding: 0.5em 1em 0.5em 1em;
+}
+
 div#header h1 {
   float: left;
   margin: 0.25em 0 0 0.5em;
@@ -16,7 +20,7 @@ div#nav {
 }
 
 div#nav ul {
-  padding: 0.75em 0 0.5em 10em;
+  padding: 0.75em 0 0.25em 10em;
 }
 
 div#nav ul li {
@@ -40,7 +44,6 @@ div#nav ul li.active a {
 div#nav ul li a {
   color: #ffffff;
   text-decoration: underline;
-  padding: 0.5em 1em 0.75em 1em;
 }
 
 div.flash {
