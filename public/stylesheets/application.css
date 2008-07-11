@@ -20,14 +20,14 @@ div#nav ul {
 }
 
 div#nav ul li {
-  padding: 0.5em 1em 0.75em 1em;
   display: inline;
   font-family: arial;
   font-size: small;
   letter-spacing: 0.1em;
+  margin: 0 0.25em 0 0.25em;
 }
 
-div#nav ul li.active {
+div#nav ul li.active a {
   background-color: #e0e0e0;
   font-weight: bold;
 }
@@ -40,6 +40,7 @@ div#nav ul li.active a {
 div#nav ul li a {
   color: #ffffff;
   text-decoration: underline;
+  padding: 0.5em 1em 0.75em 1em;
 }
 
 div.flash {
