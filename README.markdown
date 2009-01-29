@@ -20,22 +20,34 @@ Installation
 
 Installing Achilles is similar to any other Rails-based application. You can play around with Achilles locally using a sqlite3 database but is recommended to use MySQL in production.
 
-To play around with Achilles you must first edit the `config/environment.rb` file. There are several things you will want to change:
+To play around with Achilles you must first edit the `config/config.yml` file. There are several things you will want to change:
 
-  1. The session secret (`config.action_controller.session[:secret]`, use `rake secret` to generate a new secret)
-  2. The nmap executable path (`config.app_config.nmap_path`)
-  3. Where results from nmap should be stored  (`config.app_config.nmap_path_results`)
-  4. The nessus executable path (`config.app_config.nessus_path`)
-  5. Where nessus results should be stored (`config.app_config.nessus_results_path and config.app_config.nessus_plugins_path`)
+  1. The nmap executable path, `nmap_path`.
+  2. Where results from nmap should be stored, `nmap_results_path`.
+  4. The nessus executable path, `nessus_path`.
+  5. Where nessus results should be stored, `nessus_results_path` and `nessus_plugins_path`.
 
-Then run the following commands:
+You might also want to change the secret that Rails uses to encrypt session cookies:
+
+    rake secret
+
+The following commands will create, migrate, and populate the a SQLite3 database and start the HTTP server:
 
     rake db:create
     rake db:migrate
     rake db:populate
     ./script/server
 
-Once the server is running locally, you can open your web browser to <http://0.0.0.0:3000>.
+Once the server is running, you can open your web browser to <http://0.0.0.0:3000>.
+
+Scheduling Nessus Scans
+-----------------------
+
+Achilles can schedule nessus scans. In order for this to work, it is advisable to setup a cronjob that executes the following:
+
+    ./script/runner Scan.run!
+    
+This will run exactly 1 scan.
 
 Dependencies
 ------------
@@ -48,7 +60,7 @@ Achilles is also dependent on the follow ruby gems:
   - haml
   - libxml-ruby
 
-Run the following command to install:
+The following command should install the gem dependencies:
 
     rake gems:install
 

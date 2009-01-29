@@ -10,7 +10,7 @@ module ApplicationHelper
   
   def nav_link(name)
     haml_tag(:li, {:class => (controller.kind_of?("#{name.to_s.camelize}Controller".constantize) ? 'active' : 'inactive' )}) do
-      puts link_to(name.to_s.titleize, self.send("#{name.to_s.tableize}_path"))
+      haml_concat link_to(name.to_s.titleize, self.send("#{name.to_s.tableize}_path"))
     end
   end
   
@@ -60,7 +60,7 @@ module ApplicationHelper
           haml_tag(:h1) do
             case header
             when String
-              puts header
+              haml_concat header
             when Array
               haml_tag(:ul) do
                 header.each do |item|
@@ -71,7 +71,7 @@ module ApplicationHelper
           end
         end
         
-        puts capture_haml(name, &block) if block_given?
+        haml_concat capture_haml(name, &block) if block_given?
       end
     end
   end
