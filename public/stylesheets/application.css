@@ -66,11 +66,7 @@ div.flash#error {
 
 div#article {
   margin: 1em;
-}
-
-div.section {
   background-color: #f9f9f9;
-  margin-bottom: 1em;
   border-right: 2px solid #999999;
   border-bottom: 2px solid #999999;
   border-top: 2px solid #ffffff;
