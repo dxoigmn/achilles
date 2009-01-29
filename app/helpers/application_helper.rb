@@ -40,12 +40,10 @@ module ApplicationHelper
       header = options[:header]
       
       unless header
-        header = []
-        header << link_to(ActionController::RecordIdentifier.plural_class_name(object).titleize, self.send("#{ActionController::RecordIdentifier.plural_class_name(object)}_path"))
         if object.new_record?
-          header << 'New'
+          header = "New #{ActionController::RecordIdentifier.singular_class_name(object).titleize}"
         else
-          header << link_to(object.to_s, self.send("#{ActionController::RecordIdentifier.singular_class_name(object)}_path", object))
+          header = object.to_s
         end
       end
       
