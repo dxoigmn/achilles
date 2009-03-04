@@ -26,9 +26,9 @@ module Nessus
 
     def self.parse(xml)
       nessus_host                 = NessusHost.new
-      nessus_host.name            = xml.find_first('HostName').content
-      nessus_host.scan_start      = DateTime.parse(xml.find_first('startTime').content)
-      nessus_host.scan_end        = DateTime.parse(xml.find_first('stopTime').content)
+      nessus_host.name            = xml.find_first('HostName').content rescue nil
+      nessus_host.scan_start      = DateTime.parse(xml.find_first('startTime').content) rescue nil
+      nessus_host.scan_end        = DateTime.parse(xml.find_first('stopTime').content) rescue nil
       nessus_host.vulnerabilities = xml.find('ReportItem').map { |report_item| NessusVulnerability.parse(report_item) }
       nessus_host
     end
@@ -50,11 +50,11 @@ module Nessus
     
     def self.parse(xml)
       nessus_vulnerability              = NessusVulnerability.new
-      nessus_vulnerability.port         = xml.find_first('port').content
-      nessus_vulnerability.severity     = xml.find_first('severity').content.to_i
-      nessus_vulnerability.plugin_name  = xml.find_first('pluginName').content
-      nessus_vulnerability.plugin_id    = xml.find_first('pluginID').content.to_i
-      nessus_vulnerability.data         = xml.find_first('data').content.gsub("\\n", "\n").gsub("\\r", "\r").strip
+      nessus_vulnerability.port         = xml.find_first('port').content rescue nil
+      nessus_vulnerability.severity     = xml.find_first('severity').content.to_i rescue nil
+      nessus_vulnerability.plugin_name  = xml.find_first('pluginName').content rescue nil
+      nessus_vulnerability.plugin_id    = xml.find_first('pluginID').content.to_i rescue nil
+      nessus_vulnerability.data         = xml.find_first('data').content.gsub("\\n", "\n").gsub("\\r", "\r").strip rescue nil
       nessus_vulnerability
     end
   end
