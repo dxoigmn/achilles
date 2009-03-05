@@ -33,8 +33,7 @@ You might also want to change the secret that Rails uses to encrypt session cook
 
 The following commands will create, migrate, and populate the a SQLite3 database and start the HTTP server:
 
-    rake db:create
-    rake db:migrate
+    rake db:schema:load
     rake db:populate
     ./script/server
 
