@@ -99,9 +99,9 @@ module Nessus
   def self.process(scan, nessus_file, plugins_file)
     # Parse results
     scan.puts("Parsing results in #{nessus_file}...")
-
+    
     nessus_report = NessusReport.parse(XML::Document.file(nessus_file))
-
+    
     # Parse plugins
     scan.puts("Parsing plugins in #{plugins_file}...")
     
@@ -111,13 +111,13 @@ module Nessus
       nessus_plugin = NessusPlugin.parse(scan, line)
       
       next unless nessus_plugin
-
+      
       nessus_plugins[nessus_plugin.id] = nessus_plugin
     end
-
+    
     # Import results
     scan.puts("Importing #{nessus_report.hosts.size} hosts...")
-
+    
     nessus_report.hosts.each do |nessus_host|
       scan.hosts.new do |host|
         host.name       = nessus_host.name
@@ -125,16 +125,16 @@ module Nessus
         host.scan_start = nessus_host.scan_start
         host.scan_end   = nessus_host.scan_end
         host.save!
-    
+        
         nessus_host.vulnerabilities.each do |nessus_vulnerability|
           host.vulnerabilities.new do |vulnerability|
-            nessus_plugin = nessus_plugins[nessus_vulnerability.plugin_id]
+            plugin = Plugin.find_by_id(nessus_vulnerability.plugin_id)
             
-            fail "Couldn't find plugin #{nessus_vulnerability.plugin_id} referenced by vulnerability!" unless nessus_plugin
-            
-            plugin = Plugin.find_by_id(nessus_plugin.id)
-
             unless plugin
+              nessus_plugin = nessus_plugins[nessus_vulnerability.plugin_id]
+              
+              fail "Couldn't find plugin #{nessus_vulnerability.plugin_id} referenced by vulnerability!" unless nessus_plugin
+              
               Plugin.new do |plugin|
                 plugin.id       = nessus_plugin.id
                 plugin.name     = nessus_plugin.name

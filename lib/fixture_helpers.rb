@@ -89,4 +89,25 @@ module FixtureHelpers
     subnet.location_id        = options[:location_id]
     subnet.save!
   end
+  
+  def plugin(options)
+    options[:family_id] = Family.find_or_create_by_name(options[:family]) if options[:family]
+    options[:risk_id]   = Risk.find_or_create_by_name(options[:risk]) if options[:risk]
+    
+    fail unless options[:id] &&
+                options[:name] &&
+                options[:category] &&
+                options[:family_id] &&
+                options[:risk_id] &&
+                options[:summary]
+    
+    plugin            = Plugin.new
+    plugin.id         = options[:id]
+    plugin.name       = options[:name]
+    plugin.category   = options[:category]
+    plugin.family_id  = options[:family_id]
+    plugin.risk_id    = options[:risk_id]
+    plugin.summary    = options[:summary]
+    plugin.save!
+  end
 end
