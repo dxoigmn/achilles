@@ -2,12 +2,12 @@ development:
   nmap_path:            'nmap'
   nmap_results_path:    './data/results/nmap/%Y-%m-%d-results.nmap'
   nessus_path:          'nessus -q <host> <port> <username> <password>'
-  nessus_results_path:  './data/results/nessus/%Y-%m-%d-results.nessus'
-  nessus_plugins_path:  './data/results/nessus/%Y-%m-%d-plugins.lst'
+  nessus_results_path:  './data/results/nessus/%Y-%m-%d.nessus'
+  nessus_plugins_path:  './data/results/nessus/%Y-%m-%d.plugins'
 
 production:
   nmap_path:            'nmap'
   nmap_results_path:    'data/results/nmap/%Y-%m-%d-results.nmap'
   nessus_path:          'nessus -q <host> <port> <username> <password>'
-  nessus_results_path:  './data/results/nessus/%Y-%m-%d-results.nessus'
-  nessus_plugins_path:  './data/results/nessus/%Y-%m-%d-plugins.lst'
+  nessus_results_path:  './data/results/nessus/%Y-%m-%d.nessus'
+  nessus_plugins_path:  './data/results/nessus/%Y-%m-%d.plugins'
