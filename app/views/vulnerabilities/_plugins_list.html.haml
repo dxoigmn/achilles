@@ -5,12 +5,12 @@
       %th{:width => '15%'}= 'Port'
       %th{:width => '15%'}= 'Severity'
       %th{:width => '20%'}= 'Status'
-      
+
   - if vulnerabilities.respond_to?(:page)
     %tfoot
       %tr
         %th{:colspan => 4}= paginating_links(vulnerabilities, :window_size => 3)
-  
+
   %tbody
     - if vulnerabilities.size == 0
       %tr

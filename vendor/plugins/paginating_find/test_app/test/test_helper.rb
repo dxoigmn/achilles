@@ -25,9 +25,9 @@ class Test::Unit::TestCase
   self.use_instantiated_fixtures  = false
 
   # Add more helper methods to be used by all tests here...
-  
+
   def setup
     RAILS_DEFAULT_LOGGER.debug "\n\e[0;31mRUNNING TEST CASE: #{name}\e[m\n"
   end
-  
+
 end

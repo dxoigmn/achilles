@@ -3,7 +3,7 @@ Achilles
 
 Achilles is a web-based Nessus client with the added ability to prioritize vulnerabilities by severity. Achilles was built because we needed the ability to prioritize vulnerabilities by location. For example, a vulnerability found on a host in the administrative network might be prioritized much higher than a vulnerability found on a host in the residential network. Achilles allows you to customize this prioritization via several techniques.
 
-In Achilles, a vulnerability inherits almost all of its characteristics from a Nessus plugin. For example, if you were to modify a plugin's severity at a specific location it will be reflected in all vulnerabilities associated with that plugin. However, depending on your setup Nessus could be utilizing several thousand plugins at any given time. It would be a time consuming task to modify the severity in every location for all plugins. Thus, Achilles abstracts this to what we call the severity matrix. The severity matrix is simply a mapping from plugin classifications and location to a severity. 
+In Achilles, a vulnerability inherits almost all of its characteristics from a Nessus plugin. For example, if you were to modify a plugin's severity at a specific location it will be reflected in all vulnerabilities associated with that plugin. However, depending on your setup Nessus could be utilizing several thousand plugins at any given time. It would be a time consuming task to modify the severity in every location for all plugins. Thus, Achilles abstracts this to what we call the severity matrix. The severity matrix is simply a mapping from plugin classifications and location to a severity.
 
 The ability to classify plugins is also a unique ability of Achilles. Because every Nessus plugin must specify a risk and family, Achilles allows you to map these to classifications. For example, a plugin that specifies a "high" risk and as a "backdoor" family you might classify as "compromised." This mapping is entirely your choice and should be chosen carefully.
 
@@ -45,7 +45,7 @@ Scheduling Nessus Scans
 Achilles can schedule nessus scans. In order for this to work, it is advisable to setup a cronjob that executes the following:
 
     ./script/runner Scan.run!
-    
+
 This will run exactly 1 scan.
 
 Dependencies

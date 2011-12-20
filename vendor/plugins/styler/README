@@ -62,11 +62,11 @@ Conventions are great, but need to add your own stylesheets?
 Use nested stylesheets (optional)
 =================================
 
-For bigger projects, you might wish to break your stylesheets into separate 
+For bigger projects, you might wish to break your stylesheets into separate
 directories.
 
-To use nested stylesheets, just create subdirectories in public/stylesheets 
-for each of your controllers, and then add stylesheets for individual 
+To use nested stylesheets, just create subdirectories in public/stylesheets
+for each of your controllers, and then add stylesheets for individual
 actions you wish to style.
 
 - Styles for an entire controller should be stored in controller.css

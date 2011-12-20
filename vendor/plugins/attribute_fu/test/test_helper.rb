@@ -3,7 +3,7 @@ plugin_test_dir = File.dirname(__FILE__)
 
 require 'rubygems'
 require 'multi_rails_init'
-require 'active_record' 
+require 'active_record'
 require 'action_view'
 require 'test/unit'
 require 'mocha'

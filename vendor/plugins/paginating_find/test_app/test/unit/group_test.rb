@@ -15,7 +15,7 @@ class GroupTest < Test::Unit::TestCase
     assert_equal 1, results.page_count
     assert_equal 2, results.page_size
   end
-  
+
   def test_should_paginate_with_group_and_order
     one = Article.create(:name => "one", :author_id => 1)
     two = Article.create(:name => "two", :author_id => 1)
@@ -26,7 +26,7 @@ class GroupTest < Test::Unit::TestCase
     assert_equal 1, results.page_count
     assert_equal 2, results.page_size
   end
-  
+
   def test_should_work_with_having_tacked_onto_group
     one = Article.create(:name => "one", :author_id => 1)
     two = Article.create(:name => "two", :author_id => 1)

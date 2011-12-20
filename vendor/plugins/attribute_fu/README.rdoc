@@ -21,29 +21,29 @@ attribute_fu requires the fewest keystrokes if you follow certain conventions.
 
 = Example
 
-In this example, you'll build a form for a Project model, in which a list of associated (has_many) tasks can be edited. 
+In this example, you'll build a form for a Project model, in which a list of associated (has_many) tasks can be edited.
 
 The first thing you need to do is enable attributes on the association.
-  
+
   class Project < ActiveRecord::Base
     has_many :tasks, :attributes => true
   end
 
 Instances of Project will now respond to task_attributes, whose format is as follows:
-  
+
   @project.task_attributes = {
     @project.tasks.first.id => {:title => "A new title for an existing task"},
     :new => {
       "0" => {:title => "A new task"}
     }
   }
-  
+
 Any tasks that already exist in that collection, and are not included in the hash, as supplied to task_attributes, will be removed from the association when saved. Most of the time, the form helpers should take care of building that hash for you, though.
 
 == Form Helpers
 
 If you follow certain conventions, rendering your associated model's form elements is incredibly simple. The partial should have the name of the associated element's type, and look like a regular old form partial (no messy fields_for calls, or any nonsense like that).
-  
+
   ## _task.html.erb
   <div class="task">
     <label>Title</label>
@@ -54,13 +54,13 @@ Then, in your parent element's form, call the render_associated_form method on t
 
   ## _form.html.erb
   <%= f.render_associated_form(@project.tasks) %>
-  
+
 That call will render the partial named _task.html.erb with each element in the supplied collection of tasks, wrapping the partial in a form builder (fields_for) with all the necessary arguments to produce a hash that will satisfy the task_attributes method.
 
 You may want to add a few blank tasks to the bottom of your form; no need to do that in the controller anymore.
 
   <%= f.render_associated_form(@project.tasks, :new => 3) %>
-  
+
 Since this is Web2.0, no form would be complete without some DHTML add and remove buttons. Fortunately, there are some nifty helpers to create them for us. Simply calling remove_link on the form builder in your _task partial will do the trick.
 
   ## _task.html.erb
@@ -69,12 +69,12 @@ Since this is Web2.0, no form would be complete without some DHTML add and remov
     <%= f.text_field :title %>
     <%= f.remove_link "remove" %>
   </div>
-  
+
 Creating the add button is equally simple. The add_associated_link helper will do all of the heavy lifting for you.
 
   ## _form.html.erb
   <%= f.add_associated_link "Add New Task", @project.tasks.build %>
-  
+
 That's all you have to do to create a multi-model form with attribute_fu!
 
 == Discarding Blank Child Models
@@ -90,7 +90,7 @@ If you want to show a bunch of blank child model forms at the bottom of your for
   class Project < ActiveRecord::Base
     has_many :tasks, :attributes => true, :discard_if => :blank?
   end
-  
+
   class Task < ActiveRecord::Base
     def blank?
       title.blank?

@@ -9,16 +9,16 @@ class ScansController < ApplicationController
   def show
     @scan = Scan.find(params[:id],
                       :include => [:locations])
-    
+
     @hosts = Host.find_all_by_scan_id(@scan.id,
                                       :page => { :current => params[:page], :size => session[:user].page_size},
                                       :conditions => {:location_id => session[:user].locations},
                                       :include => [:location])
   end
-  
+
   def new
     @scan       = Scan.new
-    
+
     @locations  = Location.find(:all,
                                 :conditions => {:id => session[:user].locations})
   end

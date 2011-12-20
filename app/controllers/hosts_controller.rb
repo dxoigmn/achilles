@@ -13,12 +13,12 @@ class HostsController < ApplicationController
                       :include => [:location, {:vulnerabilities => [:plugin, :status]}],
                       :order => 'statuses."default" DESC, vulnerabilities.severity DESC, vulnerabilities.port ASC')
   end
-  
+
   def edit
     @host = Host.find(params[:id],
                       :conditions => {:location_id => session[:user].locations})
   end
-  
+
   def update
     @host = Host.find(params[:id],
                       :conditions => {:location_id => session[:user].locations})

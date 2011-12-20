@@ -4,16 +4,16 @@ module ApplicationHelper
     haml_tag(:dt) do
       haml_tag(:div, label.to_s)
     end
-    
+
     haml_tag(:dd, find_and_preserve(field))
   end
-  
+
   def nav_link(name)
     haml_tag(:li, {:class => (controller.kind_of?("#{name.to_s.camelize}Controller".constantize) ? 'active' : 'inactive' )}) do
       haml_concat link_to(name.to_s.titleize, self.send("#{name.to_s.tableize}_path"))
     end
   end
-  
+
   def section_for(object, options = {}, &block)
     case options[:header]
     when Array
@@ -28,7 +28,7 @@ module ApplicationHelper
           headers << link_to(header.to_s, self.send("#{ActionController::RecordIdentifier.singular_class_name(header)}_path", header))
         end
       end
-      
+
       options[:header] = headers
     end
 
@@ -38,7 +38,7 @@ module ApplicationHelper
       header  = options[:header] || object.to_s.titleize
     when ActiveRecord::Base
       header = options[:header]
-      
+
       unless header
         if object.new_record?
           header = "New #{ActionController::RecordIdentifier.singular_class_name(object).titleize}"
@@ -46,14 +46,14 @@ module ApplicationHelper
           header = object.to_s
         end
       end
-      
+
       name = ActionController::RecordIdentifier.singular_class_name(object)
     when Enumerable
       header  = options[:header] || ActionController::RecordIdentifier.plural_class_name(object.to_a.first).titleize
       header << " (#{object.size})" if object.size > 0
       name    = ActionController::RecordIdentifier.plural_class_name(object.to_a.first)
     end
-    
+
     haml_tag(:div, {:class => :section, :id => name}) do
       haml_tag(:div, {:class => :body}) do
         haml_tag(:div, {:class => :header}) do
@@ -70,7 +70,7 @@ module ApplicationHelper
             end
           end
         end
-        
+
         haml_concat capture_haml(name, &block) if block_given?
       end
     end

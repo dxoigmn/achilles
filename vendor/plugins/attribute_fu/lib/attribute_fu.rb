@@ -1,2 +1,2 @@
-module AttributeFu #:nodoc:  
+module AttributeFu #:nodoc:
 end

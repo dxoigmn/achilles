@@ -3,7 +3,7 @@ class Classification < ActiveRecord::Base
 
   has_many :plugins
   has_many :severities
-  
+
   def to_s
     name
   end
@@ -14,7 +14,7 @@ class Classification < ActiveRecord::Base
 
   private
     def add_severities!
-      Location.find(:all).each do |location| 
+      Location.find(:all).each do |location|
         severities.create(:location => location)
       end
     end

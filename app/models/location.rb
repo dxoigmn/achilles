@@ -7,11 +7,11 @@ class Location < ActiveRecord::Base
   has_many :subnets, :attributes => true
   has_many :plugin_severities
   has_many :severities
-  
+
   def to_s
     name
   end
-  
+
   def self.locate(ip)
     ip_address = nil
 
@@ -23,29 +23,29 @@ class Location < ActiveRecord::Base
     else
       fail "ip must be of type Fixnum or String: #{ip.class}"
     end
-    
+
     subnet = Subnet.find(:first,
                          :conditions => ["? BETWEEN lowest_ip_address AND highest_ip_address", ip_address],
                          :include => :location)
-    
+
     if subnet
-      subnet.location 
+      subnet.location
     else
       nil
     end
   end
-  
+
   def self.choices
     Location.find(:all).map { |location| [location.name, location.id.to_s] }
   end
-  
+
   private
     def add_severities
-      Classification.find(:all).each do |classification| 
+      Classification.find(:all).each do |classification|
         severities.create(:classification => classification)
       end
     end
-    
+
     def remove_blank_subnets
       subnets.delete(subnets.select { |subnet| subnet.name.blank? })
     end

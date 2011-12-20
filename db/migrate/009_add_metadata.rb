@@ -8,7 +8,7 @@ class AddMetadata < ActiveRecord::Migration
     add_column :vulnerabilities, :evaluation, :text
     add_column :vulnerabilities, :remediation, :text
     add_column :vulnerabilities, :visible, :boolean, :null => true, :default => nil
-    
+
     add_column :plugins, :description, :text
     add_column :plugins, :evaluation, :text
     add_column :plugins, :remediation, :text

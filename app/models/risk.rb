@@ -1,12 +1,12 @@
 class Risk < ActiveRecord::Base
   after_create :add_classifications!
-  
+
   has_many :plugins
 
   def to_s
     name
   end
-  
+
   def self.choices
     Risk.find(:all).map { |risk| [risk.name, risk.id.to_s] }
   end

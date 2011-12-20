@@ -11,7 +11,7 @@ class Article < ActiveRecord::Base
   has_many :edits
   has_many :editors, :through => :edits, :source => :author
   belongs_to :author
-  
+
   def self.find_with_scope(options={}, &block)
     with_scope(:find => options, &block)
   end

@@ -1,12 +1,12 @@
 namespace :db do
   desc 'Loads initial database models for the current environment.'
   task :populate => :environment do
-    Dir[File.join(RAILS_ROOT, 'db', 'fixtures', '*.rb')].sort.each do |fixture| 
+    Dir[File.join(RAILS_ROOT, 'db', 'fixtures', '*.rb')].sort.each do |fixture|
       puts "Importing database fixture '#{File.basename(fixture)}'..."
       load fixture
     end
-    
-    Dir[File.join(RAILS_ROOT, 'db', 'fixtures', RAILS_ENV, '*.rb')].sort.each do |fixture| 
+
+    Dir[File.join(RAILS_ROOT, 'db', 'fixtures', RAILS_ENV, '*.rb')].sort.each do |fixture|
       puts "Importing database fixture '#{File.basename(fixture)}'..."
       load fixture
     end
