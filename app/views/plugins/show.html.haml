@@ -2,11 +2,11 @@
   #severities
     .header
       %h1= 'Severities'
-    
+
     %dl
       - for plugin_severity in @plugin.plugin_severities
         = form_field(plugin_severity.location, plugin_severity.severity)
-      
+
   #summary
     %dl
       = form_field('Summary', @plugin.summary)

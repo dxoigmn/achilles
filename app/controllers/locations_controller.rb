@@ -9,16 +9,16 @@ class LocationsController < ApplicationController
     @location = Location.find(params[:id],
                               :conditions => {:id => session[:user].locations})
   end
-  
+
   def edit
     @location = Location.find(params[:id],
                               :conditions => {:id => session[:user].locations})
   end
-  
+
   def new
     @location = Location.new
   end
-  
+
   def create
     @location = Location.new(params[:location])
 
@@ -32,7 +32,7 @@ class LocationsController < ApplicationController
         format.html { render :action => :new }
       end
     end
-  end  
+  end
   def update
     @location = Location.find(params[:id],
                               :conditions => {:id => session[:user].locations})

@@ -6,19 +6,19 @@ class VulnerabilitiesController < ApplicationController
                                           :conditions => {'hosts.location_id' => session[:user].locations},
                                           :order => 'statuses."default" DESC, vulnerabilities.severity DESC, vulnerabilities.port ASC')
   end
-  
+
   def show
     @vulnerability = Vulnerability.find(params[:id],
                                         :include => [:plugin, :host, :status],
                                         :conditions => {'hosts.location_id' => session[:user].locations})
   end
-  
+
   def edit
     @vulnerability = Vulnerability.find(params[:id],
                                         :include => [:host],
                                         :conditions => {'hosts.location_id' => session[:user].locations})
   end
-  
+
   def update
     @vulnerability = Vulnerability.find(params[:id],
                                         :include => [:host],

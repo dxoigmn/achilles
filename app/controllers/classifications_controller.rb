@@ -3,7 +3,7 @@ class ClassificationsController < ApplicationController
     @classifications = Classification.find(:all,
                                            :page => {:current => params[:page], :size => session[:user].page_size})
   end
-  
+
   def new
     @classification = Classification.new
   end
@@ -21,12 +21,12 @@ class ClassificationsController < ApplicationController
       end
     end
   end
-  
+
 
   def edit
     @classification = Classification.find(params[:id])
   end
-  
+
   def update
     @classification = Classification.find(params[:id])
 

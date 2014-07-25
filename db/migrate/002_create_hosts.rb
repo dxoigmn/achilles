@@ -6,7 +6,7 @@ class CreateHosts < ActiveRecord::Migration
       t.datetime :scan_start
       t.datetime :scan_end
       t.integer :vulnerabilities_count, :null => false, :default => 0
-      
+
       t.timestamps
     end
   end

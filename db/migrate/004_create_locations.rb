@@ -5,7 +5,7 @@ class CreateLocations < ActiveRecord::Migration
       t.integer :hosts_count, :null => false, :default => 0
       t.timestamps
     end
-    
+
     create_table :subnets do |t|
       t.string :name
       t.column :lowest_ip_address, 'integer unsigned', :null => false, :default => NetAddr.ip_to_i('0.0.0.0')
@@ -14,7 +14,7 @@ class CreateLocations < ActiveRecord::Migration
 
       t.timestamps
     end
-    
+
     add_column :hosts, :location_id, :integer
   end
 

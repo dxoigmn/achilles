@@ -24,9 +24,9 @@ module Javascripter
         javascript_include_tag(name)
       end
     end
-    
+
     # Link to applicaton.js and defaults (if requested)
-    javascript_include_tag(sources.include?(:defaults) ? (:defaults) : ("application")) + 
+    javascript_include_tag(sources.include?(:defaults) ? (:defaults) : ("application")) +
     "\n" + javascripts.compact.join("\n").to_s
 
   end

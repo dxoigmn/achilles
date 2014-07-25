@@ -3,7 +3,7 @@ class Subnet < ActiveRecord::Base
 
   def cidr=(value)
     value = NetAddr::CIDR.create(value)
-    
+
     write_attribute(:lowest_ip_address, NetAddr.ip_to_i(value.first))
     write_attribute(:highest_ip_address, NetAddr.ip_to_i(value.last))
   end

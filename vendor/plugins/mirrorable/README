@@ -2,7 +2,7 @@ Mirrorable
 ==========
 
 Simple plugin to allow "mirroring" of values. That is an attribute of a model
-inherits its value from another model if the value of that attribute is 
+inherits its value from another model if the value of that attribute is
 missing.
 
 

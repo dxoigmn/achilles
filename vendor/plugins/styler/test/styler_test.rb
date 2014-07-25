@@ -7,7 +7,7 @@ class StylerTest < Test::Unit::TestCase
 
   include ActionView::Helpers::TagHelper
   include Styler
-  
+
   def test_this_plugin
     true
   end

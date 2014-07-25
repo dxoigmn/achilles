@@ -10,12 +10,12 @@ class PluginClassification < ActiveRecord::Base
 
   def update_plugins
     plugins.map(&:classify!)
-  end                                  
+  end
 
   def self.classify(risk, family)
     risk_id   = nil
     family_id = nil
-    
+
     case risk
     when Fixnum
       risk_id = risk
@@ -24,7 +24,7 @@ class PluginClassification < ActiveRecord::Base
     else
       fail "risk must be of type Fixnum or Family: #{risk.class}"
     end
-    
+
     case family
     when Fixnum
       family_id = family
@@ -35,7 +35,7 @@ class PluginClassification < ActiveRecord::Base
     end
 
     plugin_classification = PluginClassification.find(:first, :conditions => { :risk_id => risk_id, :family_id => family_id })
-    
+
     if plugin_classification
       plugin_classification.classification
     else

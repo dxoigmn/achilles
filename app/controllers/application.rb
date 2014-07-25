@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     controller.session[:user] ||= User.find_by_name(controller.request.env["REMOTE_USER"] || '', :include => [:locations])
     raise SecurityTransgression unless controller.session[:user]
   end
-  
+
   rescue_from SecurityTransgression do |exception|
     render :file => 'public/403.html', :status => 403
   end

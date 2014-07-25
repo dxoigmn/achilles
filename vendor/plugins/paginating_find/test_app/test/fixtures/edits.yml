@@ -3,7 +3,7 @@ new_idea:
   text: I have a new idea
   author_id: 1
   article_id: 1
-  
+
 remove_para:
   id: 2
   text: Remove paragraph 2

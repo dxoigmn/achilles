@@ -7,7 +7,7 @@ class JavascripterTest < Test::Unit::TestCase
 
   include ActionView::Helpers::TagHelper
   include Javascripter
-  
+
   def test_this_plugin
     true
   end

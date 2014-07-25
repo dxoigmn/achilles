@@ -4,13 +4,13 @@ class CreateStatuses < ActiveRecord::Migration
       t.string :name
       t.boolean :default, :null => false, :default => false
     end
-    
+
     add_column :vulnerabilities, :status_id, :integer
   end
 
   def self.down
     drop_table :statuses
-    
+
     remove_column :vulnerabilities, :status_id
   end
 end

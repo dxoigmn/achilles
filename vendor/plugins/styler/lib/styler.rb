@@ -11,7 +11,7 @@ module Styler
         stylesheets << stylesheet
       end
     end
-  
+
     # Controller/action sheets
     stylesheets << "#{controller.controller_name}"
     stylesheets << "#{controller.controller_name}_#{controller.action_name}"
@@ -22,7 +22,7 @@ module Styler
     stylesheets << "ie6"
 
     # Add links to header
-    stylesheets.collect! do |name| 
+    stylesheets.collect! do |name|
       if File.exist?("#{RAILS_ROOT}/public/stylesheets/#{name}.css")
         case name
         when "ie7"

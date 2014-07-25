@@ -7,13 +7,13 @@ deploying:
   id: 2
   name: Deploying Rails Applications
   author_id: 2
-  
+
 donkies:
   id: 3
   name: What about the donkies?
   author_id: 2
-  
+
 whales:
   id: 4
   name: Won't somebody think of the whales?
-  author_id: 2   
+  author_id: 2

@@ -29,7 +29,7 @@
  *          to template nodes after creation.
  */
 (function($){
-	
+
 	/**
 	 * Create a New Template
 	 */
@@ -58,7 +58,7 @@
 		this.html = html;
 
 		if (this.options.compile) {
-			this.compile();   
+			this.compile();
 		}
 		this.isTemplate = true;
 	};
@@ -83,12 +83,12 @@
         ext:        /\{([\w-]+)(?:\:([\w\.]*)(?:\((.*?)?\))?)?\}/g,
         jtemplates: /\{\{([\w-]+)(?:\:([\w\.]*)(?:\((.*?)?\))?)?\}\}/g
 	};
-	
+
 	/**
 	 * Set the standard regular expression to be used.
 	 */
 	$.template.regx.standard = $.template.regx.jsp;
-	
+
 	/**
 	 * Variable Helper Methods
 	 *
@@ -99,7 +99,7 @@
 	 * A basic substring helper is provided as an example of how you can define helpers.
 	 * To add more helpers simply do:
 	 * $.extend( $.template.helpers , {
-	 *	 sampleHelper: function() { ... }	
+	 *	 sampleHelper: function() { ... }
 	 * });
 	 */
 	$.template.helpers = $.template.instance.prototype.helpers = {
@@ -113,7 +113,7 @@
 	 * Template Instance Methods
 	 */
 	$.extend( $.template.instance.prototype, {
-		
+
 		/**
 		 * Apply Values to a Template
 		 *
@@ -136,7 +136,7 @@
 							return tpl.call(format.substr(5), values[name], values);
 						} else {
 							if (args) {
-								// quoted values are required for strings in compiled templates, 
+								// quoted values are required for strings in compiled templates,
 								// but for non compiled we need to strip them
 								// quoted reversed for jsmin
 								var re = /^\s*['"](.*)["']\s*$/;
@@ -203,7 +203,7 @@
 
 
 	/**
-	 * Save a reference in this local scope to the original methods which we're 
+	 * Save a reference in this local scope to the original methods which we're
 	 * going to overload.
 	 **/
 	var $_old = {
@@ -213,7 +213,7 @@
 	};
 
 	/**
-	 * Overwrite the domManip method so that we can use things like append() by passing a 
+	 * Overwrite the domManip method so that we can use things like append() by passing a
 	 * template object and macro parameters.
 	 */
 	$.fn.domManip = function( args, table, reverse, callback ) {
@@ -240,7 +240,7 @@
 
 		return r;
 	};
-	
+
 	/**
 	 * Overwrite the text() method
 	 */

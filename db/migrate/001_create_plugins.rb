@@ -3,7 +3,7 @@ class CreatePlugins < ActiveRecord::Migration
     create_table :families do |t|
       t.string :name
     end
-    
+
     create_table :risks do |t|
       t.string :name
     end

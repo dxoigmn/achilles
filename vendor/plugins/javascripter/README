@@ -2,7 +2,7 @@
 Javascripter
 ============
 
-Just like Styler, you can use Javascripter to keep javascript organized in 
+Just like Styler, you can use Javascripter to keep javascript organized in
 your application.
 
 
@@ -16,7 +16,7 @@ To use Javascripter, replace your javascript_include_tags with a single tag:
 <%= javascripts %>
 </head>
 
-Once you do, your javascripts will be included automatically, using the 
+Once you do, your javascripts will be included automatically, using the
 conventions below.
 
 <head>
@@ -35,7 +35,7 @@ Javascripter uses a simple set of conventions:
 - Javascript for specific actions should be stored in controller_action.js
 - Javascript for specific actions should be stored in controller/action.js (optional)
 
-Follow these conventions and Javascripter will reward you with automagic goodness, 
+Follow these conventions and Javascripter will reward you with automagic goodness,
 loading javascripts for specific controllers or actions whenever they are active.
 
 Support for :defaults
@@ -58,7 +58,7 @@ Need to include extra javascript libraries? Use the :include parameter:
 Generator
 =========
 
-Javascripter also includes a generator that will create a default application.js 
+Javascripter also includes a generator that will create a default application.js
 script and separate javascript files for each controller in your application.
 
 To use the generator, run this command in your terminal:
@@ -72,7 +72,7 @@ for the controller will be created. (Existing javascripts will be ignored.)
 Credits
 =======
 
-Special thanks to Lachie Cox and the rest of my RORO Sydney comrades who 
+Special thanks to Lachie Cox and the rest of my RORO Sydney comrades who
 asked for this plugin.
 
 

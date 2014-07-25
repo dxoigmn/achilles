@@ -3,7 +3,7 @@
     #severities
       .header
         %h1= 'Severities'
-  
+
       %dl
         - for plugin_severity in @plugin.plugin_severities
           = form_field(plugin_severity.location, select("plugin_severities[#{plugin_severity.id}]", :severity, Severity.choices, :selected => plugin_severity.real_severity))
